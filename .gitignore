@@ -1,7 +1,9 @@
 .DS_Store
-.vscode/
+**/.vscode/
+**/.idea/
 
 **/node_modules/
 **/database/
 **/nodered/
-**/__pycache__/
+**/dist/
+**/__pycache_/
