@@ -6,4 +6,4 @@
 **/database/
 **/nodered/
 **/dist/
-**/__pycache_/
+**/__pycache__/
