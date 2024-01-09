@@ -1,7 +1,4 @@
-FROM python:3.13-rc-alpine3.17
-
-# Installe tzdata pour la configuration du fuseau horaire
-RUN apk add --no-cache libpq-dev gcc
+FROM python:3.12.1-bullseye
 
 # Définit le fuseau horaire (remplacez par votre fuseau horaire souhaité)
 ENV TZ=Europe/Paris
