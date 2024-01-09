@@ -33,7 +33,18 @@ services:
       private-network:
         ipv4_address: 172.69.69.3
 
-  # vuejs-frontend :
+  vuejs-frontend :
+    platform: linux/amd64
+    build:
+      context: ../frontend
+      dockerfile: Dockerfile
+    container_name: vuejs-frontend
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    networks:
+      private-network:
+        ipv4_address: 172.69.69.4
 
   nodered:
     platform: linux/amd64
@@ -46,7 +57,7 @@ services:
       - ./nodered:/data
     networks:
       private-network:
-        ipv4_address: 172.69.69.4
+        ipv4_address: 172.69.69.5
 
 networks:
   private-network:
