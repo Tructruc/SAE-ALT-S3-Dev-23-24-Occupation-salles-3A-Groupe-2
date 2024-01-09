@@ -1,0 +1,57 @@
+version: '3'
+
+services:
+  django-backend:
+    platform: linux/amd64
+    build:
+      context: ../backend
+      dockerfile: Dockerfile
+    container_name: django-backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    volumes:
+      - ../backend/API:/API #Volume for DEV
+    networks:
+      private-network:
+        ipv4_address: 172.69.69.2
+    
+  timescaledb:
+    platform: linux/amd64
+    image: timescale/timescaledb:latest-pg12
+    container_name: timescaledb
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      # - POSTGRES_DB=
+    volumes:
+      - ./database:/var/lib/postgresql/data
+    networks:
+      private-network:
+        ipv4_address: 172.69.69.3
+
+  # vuejs-frontend :
+
+  nodered:
+    platform: linux/amd64
+    image: nodered/node-red:latest
+    container_name: nodered
+    restart: unless-stopped
+    ports:
+      - "1880:1880"
+    volumes:
+      - ./nodered:/data
+    networks:
+      private-network:
+        ipv4_address: 172.69.69.4
+
+networks:
+  private-network:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.69.69.0/24
