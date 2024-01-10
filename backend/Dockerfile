@@ -15,9 +15,9 @@ COPY ./requirements.txt /API/
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Execute pour debug
-# CMD [ "tail", "-f", "/dev/null" ]
+CMD [ "tail", "-f", "/dev/null" ]
 
 # Utiliser supervisord pour démarrer les services
-CMD python manage.py makemigrations \
-    && python manage.py migrate \
-    && python manage.py runserver
+# CMD python manage.py makemigrations \
+#     && python manage.py migrate \
+#     && python manage.py runserver
