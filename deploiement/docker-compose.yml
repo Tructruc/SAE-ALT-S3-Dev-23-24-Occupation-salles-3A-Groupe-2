@@ -46,17 +46,17 @@ services:
       private-network:
         ipv4_address: 172.69.69.4
 
-  nodered:
-    platform: linux/amd64
-    image: nodered/node-red:latest
-    container_name: nodered
+
+  # A utiliser pour la gestion de la base de donnée avec UI : localhost:8080
+  adminer:
+    image: adminer
     restart: unless-stopped
+    environment:
+      ADMINER_DEFAULT_SERVER: ${MYSQL_HOST}
     ports:
-      - "1880:1880"
-    volumes:
-      - ./nodered:/data
+      - 8081:8080
     networks:
-      private-network:
+      private-network :
         ipv4_address: 172.69.69.5
 
 networks:

@@ -14,8 +14,19 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path, re_path
+from deepserializer import DeepViewSet
+from app.models import Sensor, Data
+from rest_framework import routers
+from django.conf.urls.static import static
+from django.conf import settings
+
+router = routers.DefaultRouter()
+DeepViewSet.init_router(router, [
+    Data,
+    Sensor,
+])
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-]
+    re_path(r'', include(router.urls)),
+]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
