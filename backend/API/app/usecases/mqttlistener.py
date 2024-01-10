@@ -3,6 +3,8 @@ import threading
 import json
 from pprint import pprint
 
+
+
 class MqttClientThread(threading.Thread):
     def __init__(self, topic):
         threading.Thread.__init__(self)
@@ -18,12 +20,16 @@ class MqttClientThread(threading.Thread):
         client.subscribe(topic)
 
     def on_message(self, client, userdata, msg, topic):
+        from app.usecases.createsensor import create_sensor
         try:
             # Décodez le payload et convertissez-le en dictionnaire
             message_dict = json.loads(msg.payload.decode('utf-8'))
             # Affichez le message de manière formatée
             print(f"Received message on {topic}: ")
             pprint(message_dict)
+
+            create_sensor(message_dict, topic)
+
         except json.JSONDecodeError:
             print(f"Error decoding JSON: {msg.payload}")
 

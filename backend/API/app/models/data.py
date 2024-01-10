@@ -13,4 +13,4 @@ class Data(TimescaleModel):
     infrared_and_visible = models.FloatField(default=0.0)
     pressure = models.FloatField(default=0.0)
 
-    sensor = models.ForeignKey('Sensor', on_delete=models.CASCADE)
+    sensor = models.ForeignKey('Sensor', on_delete=models.CASCADE, related_name='all_data')
