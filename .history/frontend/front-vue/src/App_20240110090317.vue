@@ -5,7 +5,10 @@ import Header from './components/Header.vue';
 </script>
 
 <template>
-<Header></Header>
+  <div id="app">
+    <Header />
+    <router-view />
+  </div>
 </template>
 
 
