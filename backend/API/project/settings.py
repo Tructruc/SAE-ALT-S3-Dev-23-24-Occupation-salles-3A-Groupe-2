@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -79,18 +79,12 @@ WSGI_APPLICATION = 'project.wsgi.application'
 
 DATABASES = {
     'default': {
-        # "ENGINE": os.environ.get("DB_ENGINE"),
-        # "NAME": os.environ.get("MYSQL_DATABASE"),
-        # "USER": os.environ.get("DB_USER"),
-        # "PASSWORD": os.environ.get("MYSQL_ROOT_PASSWORD"),
-        # "HOST": os.environ.get("MYSQL_HOST"),
-        # "PORT": os.environ.get("MYSQL_PORT"),
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'data-iot',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': '172.69.69.3',
-        'PORT': '5432',
+        'ENGINE': os.environ.get("DB_ENGINE"),
+        'NAME': os.environ.get("POSTGRES_DB"),
+        'USER': os.environ.get("POSTGRES_USER"),
+        'PASSWORD': os.environ.get("POSTGRES_PASSWORD"),
+        'HOST': os.environ.get("DB_HOST"),
+        'PORT': os.environ.get("DB_PORT"),
     }
 }
 
