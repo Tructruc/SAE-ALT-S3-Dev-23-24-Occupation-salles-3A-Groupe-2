@@ -21,12 +21,11 @@ services:
     image: timescale/timescaledb:latest-pg12
     container_name: timescaledb
     restart: unless-stopped
-    ports:
-      - "5432:5432"
     environment:
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_DB=data-iot
+      - TZ=Europe/Paris
     volumes:
       - ./database:/var/lib/postgresql/data
     networks:
@@ -40,6 +39,8 @@ services:
       dockerfile: Dockerfile
     container_name: vuejs-frontend
     restart: unless-stopped
+    environment:
+      - TZ=Europe/Paris
     ports:
       - "8080:80"
     networks:
@@ -52,7 +53,8 @@ services:
     image: adminer
     restart: unless-stopped
     environment:
-      ADMINER_DEFAULT_SERVER: ${MYSQL_HOST}
+      - ADMINER_DEFAULT_SERVER= ${MYSQL_HOST}
+      - TZ=Europe/Paris
     ports:
       - 8081:8080
     networks:
