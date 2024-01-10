@@ -6,6 +6,8 @@ services:
     build:
       context: ../backend
       dockerfile: Dockerfile
+    env_file:
+      - .env
     container_name: django-backend
     restart: unless-stopped
     ports:
@@ -19,13 +21,10 @@ services:
   timescaledb:
     platform: linux/amd64
     image: timescale/timescaledb:latest-pg12
+    env_file:
+      - .env
     container_name: timescaledb
     restart: unless-stopped
-    environment:
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_DB=data-iot
-      - TZ=Europe/Paris
     volumes:
       - ./database:/var/lib/postgresql/data
     networks:
@@ -37,6 +36,8 @@ services:
     build:
       context: ../frontend
       dockerfile: Dockerfile
+    env_file:
+      - .env
     container_name: vuejs-frontend
     restart: unless-stopped
     environment:
@@ -47,14 +48,13 @@ services:
       private-network:
         ipv4_address: 172.69.69.4
 
-
   # A utiliser pour la gestion de la base de donnée avec UI : localhost:8080
   adminer:
+    platform: linux/amd64
     image: adminer
+    env_file:
+      - .env
     restart: unless-stopped
-    environment:
-      - ADMINER_DEFAULT_SERVER= ${MYSQL_HOST}
-      - TZ=Europe/Paris
     ports:
       - 8081:8080
     networks:
