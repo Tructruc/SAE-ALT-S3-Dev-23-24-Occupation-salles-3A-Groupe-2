@@ -3,19 +3,22 @@
 <template>
   <div class="header">
 
+    <div style="display:flex; justify-content:space-between; width:30%;">
+        <!-- on met des liens vers la page d'accueil de google-->
+        <a href="/Accueil" target="_self">Accueil</a>
+        
+        <a href="/Carte" target="_self">Carte</a>
+
+        <a href="https://www.example.com/" target="_self">Example.com</a>
+    </div>
+    
     <div class="search-container">
         <input type="text" class="search-input" placeholder="Rechercher salle ...">
-        <!-- on inclut un bouton pour valider la recherche -->
         <button type="submit" class="search-button">
-            <font-awesome-icon icon="phone" />
         </button>
+        <font-awesome-icon :icon="['fas', 'magnifying-glass']" />
+
     </div>
-
-      <router-link to="/Carte">
-        <i class="Carte"></i>
-        <span class="Carte">Carte</span>
-      </router-link>
-
     </div>
 </template>
 
@@ -37,6 +40,7 @@
 
 .search-container {
     display: flex;
+    width:30%;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
     overflow: hidden;
     border-radius: 5px;
