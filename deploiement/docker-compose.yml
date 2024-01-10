@@ -55,6 +55,8 @@ services:
     env_file:
       - .env
     restart: unless-stopped
+    environment:
+      ADMINER_DEFAULT_SERVER: ${MYSQL_HOST}
     ports:
       - 8081:8080
     networks:
