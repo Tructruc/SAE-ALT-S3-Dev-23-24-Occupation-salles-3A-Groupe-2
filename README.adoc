@@ -47,6 +47,7 @@ image::https://cdn.discordapp.com/attachments/579303130886569984/106518314847384
 image::https://assets.zabbix.com/img/brands/timescaledb.jpg["Logo Timescaledb", link="https://www.timescale.com/", width=100, height=100]
 
 TimeScaleDB est un système de gestion de base de données (SGBD) particulièrement performant pour la gestion et l'analyse de séries temporelles, ce qui s'avère très utile dans notre contexte. Cette capacité nous permet de suivre avec précision et efficacité les données issues de nos capteurs. De plus, nous avons déjà une expérience avec TimeScaleDB, l'ayant utilisé lors des travaux pratiques d'IoT à l'IUT de Blagnac, comme décrit ici : https://webetud.iut-blagnac.fr/course/view.php?id=880[TPs d’IOT].
+Ce SGBD est donc idéal pour notre projet, et nous permettra de stocker et d'analyser efficacement les données de nos capteurs.
 
 ---
 
@@ -62,7 +63,7 @@ Django est un framework Python idéal pour la construction d'APIs, grâce à sa 
 
 image::https://skillicons.dev/icons?i=vue["Logo Vue JS", link="https://vuejs.org/", width=100, height=100]
 
-Crée des interfaces utilisateur réactives et interactives. Émilien l’avait déja utilisé.
+VueJS est un framework JavaScript progressif, qui permet de créer des interfaces utilisateur interactives et dynamiques. Il est particulièrement adapté pour le développement d'applications web monopages (SPA), et est très apprécié pour sa simplicité et sa flexibilité. De plus, VueJS est très performant, et permet de créer des applications rapides et réactives. Enfin, il est très bien documenté, et dispose d'une communauté active. Ce framework est donc idéal pour notre projet, et nous permettra de créer une interface utilisateur intuitive et efficace.
 
 ---
 
@@ -70,7 +71,8 @@ Crée des interfaces utilisateur réactives et interactives. Émilien l’avait 
 
 image::https://skillicons.dev/icons?i=docker["Logo Docker", link="https://www.docker.com/", width=100, height=100]
 
-Assure une déploiement et une gestion efficaces de l'application, avec une portabilité accrue entre les environnements.
+Docker, utilisé conjointement avec Dockerfile et Docker Compose, est un outil essentiel pour le déploiement de conteneurs. Il facilite le déploiement d'applications dans des conteneurs, qui sont des environnements isolés et indépendants. Cette méthode permet de déployer des applications de manière simple, rapide et efficace, tout en assurant leur accessibilité. L'un des principaux atouts de Docker est sa capacité à déployer des applications sur divers systèmes d'exploitation, incluant Windows, Linux et MacOS. Cette polyvalence est particulièrement bénéfique pour notre projet, qui nécessite une compatibilité multiplateforme. De plus, Docker assure un déploiement sécurisé des applications, un aspect crucial pour la fiabilité de notre projet. 
+L'expérience préalable d'Enzo avec Docker représente un avantage notable, augmentant ainsi notre efficacité dans l'utilisation de cet outil. En somme, Docker apparaît comme une solution idéale pour répondre aux besoins spécifiques de notre projet.
 
 
 :sectnums:
