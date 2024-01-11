@@ -1,7 +1,6 @@
 <template>
-    <div style="width: 100%; height: 100%; position: relative;">
       <h2>Full IUT</h2>
-      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 1417.3333 524" >
+      <svg width="100%" height="100%" viewBox="0 0 1417.3333 524" >
         <g id="MI" class="changeColor">
             <title>Maison intelligente</title>
             <path id="path47751" d="m 1275.5549,283.99611 -0.4068,-25.87164 27.0614,42.74674 0.058,23.6013 -26.7126,-40.4764"/>
@@ -71,7 +70,6 @@
         </g>
       </svg>
       <BatB v-if="showBatB" />
-    </div>
   </template>
   
   <script>
