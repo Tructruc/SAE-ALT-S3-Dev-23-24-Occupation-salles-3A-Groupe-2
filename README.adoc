@@ -17,7 +17,7 @@ Aujourd'hui, la quasi-totalité des salles de l'IUT de Blagnac sont équipées d
 
 Le client, M. Boulle, nous a donc missionner afin de développer une application permettant de visualiser les données des capteurs, de les stocker, et de les exploiter. L'application devra être capable de fournir des graphiques et des statistiques sur les données.
 
-Des fonctionnalitées supplémentaires sont envisagées par l'équipe, comme la possibilté d'avoir une carte interactive des salles, des predictions sur les données...
+Des fonctionnalitées supplémentaires sont envisagées par l'équipe, comme par exemple la possibilté d'avoir une carte interactive des salles, des predictions sur les données...
 
 image::https://cdn.discordapp.com/attachments/579303130886569984/1065183148473843742/1519871482152.png["Logo IUT UNIV", 100, 100]
 
@@ -42,18 +42,39 @@ image::https://cdn.discordapp.com/attachments/579303130886569984/106518314847384
 
 === Technologies utilisées
 
-[options="frame=none,grid=none"]
-|===
-| **Timescaledb** a| image::https://assets.zabbix.com/img/brands/timescaledb.jpg["Logo Timescaledb", link="https://www.timescale.com/", width=75, height=75]| Excellente gestion et analyse des séries temporelles pour suivre avec précision les données des capteurs. Nous l’avions déja utilisé pour les https://webetud.iut-blagnac.fr/course/view.php?id=880[TP d’IOT].
-| **Django** a| image::https://skillicons.dev/icons?i=django["Logo Django", link="https://www.djangoproject.com/", width=75, height=75]|Développement rapide et sécurisé, idéal pour créer des applications robustes et évolutives. Enzo l’avait déja utilisé.
-| **VueJS** a| image::https://skillicons.dev/icons?i=vue["Logo Vue JS", link="https://vuejs.org/", width=75, height=75]| Crée des interfaces utilisateur réactives et interactives. Émilien l’avait déja utilisé.
-| **Docker** a| image::https://skillicons.dev/icons?i=docker["Logo Docker", link="https://www.docker.com/", width=75, height=75]|Assure une déploiement et une gestion efficaces de l'application, avec une portabilité accrue entre les environnements.
-|===
+**Timescaledb**
 
+image::https://assets.zabbix.com/img/brands/timescaledb.jpg["Logo Timescaledb", link="https://www.timescale.com/", width=100, height=100]
 
+TimeScaleDB est un système de gestion de base de données (SGBD) particulièrement performant pour la gestion et l'analyse de séries temporelles, ce qui s'avère très utile dans notre contexte. Cette capacité nous permet de suivre avec précision et efficacité les données issues de nos capteurs. De plus, nous avons déjà une expérience avec TimeScaleDB, l'ayant utilisé lors des travaux pratiques d'IoT à l'IUT de Blagnac, comme décrit ici : https://webetud.iut-blagnac.fr/course/view.php?id=880[TPs d’IOT].
+
+---
+
+**Django**
+
+image::https://skillicons.dev/icons?i=django["Logo Django", link="https://www.djangoproject.com/", width=100, height=100]
+
+Django est un framework Python idéal pour la construction d'APIs, grâce à sa capacité à accélérer le développement tout en assurant une haute qualité et une sécurité robuste. Son architecture « batteries incluses » propose une multitude d'outils intégrés et privilégie une approche DRY (Don't Repeat Yourself) pour minimiser le code répétitif. De plus, Django facilite les interactions avec la base de données grâce à son ORM (Object-Relational Mapping), rendant les tâches complexes plus gérables et plus efficaces. En outre, Django est hautement personnalisable et extensible, ce qui le rend approprié pour des projets de toute envergure. Sa communauté active contribue également à l'utilisation d'outils innovants et performants, tels que le https://github.com/Horou/DeepSerializer[DeepSerializer] de https://github.com/Horou[Horou], qui permet de créer facilement et rapidement des objets imbriqués. Enfin, le fait qu'Enzo utilise déjà ce framework représente un avantage significatif pour notre efficacité.
+
+---
+
+**VueJS**
+
+image::https://skillicons.dev/icons?i=vue["Logo Vue JS", link="https://vuejs.org/", width=100, height=100]
+
+Crée des interfaces utilisateur réactives et interactives. Émilien l’avait déja utilisé.
+
+---
+
+**Docker** 
+
+image::https://skillicons.dev/icons?i=docker["Logo Docker", link="https://www.docker.com/", width=100, height=100]
+
+Assure une déploiement et une gestion efficaces de l'application, avec une portabilité accrue entre les environnements.
 
 
 :sectnums:
+
 == Méthode agile
 
 == Documentation
