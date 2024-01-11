@@ -6,4 +6,6 @@
 **/database/
 **/nodered/
 **/dist/
-**/__pycache_/
+**/__pycache__/
+**/migrations/**
+!**/migrations/__init__.py
