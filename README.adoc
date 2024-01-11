@@ -44,11 +44,10 @@ image::https://cdn.discordapp.com/attachments/579303130886569984/106518314847384
 
 [options="frame=none,grid=none"]
 |===
-| **Timescaledb** a| image::https://assets.zabbix.com/img/brands/timescaledb.jpg["Logo Timescaledb", link="https://www.timescale.com/", width=75, height=75]
-| **Django** a| image::https://skillicons.dev/icons?i=django["Logo Django", link="https://www.djangoproject.com/", width=75, height=75]
-| **VueJS** a| image::https://skillicons.dev/icons?i=vue["Logo Vue JS", link="https://vuejs.org/", width=75, height=75]
-| **Docker** a| image::https://skillicons.dev/icons?i=docker["Logo Docker", link="https://www.docker.com/", width=75, height=75]
-| **NodeRed** a| image::https://nodered.org/about/resources/media/node-red-icon.png["Node-RED Logo", link="https://nodered.org", width=75, height=75]
+| **Timescaledb** a| image::https://assets.zabbix.com/img/brands/timescaledb.jpg["Logo Timescaledb", link="https://www.timescale.com/", width=75, height=75]| Excellente gestion et analyse des séries temporelles pour suivre avec précision les données des capteurs. Nous l’avions déja utilisé pour les https://webetud.iut-blagnac.fr/course/view.php?id=880[TP d’IOT].
+| **Django** a| image::https://skillicons.dev/icons?i=django["Logo Django", link="https://www.djangoproject.com/", width=75, height=75]|Développement rapide et sécurisé, idéal pour créer des applications robustes et évolutives. Enzo l’avait déja utilisé.
+| **VueJS** a| image::https://skillicons.dev/icons?i=vue["Logo Vue JS", link="https://vuejs.org/", width=75, height=75]| Crée des interfaces utilisateur réactives et interactives. Émilien l’avait déja utilisé.
+| **Docker** a| image::https://skillicons.dev/icons?i=docker["Logo Docker", link="https://www.docker.com/", width=75, height=75]|Assure une déploiement et une gestion efficaces de l'application, avec une portabilité accrue entre les environnements.
 |===
 
 
@@ -57,17 +56,7 @@ image::https://cdn.discordapp.com/attachments/579303130886569984/106518314847384
 :sectnums:
 == Méthode agile
 
-== Conception
-
-== Installation
-
-=== Prérequis
-
-=== Étapes d'installation
-
-=== Configuration
-
 == Documentation
 
-lien de toute les doc et explication de choix de tehcno et pour finir lien vers le wiki du projet
+La documentation du projet se trouve dans l’onglet wiki de GitHub https://github.com/Tructruc/SAE-ALT-S3-Dev-23-24-Occupation-salles-3A-Groupe-2/wiki[]
 
