@@ -1,1 +1,0 @@
-<!-- Module de header pour les pages ( barre de recherche ) -->
