@@ -1,9 +1,10 @@
 <script setup>
-import graphLine from "@/components/graphLine.vue";
+import roomDetail from "@/components/roomDetail.vue";
+
 </script>
 
 <template>
-<graph-line></graph-line>
+  <room-detail></room-detail>
 </template>
 
 <style scoped>
