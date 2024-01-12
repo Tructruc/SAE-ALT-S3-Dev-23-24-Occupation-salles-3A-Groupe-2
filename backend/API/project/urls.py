@@ -40,15 +40,15 @@ urlpatterns = [
 
 import sys
 
-# if 'runserver' in sys.argv : # Only run the MQTT client when running the server
-#     print("Démarrage des Process MQTT")
+if 'runserver' in sys.argv : # Only run the MQTT client when running the server
+    print("Démarrage des Process MQTT")
 
-#     mqtt_process_1 = MqttClientProcess("application/1/device/+/event/status")
-#     mqtt_process_1.daemon = True
-#     mqtt_process_1.start()
-#     print("Process 1 started")
+    mqtt_process_1 = MqttClientProcess("application/1/device/+/event/status")
+    mqtt_process_1.daemon = True
+    mqtt_process_1.start()
+    print("Process 1 started")
 
-#     mqtt_process_2 = MqttClientProcess("AM107/by-room/#")
-#     mqtt_process_2.daemon = True
-#     mqtt_process_2.start()
-#     print("Process 2 started")
+    mqtt_process_2 = MqttClientProcess("AM107/by-room/#")
+    mqtt_process_2.daemon = True
+    mqtt_process_2.start()
+    print("Process 2 started")

@@ -1,13 +1,21 @@
-<script setup>
-import roomDetail from "@/components/roomDetail.vue";
-
-</script>
-
 <template>
-  <room-detail></room-detail>
+  <div id="app">
+    <FullIut />
+  </div>
 </template>
 
 
-<style scoped>
+<script>
+import FullIut from './components/FullIut.vue';
+
+export default {
+  components: {
+    FullIut
+},
+};
+</script>
+
+
+<style >
 
 </style>
