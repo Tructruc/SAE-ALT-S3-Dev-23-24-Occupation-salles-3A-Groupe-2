@@ -29,7 +29,6 @@ services:
     restart: unless-stopped
     volumes:
       - ./database:/var/lib/postgresql/data
-      - ../deploiement-shared-files/my_postgresql.conf:/var/lib/postgresql/data/postgresql.conf
     networks:
       private-network:
         ipv4_address: 172.69.69.3

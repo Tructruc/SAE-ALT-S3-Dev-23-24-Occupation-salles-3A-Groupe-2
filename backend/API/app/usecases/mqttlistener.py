@@ -3,7 +3,6 @@ import multiprocessing
 import json
 from pprint import pprint
 
-
 class MqttClientProcess(multiprocessing.Process):
     def __init__(self, topic):
         super().__init__()
@@ -16,6 +15,10 @@ class MqttClientProcess(multiprocessing.Process):
 
     def on_connect(self, client, userdata, flags, rc, topic):
         print("Connected with result code " + str(rc) + f" to topic {topic}")
+        import logging
+        logging.basicConfig(level=logging.DEBUG)
+        logger = logging.getLogger(__name__)
+        logger.info("Connected with result code " + str(rc) + f" to topic {topic}")
         client.subscribe(topic)
 
     def on_message(self, client, userdata, msg, topic):
