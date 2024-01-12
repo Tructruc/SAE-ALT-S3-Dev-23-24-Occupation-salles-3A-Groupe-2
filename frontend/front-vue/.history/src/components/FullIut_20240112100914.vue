@@ -96,50 +96,55 @@
                 this.showBatE = false;
                 console.log('blblblblb', this.showBatB);
                 },
+            },
 
             displayBatE() {
                 this.showBatE = true;
                 this.showBatB = false;
                 },
             },
-
         components: {
-            BatB,
-            BatE
+            BatB
+            
         },
     }
+
+    
+
+    
   </script>
+  
 
+  <style>
+  svg {
+      border: dashed black 1px;
+  }
 
-<style>
-svg {
-    border: dashed black 1px;
-}
+  g {
+      fill:rgb(183, 232, 247);
+      stroke:rgb(0, 26, 255);
+      
+      /* stroke:rgb(0, 0, 0);
+      fill: rgb(248, 183, 43); */
+      
+      fill-opacity:1;
+      stroke-width:1px;
+      stroke-linecap:round;
+      stroke-linejoin:round;
+      stroke-opacity:1;
+      
+      transition: fill 1.2s, stroke 1s
+  }
+  g.changeColor:hover {
+      stroke:rgb(56, 0, 102);
+      fill: rgb(247, 156, 239);
+      
+      /* stroke:rgb(255, 193, 183);
+      fill: rgb(233, 8, 0); */
+  }
 
-g {
-    fill:rgb(183, 232, 247);
-    stroke:rgb(0, 26, 255);
-    
-    /* stroke:rgb(0, 0, 0);
-    fill: rgb(248, 183, 43); */
-    
-    fill-opacity:1;
-    stroke-width:1px;
-    stroke-linecap:round;
-    stroke-linejoin:round;
-    stroke-opacity:1;
-    
-    transition: fill 1.2s, stroke 1s
-}
-g.changeColor:hover {
-    stroke:rgb(56, 0, 102);
-    fill: rgb(247, 156, 239);
-    
-    /* stroke:rgb(255, 193, 183);
-    fill: rgb(233, 8, 0); */
-}
-
-
-/* Adjust the size of the div containing the SVG to adapt to the screen width */
-
-</style>
+  
+  /* Adjust the size of the div containing the SVG to adapt to the screen width */
+  
+  </style>
+  

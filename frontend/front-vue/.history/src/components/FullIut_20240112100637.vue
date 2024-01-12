@@ -9,7 +9,7 @@
                 <path id="path47755" d="m 1302.2095,300.87121 104.472,-3.50424 -0.09,24.96697 -104.324,2.13857 -0.058,-23.6013"/>
             </g>
             
-            <g id="bat_E" class="changeColor" @click="displayBatE">
+            <g id="bat_E" class="changeColor">
                 <title>Batiment E (R&T)</title>
                 <path id="path43261" d="m 1196.8919,302.54757 c 4.5459,1.04117 8.9079,2.95184 15.1257,-3.91667 l 1.6547,-75.36769 0.1044,-2.23031 c -3.2413,2.99809 -7.657,4.42654 -12.4684,5.32593 l -4.1945,23.42375 -0.2219,52.76499"/>
                 <path id="path41991" d="m 750.66052,272.70018 18.11785,-0.93004 428.33543,-21.98756 16.3673,-0.84018 -99.6384,-53.87022 -286.20621,13.07487 -76.97597,64.55313"/>
@@ -72,19 +72,16 @@
         </svg>
     </div>
       <BatB v-if="showBatB" />
-      <BatE v-else-if="showBatE" />
+      <BatBE v-if- ="showBatE" />
 
   </template>
   
   <script>
   import BatB from './BatB.vue'; // Adjust the path according to your project structure
-  import BatE from './BatE.vue'; // Adjust the path according to your project structure
-
     export default {
         data() {
             return {
             showBatB: false,
-            showBatE: false,
             };
             
         },
@@ -93,53 +90,51 @@
             displayBatB() {
                 console.log('baba', this.showBatB);
                 this.showBatB = true;
-                this.showBatE = false;
                 console.log('blblblblb', this.showBatB);
                 },
-
-            displayBatE() {
-                this.showBatE = true;
-                this.showBatB = false;
-                },
             },
-
         components: {
-            BatB,
-            BatE
+            BatB
+            
         },
     }
+
+    
+
+    
   </script>
+  
 
+  <style>
+  svg {
+      border: dashed black 1px;
+  }
 
-<style>
-svg {
-    border: dashed black 1px;
-}
+  g {
+      fill:rgb(183, 232, 247);
+      stroke:rgb(0, 26, 255);
+      
+      /* stroke:rgb(0, 0, 0);
+      fill: rgb(248, 183, 43); */
+      
+      fill-opacity:1;
+      stroke-width:1px;
+      stroke-linecap:round;
+      stroke-linejoin:round;
+      stroke-opacity:1;
+      
+      transition: fill 1.2s, stroke 1s
+  }
+  g.changeColor:hover {
+      stroke:rgb(56, 0, 102);
+      fill: rgb(247, 156, 239);
+      
+      /* stroke:rgb(255, 193, 183);
+      fill: rgb(233, 8, 0); */
+  }
 
-g {
-    fill:rgb(183, 232, 247);
-    stroke:rgb(0, 26, 255);
-    
-    /* stroke:rgb(0, 0, 0);
-    fill: rgb(248, 183, 43); */
-    
-    fill-opacity:1;
-    stroke-width:1px;
-    stroke-linecap:round;
-    stroke-linejoin:round;
-    stroke-opacity:1;
-    
-    transition: fill 1.2s, stroke 1s
-}
-g.changeColor:hover {
-    stroke:rgb(56, 0, 102);
-    fill: rgb(247, 156, 239);
-    
-    /* stroke:rgb(255, 193, 183);
-    fill: rgb(233, 8, 0); */
-}
-
-
-/* Adjust the size of the div containing the SVG to adapt to the screen width */
-
-</style>
+  
+  /* Adjust the size of the div containing the SVG to adapt to the screen width */
+  
+  </style>
+  
