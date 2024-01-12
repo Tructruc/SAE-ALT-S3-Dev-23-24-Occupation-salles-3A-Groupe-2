@@ -25,6 +25,8 @@ from app.usecases.mqttlistener import MqttClientProcess
 
 from app.views import DataViewSet, ByRoomViewSet, SensorViewSet
 
+import logging
+
 router = routers.DefaultRouter()
 DeepViewSet.init_router(router, [
 ])
@@ -40,7 +42,11 @@ urlpatterns = [
 
 import sys
 
-if 'runserver' in sys.argv : # Only run the MQTT client when running the server
+if 'runserver' in sys.argv or 'gunicorn' in sys.argv: # Only run the MQTT client when running the server or running in production mode
+    logging.basicConfig(level=logging.DEBUG)
+    logger = logging.getLogger(__name__)
+    logger.info('This is a debug message')
+    
     print("Démarrage des Process MQTT")
 
     mqtt_process_1 = MqttClientProcess("application/1/device/+/event/status")

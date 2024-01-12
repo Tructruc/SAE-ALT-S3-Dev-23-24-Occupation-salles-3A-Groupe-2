@@ -11,13 +11,18 @@ WORKDIR /API/
 COPY ./API/ /API/
 COPY ./requirements.txt /API/
 
+# Delete the last migration file
+RUN rm -rf /API/app/migrations/0001_initial.py
+
 # Installe les dépendances Python
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Execute pour debug
-CMD [ "tail", "-f", "/dev/null" ]
+# Ajouter uvicorn et gunicorn
+RUN pip install uvicorn gunicorn
 
-# Utiliser supervisord pour démarrer les services
-# CMD python manage.py makemigrations \
-#     && python manage.py migrate \
-#     && python manage.py runserver
+# Permets de lancer les migrations pour que la base de données soit à jour
+RUN python manage.py makemigrations
+#     && python manage.py migrate
+
+# Execute pour debug si nécessaire
+CMD [ "tail", "-f", "/dev/null" ]
