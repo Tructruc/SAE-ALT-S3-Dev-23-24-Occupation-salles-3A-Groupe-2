@@ -63,7 +63,7 @@ Django est un framework Python idéal pour la construction d'APIs, grâce à sa 
 
 image::https://skillicons.dev/icons?i=vue["Logo Vue JS", link="https://vuejs.org/", width=100, height=100]
 
-VueJS est un framework JavaScript progressif, qui permet de créer des interfaces utilisateur interactives et dynamiques. Il est particulièrement adapté pour le développement d'applications web monopages (SPA), et est très apprécié pour sa simplicité et sa flexibilité. De plus, VueJS est très performant, et permet de créer des applications rapides et réactives. Enfin, il est très bien documenté, et dispose d'une communauté active. Ce framework est donc idéal pour notre projet, et nous permettra de créer une interface utilisateur intuitive et efficace.
+VueJS est un framework JavaScript progressif, qui permet de créer des interfaces utilisateur interactives et dynamiques. Il est particulièrement adapté pour le développement d'applications web monopages (SPA), et est très apprécié pour sa simplicité et sa flexibilité. De plus, VueJS est très performant, et permet de créer des applications rapides et réactives. Enfin, il est très bien documenté, et dispose d'une communauté active. Ce framework est donc idéal pour notre projet, et nous permettra de créer une interface utilisateur intuitive et efficace. L’intégration de https://www.chartjs.org/[Chart.js] grace à https://vue-chartjs.org/[vue-chartjs] nous permet d'ajouter des graphiques interactifs et esthétiques à notre application VueJS. Chart.js est une bibliothèque JavaScript populaire pour la création de graphiques. Elle offre une variété de types de graphiques, comme des diagrammes en barres, en lignes, à secteurs, et plus encore. Ces graphiques sont réactifs et s'adaptent parfaitement aux différentes tailles d'écran, ce qui est essentiel pour les applications web modernes.
 
 ---
 
@@ -94,9 +94,18 @@ En résumé, cette architecture n'est pas seulement une infrastructure technique
 
 :sectnums:
 
-== Méthode agile
+== Méthode AGILE
+
+Le suivi de la méthode AGILE se trouve dans le wiki du repository à l’adresse suivante https://github.com/Tructruc/SAE-ALT-S3-Dev-23-24-Occupation-salles-3A-Groupe-2/wiki/M%C3%A9thode-AGILE[]
 
 == Documentation
 
 La documentation du projet se trouve dans l’onglet wiki de GitHub https://github.com/Tructruc/SAE-ALT-S3-Dev-23-24-Occupation-salles-3A-Groupe-2/wiki[]
+
+== Retours Sprint
+
+Les retours de sprint pourront s’effectuer via la page discussion du repository GitHub https://github.com/Tructruc/SAE-ALT-S3-Dev-23-24-Occupation-salles-3A-Groupe-2/discussions/categories/retours[] 
+
+Voici un tutoriel pour créer une discussion : https://github.com/Tructruc/SAE-ALT-S3-Dev-23-24-Occupation-salles-3A-Groupe-2/wiki/Tutoriel-Cr%C3%A9ation-discussion-Retour-Sprint[]
+
 
