@@ -18,4 +18,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 CMD [ "tail", "-f", "/dev/null" ]
 
 # Utiliser supervisord pour démarrer les services
-# CMD []
+# CMD python manage.py makemigrations \
+#     && python manage.py migrate \
+#     && python manage.py runserver

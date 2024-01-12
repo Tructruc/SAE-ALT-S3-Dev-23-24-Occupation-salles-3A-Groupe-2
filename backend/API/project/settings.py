@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,7 +25,13 @@ SECRET_KEY = 'django-insecure-^m^9b2&$=(#u2zs4+%-4mr)sf3h-8w(cb_@o7r&-hvh76o5d4u
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+CORS_ORIGIN_ALLOW_ALL = True
+
+ALLOWED_HOSTS = [
+    'localhost:5173',
+    'localhost:8080',
+    'localhost',
+]
 
 
 # Application definition
@@ -37,9 +43,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
+    'rest_framework',
+    'app',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -47,6 +57,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
 ]
 
 ROOT_URLCONF = 'project.urls'
@@ -75,21 +86,16 @@ WSGI_APPLICATION = 'project.wsgi.application'
 
 DATABASES = {
     'default': {
-        # "ENGINE": os.environ.get("DB_ENGINE"),
-        # "NAME": os.environ.get("MYSQL_DATABASE"),
-        # "USER": os.environ.get("DB_USER"),
-        # "PASSWORD": os.environ.get("MYSQL_ROOT_PASSWORD"),
-        # "HOST": os.environ.get("MYSQL_HOST"),
-        # "PORT": os.environ.get("MYSQL_PORT"),
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'data-iot',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': '172.69.69.3',
-        'PORT': '5432',
+        'ENGINE': os.environ.get("DB_ENGINE"),
+        'NAME': os.environ.get("POSTGRES_DB"),
+        'USER': os.environ.get("POSTGRES_USER"),
+        'PASSWORD': os.environ.get("POSTGRES_PASSWORD"),
+        'HOST': os.environ.get("DB_HOST"),
+        'PORT': os.environ.get("DB_PORT"),
     }
 }
 
+TIMESCALE_DB_BACKEND_BASE = "django.contrib.gis.db.backends.postgis"
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -115,13 +121,13 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'CET'
+TIME_ZONE = 'Europe/Paris'
 
 USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)

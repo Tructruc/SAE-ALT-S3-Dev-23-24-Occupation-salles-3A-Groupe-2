@@ -6,6 +6,8 @@ services:
     build:
       context: ../backend
       dockerfile: Dockerfile
+    env_file:
+      - .env
     container_name: django-backend
     restart: unless-stopped
     ports:
@@ -19,16 +21,13 @@ services:
   timescaledb:
     platform: linux/amd64
     image: timescale/timescaledb:latest-pg12
+    env_file:
+      - .env
     container_name: timescaledb
     restart: unless-stopped
-    ports:
-      - "5432:5432"
-    environment:
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_DB=data-iot
     volumes:
       - ./database:/var/lib/postgresql/data
+      - ./my_postgresql.conf:/var/lib/postgresql/data/postgresql.conf
     networks:
       private-network:
         ipv4_address: 172.69.69.3
@@ -38,6 +37,8 @@ services:
     build:
       context: ../frontend
       dockerfile: Dockerfile
+    env_file:
+      - .env
     container_name: vuejs-frontend
     restart: unless-stopped
     ports:
@@ -46,17 +47,17 @@ services:
       private-network:
         ipv4_address: 172.69.69.4
 
-  nodered:
+  # A utiliser pour la gestion de la base de donnée avec UI : localhost:8080
+  adminer:
     platform: linux/amd64
-    image: nodered/node-red:latest
-    container_name: nodered
+    image: adminer
+    env_file:
+      - .env
     restart: unless-stopped
     ports:
-      - "1880:1880"
-    volumes:
-      - ./nodered:/data
+      - 8081:8080
     networks:
-      private-network:
+      private-network :
         ipv4_address: 172.69.69.5
 
 networks:
