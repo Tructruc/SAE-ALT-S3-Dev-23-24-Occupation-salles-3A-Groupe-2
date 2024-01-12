@@ -1,13 +1,12 @@
 import paho.mqtt.client as mqtt
-import threading
+import multiprocessing
 import json
 from pprint import pprint
 
 
-
-class MqttClientThread(threading.Thread):
+class MqttClientProcess(multiprocessing.Process):
     def __init__(self, topic):
-        threading.Thread.__init__(self)
+        super().__init__()
         self.client = mqtt.Client()
         self.topic = topic
 
@@ -20,7 +19,7 @@ class MqttClientThread(threading.Thread):
         client.subscribe(topic)
 
     def on_message(self, client, userdata, msg, topic):
-        from app.usecases.createsensor import create_sensor
+        from app.usecases import create_sensor
         try:
             # Décodez le payload et convertissez-le en dictionnaire
             message_dict = json.loads(msg.payload.decode('utf-8'))
@@ -41,5 +40,5 @@ class MqttClientThread(threading.Thread):
             while True:
                 pass
         except KeyboardInterrupt:
-            print("Arrêt du script.")
+            print("Arrêt du processus.")
             self.client.disconnect()

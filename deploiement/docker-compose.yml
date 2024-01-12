@@ -27,6 +27,7 @@ services:
     restart: unless-stopped
     volumes:
       - ./database:/var/lib/postgresql/data
+      - ./my_postgresql.conf:/var/lib/postgresql/data/postgresql.conf
     networks:
       private-network:
         ipv4_address: 172.69.69.3
@@ -40,8 +41,6 @@ services:
       - .env
     container_name: vuejs-frontend
     restart: unless-stopped
-    environment:
-      - TZ=Europe/Paris
     ports:
       - "8080:80"
     networks:

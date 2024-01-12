@@ -3,3 +3,5 @@ psycopg2
 django-timescaledb
 djangorestframework-deepserializer
 paho-mqtt
+python-dateutil
+django-cors-headers
