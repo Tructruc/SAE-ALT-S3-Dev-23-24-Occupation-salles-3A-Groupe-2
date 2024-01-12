@@ -7,11 +7,15 @@ from app.usecases import data_date_sort
 from app.serializers import DataSerializer
 
 class DataViewSet(DeepViewSet):
+    depth = 0
     queryset = Data.objects
+    use_case = 'data_date_sort'
 
     def get_queryset(self):
         queryset = super().get_queryset()
         params = self.request.query_params
+
+        # print(DeepViewSet.get_serializer(queryset.model, use_case='data_date_sort'))
 
         # Convertir les paramètres de date en objets datetime conscients
         date_from = params.get('from')

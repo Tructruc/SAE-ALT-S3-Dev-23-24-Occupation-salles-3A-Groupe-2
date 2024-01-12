@@ -15,7 +15,8 @@ class ByRoomSerializer(DeepSerializer):
     class Meta:
         model = Sensor
         fields = ['room', 'all_data']
-        depth = 1
+        depth = 0
+        use_case = 'by_room_sort'
 
     def get_all_data(self, obj):        
         print("coucou")
@@ -54,7 +55,9 @@ class ByRoomSerializer(DeepSerializer):
 #         return Response(serializer.data, status=status.HTTP_200_OK)
 
 class ByRoomViewSet(DeepViewSet):
+    depth = 0
     queryset = Sensor.objects.all()
+    use_case = 'by_room_sort'
 
     def get_queryset(self):
         return super().get_queryset()
