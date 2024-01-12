@@ -27,11 +27,11 @@ image::https://cdn.discordapp.com/attachments/579303130886569984/106518314847384
 
 - link:https://github.com/P4C-M4N[Thomas Silvestre] - Développeur
 
-- link:https://github.com/Tructruc[Émilien Fieu] - SCRUM Master/Développeur
+- link:https://github.com/Tructruc[Émilien Fieu] - SCRUM Master / Développeur
 
-- link:https://github.com/enzofrnt[Enzo Fournet] - Product Owner/Développeur
+- link:https://github.com/enzofrnt[Enzo Fournet] - Product Owner / Développeur
 
-- link:https://github.com/Baraphe[Raphaël Bar] - Développeur
+- link:https://github.com/Baraphe[Raphaël Bar] - Développeur / Illustrateur
 
 - link:https://github.com/mel2k3n[(Melissa Dequesne)] - Développeuse
 
