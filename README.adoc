@@ -7,23 +7,23 @@ Date: 09-01-2024
 
 ---
 
-== Introduction
+== • Introduction
 
-=== Contexte
+=== • Contexte
 
 Aujourd'hui, la quasi-totalité des salles de l'IUT de Blagnac sont équipées de capteurs link:https://www.landatel.com/en_US/shop/product/mls-am107-868m-milesight-am107-868m-multiple-indoor-environment-sensor-7-sensors-in-one-lorawan-868-mhz-14500[Milesight AM107-868M]. Ces capteurs fournissent des données précieuses sur plusieurs paramètres environnementaux : température, humidité, luminosité, taux de CO2, présence de particules fines dans l'air, pression atmosphérique, et détection de présence humaine dans la salle. Ils sont connectés à un réseau LoRaWAN, qui transmer ensuite les données à un broker MQTT. Cependant, ces informations ne sont actuellement pas exploitées à leur plein potentiel et demeurent difficilement accessibles.
 
-=== Présentation du projet
+=== • Présentation du projet
 
 Le client, M. Boulle, nous a donc missionner afin de développer une application permettant de visualiser les données des capteurs, de les stocker, et de les exploiter. L'application devra être capable de fournir des graphiques et des statistiques sur les données.
 
-Des fonctionnalitées supplémentaires sont envisagées par l'équipe, comme la possibilté d'avoir une carte interactive des salles, des predictions sur les données...
+Des fonctionnalitées supplémentaires sont envisagées par l'équipe, comme par exemple la possibilté d'avoir une carte interactive des salles, des predictions sur les données...
 
 image::https://cdn.discordapp.com/attachments/579303130886569984/1065183148473843742/1519871482152.png["Logo IUT UNIV", 100, 100]
 
-=== Notre équipe
+=== • Notre équipe
 
-==== Étudiant.e.s
+==== • Étudiant.e.s
 
 - link:https://github.com/P4C-M4N[Thomas Silvestre] - Développeur
 
@@ -33,41 +33,70 @@ image::https://cdn.discordapp.com/attachments/579303130886569984/106518314847384
 
 - link:https://github.com/Baraphe[Raphaël Bar] - Développeur
 
-- link:https://perdu.com/[(Melissa Desquene)] - Pas là :(
+- link:https://github.com/mel2k3n[(Melissa Dequesne)] - Développeuse
 
-==== Enseignant.e.s
+==== • Enseignant.e.s
 
 - link:https://github.com/rboulle[Rémi Boulle] - Client
 - link:https://github.com/ependaries[Esther Pendaries] - Enseignante référente
 
-=== Technologies utilisées
+=== • Technologies utilisées
 
-[options="frame=none,grid=none"]
-|===
-| **Timescaledb** a| image::https://assets.zabbix.com/img/brands/timescaledb.jpg["Logo Timescaledb", link="https://www.timescale.com/", width=75, height=75]
-| **Django** a| image::https://skillicons.dev/icons?i=django["Logo Django", link="https://www.djangoproject.com/", width=75, height=75]
-| **VueJS** a| image::https://skillicons.dev/icons?i=vue["Logo Vue JS", link="https://vuejs.org/", width=75, height=75]
-| **Docker** a| image::https://skillicons.dev/icons?i=docker["Logo Docker", link="https://www.docker.com/", width=75, height=75]
-| **NodeRed** a| image::https://nodered.org/about/resources/media/node-red-icon.png["Node-RED Logo", link="https://nodered.org", width=75, height=75]
-|===
+- **Timescaledb**
 
+image::https://assets.zabbix.com/img/brands/timescaledb.jpg["Logo Timescaledb", link="https://www.timescale.com/", width=100, height=100]
 
+TimeScaleDB est un système de gestion de base de données (SGBD) particulièrement performant pour la gestion et l'analyse de séries temporelles, ce qui s'avère très utile dans notre contexte. Cette capacité nous permet de suivre avec précision et efficacité les données issues de nos capteurs. De plus, nous avons déjà une expérience avec TimeScaleDB, l'ayant utilisé lors des travaux pratiques d'IoT à l'IUT de Blagnac, comme décrit ici : https://webetud.iut-blagnac.fr/course/view.php?id=880[TPs d’IOT].
+Ce SGBD est donc idéal pour notre projet, et nous permettra de stocker et d'analyser efficacement les données de nos capteurs.
 
+---
+
+- **Django**
+
+image::https://skillicons.dev/icons?i=django["Logo Django", link="https://www.djangoproject.com/", width=100, height=100]
+
+Django est un framework Python idéal pour la construction d'APIs, grâce à sa capacité à accélérer le développement tout en assurant une haute qualité et une sécurité robuste. Son architecture « batteries incluses » propose une multitude d'outils intégrés et privilégie une approche DRY (Don't Repeat Yourself) pour minimiser le code répétitif. De plus, Django facilite les interactions avec la base de données grâce à son ORM (Object-Relational Mapping), rendant les tâches complexes plus gérables et plus efficaces. En outre, Django est hautement personnalisable et extensible, ce qui le rend approprié pour des projets de toute envergure. Sa communauté active contribue également à l'utilisation d'outils innovants et performants, tels que le https://github.com/Horou/DeepSerializer[DeepSerializer] de https://github.com/Horou[Horou], qui permet de créer facilement et rapidement des objets imbriqués. Enfin, le fait qu'Enzo utilise déjà ce framework représente un avantage significatif pour notre efficacité.
+
+---
+
+- **VueJS**
+
+image::https://skillicons.dev/icons?i=vue["Logo Vue JS", link="https://vuejs.org/", width=100, height=100]
+
+VueJS est un framework JavaScript progressif, qui permet de créer des interfaces utilisateur interactives et dynamiques. Il est particulièrement adapté pour le développement d'applications web monopages (SPA), et est très apprécié pour sa simplicité et sa flexibilité. De plus, VueJS est très performant, et permet de créer des applications rapides et réactives. Enfin, il est très bien documenté, et dispose d'une communauté active. Ce framework est donc idéal pour notre projet, et nous permettra de créer une interface utilisateur intuitive et efficace.
+
+---
+
+- **Docker** 
+
+image::https://skillicons.dev/icons?i=docker["Logo Docker", link="https://www.docker.com/", width=100, height=100]
+
+Docker, utilisé conjointement avec Dockerfile et Docker Compose, est un outil essentiel pour le déploiement de conteneurs. Il facilite le déploiement d'applications dans des conteneurs, qui sont des environnements isolés et indépendants. Cette méthode permet de déployer des applications de manière simple, rapide et efficace, tout en assurant leur accessibilité. L'un des principaux atouts de Docker est sa capacité à déployer des applications sur divers systèmes d'exploitation, incluant Windows, Linux et MacOS. Cette polyvalence est particulièrement bénéfique pour notre projet, qui nécessite une compatibilité multiplateforme. De plus, Docker assure un déploiement sécurisé des applications, un aspect crucial pour la fiabilité de notre projet. 
+L'expérience préalable d'Enzo avec Docker représente un avantage notable, augmentant ainsi notre efficacité dans l'utilisation de cet outil. En somme, Docker apparaît comme une solution idéale pour répondre aux besoins spécifiques de notre projet.
+
+=== • Architecture du projet
+
+image::https://i.imgur.com/eXL32Ly.png["Schéma Architecture", link="https://www.docker.com/", width=1000]
+
+L'architecture que nous avons conçue est un modèle de déploiement moderne qui tire parti de la puissance et de la flexibilité des conteneurs Docker, avec Dockerfile et Docker Compose, pour orchestrer notre application complète. Notre infrastructure se décompose en 3 composants principaux, tous gérés par Docker Compose, qui permettent une mise en œuvre cohérente et une intégration transparente entre les différents services. L'architecture s'appuie aussi sur des variables d'environnement partagées via un fichier .env pour garantir la synchronisation entre les services ainsi que des volumes pour le dévellopement ou pour garantire la peristence des données.
+
+Au cœur de notre système, nous avons un conteneur dédié à TimescaleDB, notre base de données spécialisée dans le traitement des séries temporelles. Isolée au sein de notre réseau, cette base de données est la fondation sur laquelle reposent la collecte et l'analyse de nos données de capteurs.
+
+Le conteneur Django représente le back-end de notre application. Grâce à un Dockerfile spécifiquement conçu, ce conteneur est chargé de construire l'environnement nécessaire pour exécuter notre API.
+
+Pour l'interface utilisateur, nous avons un conteneur Nginx/VueJS. Nginx agit en tant que serveur web et proxy inverse, dirigeant les requêtes utilisateur vers notre application front-end développée avec VueJS. Le Dockerfile associé à ce conteneur se charge de compiler et de servir notre interface utilisateur, assurant une expérience utilisateur fluide et réactive.
+
+Le conteneur Adminer fournit une interface web intuitive pour la gestion de notre base de données, spécialement pendant les phases de développement et de débogage. Cet outil facilite considérablement la tâche de nos développeurs qui peuvent ainsi gérer et maintenir la base de données avec efficacité et simplicité.
+
+Tous ces éléments interagissent au sein d'un réseau privé Docker, sécurisé et isolé, assurant une communication fluide et protégée entre les conteneurs. Le fichier docker-compose.yml est la clé de voûte de notre architecture : il définit la configuration de chaque service, orchestre la construction des images Docker et gère le démarrage des conteneurs ainsi que la mise en oeuvre des volumes persistants. Cela simplifie considérablement le processus de déploiement, qu'il s'agisse de développement, de tests ou de mise en production, tout en permettant une évolutivité et une maintenance aisées.
+
+En résumé, cette architecture n'est pas seulement une infrastructure technique ; elle reflète notre engagement envers des pratiques de développement modernes, offrant à notre équipe la possibilité de travailler de manière efficace et harmonieuse, et à nos utilisateurs l'assurance d'une application performante et fiable.
 
 :sectnums:
+
 == Méthode agile
-
-== Conception
-
-== Installation
-
-=== Prérequis
-
-=== Étapes d'installation
-
-=== Configuration
 
 == Documentation
 
-lien de toute les doc et explication de choix de tehcno et pour finir lien vers le wiki du projet
+La documentation du projet se trouve dans l’onglet wiki de GitHub https://github.com/Tructruc/SAE-ALT-S3-Dev-23-24-Occupation-salles-3A-Groupe-2/wiki[]
 
