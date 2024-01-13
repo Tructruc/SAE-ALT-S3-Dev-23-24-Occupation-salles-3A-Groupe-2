@@ -38,7 +38,7 @@ class MqttClientProcess(multiprocessing.Process):
     def run(self):
         try:
             # Tenter de se connecter au broker MQTT
-            self.client.connect("chirpstack.lora.tetaneutral.net", 1883, 60)
+            self.client.connect("chirpstack.iut-blagnac.fr", 1883, 60)
         except TimeoutError as e:
             # Gérer l'exception TimeoutError ici
             print("La connexion a dépassé le délai imparti. Vérifiez l'adresse du serveur et votre connexion internet.")
