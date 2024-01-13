@@ -1,4 +1,6 @@
 import os
+import logging
+
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -73,3 +75,23 @@ DATABASES = {
 }
 
 TIMESCALE_DB_BACKEND_BASE = "django.contrib.gis.db.backends.postgis"
+
+class ColorFormatter(logging.Formatter):
+    # Codes de couleur ANSI
+    COLORS = {
+        'WARNING': '\033[93m', # Jaune
+        'INFO': '\033[94m',    # Bleu
+        'DEBUG': '\033[92m',   # Vert
+        'CRITICAL': '\033[91m',# Rouge
+        'ERROR': '\033[91m',   # Rouge
+        'ENDC': '\033[0m',     # Fin de la couleur
+    }
+
+    def format(self, record):
+        levelname = record.levelname
+        if levelname in self.COLORS:
+            levelname_color = self.COLORS[levelname] + levelname + self.COLORS['ENDC']
+            record.levelname = levelname_color
+        return logging.Formatter.format(self, record)
+
+PATH_TO_LOG_FILE = os.path.join(BASE_DIR, 'api.log')

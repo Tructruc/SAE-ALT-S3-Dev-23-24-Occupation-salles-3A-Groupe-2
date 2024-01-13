@@ -36,5 +36,8 @@ urlpatterns = [
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 import sys
-if 'runserver' in sys.argv : # Start MQTT process only if manage.py runserver is running (In development)
+from project.loggerconfig import setup_logger
+
+if 'runserver' in sys.argv : # Start MQTT process and logger only if manage.py runserver is running (In development)
+    logger = setup_logger()
     start_process_mqtt_listener()

@@ -5,3 +5,5 @@ DEBUG = False
 CORS_ORIGIN_ALLOW_ALL = True
 
 ALLOWED_HOSTS = ['localhost', "localhost:8080", "http://localhost:8080"]
+
+LOGGING_LEVEL = logging.DEBUG if DEBUG else logging.INFO
