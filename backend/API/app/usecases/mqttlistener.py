@@ -36,7 +36,16 @@ class MqttClientProcess(multiprocessing.Process):
             print(f"Error decoding JSON: {msg.payload}")
 
     def run(self):
-        self.client.connect("chirpstack.iut-blagnac.fr", 1883, 60)
+        try:
+            # Tenter de se connecter au broker MQTT
+            self.client.connect("chirpstack.lora.tetaneutral.net", 1883, 60)
+        except TimeoutError as e:
+            # Gérer l'exception TimeoutError ici
+            print("La connexion a dépassé le délai imparti. Vérifiez l'adresse du serveur et votre connexion internet.")
+            # Ajouter une logique de reconnexion ou terminer le programme
+        except Exception as e:
+            # Gérer d'autres exceptions potentielles
+            print(f"Une exception a été levée: {e}")
         self.client.loop_start()
 
         try:
