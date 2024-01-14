@@ -3,9 +3,7 @@ def start_process_mqtt_listener() :
 
     from app.usecases.mqttlistener import MqttClientProcess
 
-    logging.basicConfig(level=logging.DEBUG)
-    logger = logging.getLogger(__name__)
-    logger.info('Démarrage du serveur')
+    logger = logging.getLogger('API')
 
     mqtt_process_1 = MqttClientProcess("application/1/device/+/event/status")
     mqtt_process_1.daemon = True

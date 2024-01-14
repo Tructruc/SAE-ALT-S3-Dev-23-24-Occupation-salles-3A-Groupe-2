@@ -2,6 +2,9 @@ import paho.mqtt.client as mqtt
 import multiprocessing
 import json
 from pprint import pprint
+import logging
+
+logger = logging.getLogger('API')
 
 class MqttClientProcess(multiprocessing.Process):
     def __init__(self, topic):
@@ -13,11 +16,7 @@ class MqttClientProcess(multiprocessing.Process):
         self.client.on_connect = lambda client, userdata, flags, rc: self.on_connect(client, userdata, flags, rc, self.topic)
         self.client.on_message = lambda client, userdata, msg: self.on_message(client, userdata, msg, self.topic)
 
-    def on_connect(self, client, userdata, flags, rc, topic):
-        print("Connected with result code " + str(rc) + f" to topic {topic}")
-        import logging
-        logging.basicConfig(level=logging.DEBUG)
-        logger = logging.getLogger(__name__)
+    def on_connect(self, client, userdata, flags, rc, topic):        
         logger.info("Connected with result code " + str(rc) + f" to topic {topic}")
         client.subscribe(topic)
 
@@ -27,8 +26,7 @@ class MqttClientProcess(multiprocessing.Process):
             # Décodez le payload et convertissez-le en dictionnaire
             message_dict = json.loads(msg.payload.decode('utf-8'))
             # Affichez le message de manière formatée
-            print(f"Received message on {topic}: ")
-            pprint(message_dict)
+            logger.info(f"Received message on {topic}: ")
 
             create_sensor(message_dict, topic)
 

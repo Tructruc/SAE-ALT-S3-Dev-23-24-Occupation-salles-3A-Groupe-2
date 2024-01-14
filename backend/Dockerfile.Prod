@@ -23,6 +23,7 @@ RUN pip install uvicorn gunicorn
 # Permets de lancer les migrations pour que la base de données soit à jour
 RUN python manage.py makemigrations
 
-CMD python manage.py migrate && \
-    gunicorn project.asgi:application -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:8000 
+CMD python manage.py wait_for_db \
+    && python manage.py migrate && \
+    gunicorn project.asgi:application -k uvicorn.workers.UvicornWorker -c gunicorn_config.py
 

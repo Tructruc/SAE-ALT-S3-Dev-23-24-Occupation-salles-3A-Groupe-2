@@ -2,32 +2,32 @@ import importlib
 import logging
 import os
 
-# from project.settings.base_settings import ColorFormatter, LOGGING_LEVEL
-# from django.conf import settings
-# from django.conf.global_settings import ColorFormatter, LOGGING_LEVEL
-
-# Récupérer la valeur de la variable d'environnement
+# Get the settings module name from the environment variable
 settings_module_name = os.environ.get('DJANGO_SETTINGS_MODULE')
 
 if settings_module_name:
-    # Importer le module de paramètres en utilisant le nom du module
+    # Import dynamiclly the settings module to be able to get tje current settings
     settings_module = importlib.import_module(settings_module_name)
 
-    # Utiliser `getattr` pour accéder aux attributs par leur nom
+    # Use getattr to get the value of the variable in the settings module that we need here
     ColorFormatter = getattr(settings_module, 'ColorFormatter', None)
     LOGGING_LEVEL = getattr(settings_module, 'LOGGING_LEVEL', None)
     PATH_TO_LOG_FILE = getattr(settings_module, 'PATH_TO_LOG_FILE', None)
 
-    if ColorFormatter is not None and LOGGING_LEVEL is not None:
-        # Vous pouvez maintenant utiliser `ColorFormatter` et `LOGGING_LEVEL`
-        print('DEBUG:', getattr(settings_module, 'DEBUG', None))
-        print('ColorFormatter:', ColorFormatter)
-        print('LOGGING_LEVEL:', LOGGING_LEVEL)
-        print('PATH_TO_LOG_FILE:', PATH_TO_LOG_FILE)
-    else:
-        print("ColorFormatter ou LOGGING_LEVEL n'est pas défini dans le module des paramètres.")
+    if not ColorFormatter or not LOGGING_LEVEL or not PATH_TO_LOG_FILE:
+        raise ValueError('Some variables are missing in the settings module, app cannot start properly.')
 else:
-    print("La variable d'environnement DJANGO_SETTINGS_MODULE n'est pas définie.")
+    raise ValueError('DJANGO_SETTINGS_MODULE variable is not set in the environment.')
+
+
+def setup_gunicorn_loggers(logger):
+    """
+    Configure Gunicorn loggers to use the same handlers as our custom logger.
+    """
+    # Configure Gunicorn error logger
+    gunicorn_error_logger = logging.getLogger('gunicorn.error')
+    gunicorn_error_logger.handlers = logger.handlers
+    gunicorn_error_logger.setLevel(logger.level)
 
 
 def setup_logger():

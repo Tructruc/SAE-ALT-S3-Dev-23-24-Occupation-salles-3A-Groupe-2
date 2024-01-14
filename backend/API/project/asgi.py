@@ -17,8 +17,6 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'project.settings')
 application = get_asgi_application()
 
 import sys
-from project.loggerconfig import setup_logger
 
 if '/usr/local/bin/gunicorn' in sys.argv : # Start MQTT process and logger only if gunicorn is running (In production)
     start_process_mqtt_listener()
-    logger = setup_logger()
