@@ -1,0 +1,481 @@
+2024-01-15 14:27:49,803 - INFO - Process 1 started
+2024-01-15 14:27:49,804 - INFO - Process 2 started
+2024-01-15 14:27:59,061 - INFO - Process 1 started
+2024-01-15 14:27:59,062 - INFO - Process 2 started
+2024-01-15 14:27:59,327 - INFO - Process 1 started
+2024-01-15 14:27:59,328 - INFO - Process 2 started
+2024-01-15 14:28:33,427 - INFO - Process 1 started
+2024-01-15 14:28:33,429 - INFO - Process 2 started
+2024-01-15 14:28:33,633 - INFO - Process 1 started
+2024-01-15 14:28:33,634 - INFO - Process 2 started
+2024-01-15 14:29:11,091 - INFO - Connected with result code 0 to topic AM107/by-room/#
+2024-01-15 14:29:11,120 - INFO - Connected with result code 0 to topic application/1/device/+/event/status
+2024-01-15 14:29:13,230 - INFO - Connected with result code 0 to topic application/1/device/+/event/status
+2024-01-15 14:29:26,504 - INFO - Connected with result code 0 to topic AM107/by-room/#
+2024-01-15 14:29:43,197 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:29:43,198 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:29:44,425 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 14:29:44,435 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 14:29:46,209 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 14:29:46,212 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 14:29:54,242 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:29:54,371 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:29:54,522 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:29:54,653 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:29:54,830 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:29:54,845 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:29:54,990 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:29:55,045 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:29:55,143 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:29:55,225 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:29:55,418 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:29:55,711 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:29:55,869 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:29:56,014 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:30:02,747 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:30:02,747 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:30:13,227 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:30:13,227 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:30:48,631 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:30:48,651 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:30:48,651 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 14:36:01,943 - INFO - Connected with result code 0 to topic application/1/device/+/event/status
+2024-01-15 14:36:02,345 - INFO - Connected with result code 0 to topic AM107/by-room/#
+2024-01-15 14:36:18,801 - INFO - Connected with result code 0 to topic AM107/by-room/#
+2024-01-15 14:36:32,036 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:36:32,052 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:36:46,230 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:36:46,240 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:36:46,251 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 14:37:12,863 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:37:12,883 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:37:18,526 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:37:18,526 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:37:19,003 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 14:37:19,062 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:37:19,240 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:37:30,164 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 14:37:30,203 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:37:43,804 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:37:45,913 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:37:48,543 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:37:51,283 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:38:18,835 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 14:38:18,883 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:38:43,663 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:38:44,783 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 14:38:44,827 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:39:10,543 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:39:42,964 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 14:39:42,993 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:39:43,364 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:39:45,583 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:39:45,993 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:39:46,863 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:39:47,276 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:39:53,283 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 14:39:53,292 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:40:02,867 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:40:21,538 - INFO - Process 1 started
+2024-01-15 14:40:21,539 - INFO - Process 2 started
+2024-01-15 14:40:21,736 - INFO - Process 1 started
+2024-01-15 14:40:21,737 - INFO - Process 2 started
+2024-01-15 14:40:21,824 - INFO - Connected with result code 0 to topic AM107/by-room/#
+2024-01-15 14:40:21,824 - INFO - Connected with result code 0 to topic application/1/device/+/event/status
+2024-01-15 14:40:21,962 - INFO - Connected with result code 0 to topic application/1/device/+/event/status
+2024-01-15 14:40:21,967 - INFO - Connected with result code 0 to topic AM107/by-room/#
+2024-01-15 14:40:47,743 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:40:47,764 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:42:14,562 - INFO - Process 1 started
+2024-01-15 14:42:14,563 - INFO - Process 2 started
+2024-01-15 14:42:14,759 - INFO - Process 1 started
+2024-01-15 14:42:14,761 - INFO - Process 2 started
+2024-01-15 14:42:14,806 - INFO - Connected with result code 0 to topic AM107/by-room/#
+2024-01-15 14:42:14,806 - INFO - Connected with result code 0 to topic application/1/device/+/event/status
+2024-01-15 14:42:14,963 - INFO - Connected with result code 0 to topic application/1/device/+/event/status
+2024-01-15 14:42:14,979 - INFO - Connected with result code 0 to topic AM107/by-room/#
+2024-01-15 14:42:15,827 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:42:15,848 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:43:02,712 - INFO - Process 1 started
+2024-01-15 14:43:02,713 - INFO - Process 2 started
+2024-01-15 14:43:02,972 - INFO - Process 1 started
+2024-01-15 14:43:02,973 - INFO - Process 2 started
+2024-01-15 14:43:03,256 - INFO - Process 1 started
+2024-01-15 14:43:03,257 - INFO - Process 2 started
+2024-01-15 14:43:32,654 - INFO - Process 1 started
+2024-01-15 14:43:32,655 - INFO - Process 2 started
+2024-01-15 14:43:32,845 - INFO - Connected with result code 0 to topic application/1/device/+/event/status
+2024-01-15 14:43:32,870 - INFO - Connected with result code 0 to topic AM107/by-room/#
+2024-01-15 14:43:32,871 - INFO - Process 1 started
+2024-01-15 14:43:32,872 - INFO - Process 2 started
+2024-01-15 14:43:33,039 - INFO - Connected with result code 0 to topic AM107/by-room/#
+2024-01-15 14:43:33,039 - INFO - Connected with result code 0 to topic application/1/device/+/event/status
+2024-01-15 14:43:45,050 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 14:43:45,065 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 14:43:45,119 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:43:45,140 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:43:57,821 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:43:59,221 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:44:42,216 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:44:42,221 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 14:44:42,226 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 14:44:42,226 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:44:45,183 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:44:45,198 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:44:46,466 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 14:44:46,476 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 14:44:46,484 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:44:46,505 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:44:47,821 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:44:47,836 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:44:48,915 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:45:13,354 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:45:16,772 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:45:34,296 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:45:47,451 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:46:32,775 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 14:46:32,775 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:46:32,791 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 14:46:46,529 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:47:13,349 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:47:18,789 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:47:19,333 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:47:19,498 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 14:47:19,509 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 14:47:19,572 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:47:30,470 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:47:44,057 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:47:46,138 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 14:47:46,138 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 14:47:46,178 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:47:49,820 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:47:51,569 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:48:19,170 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:48:43,979 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:48:43,990 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 14:48:43,990 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 14:48:45,100 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:48:45,830 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:48:46,773 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:49:10,790 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 14:49:10,790 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 14:49:10,798 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:49:43,219 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:49:43,589 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 14:49:43,589 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 14:49:43,602 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:49:43,904 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:49:45,569 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:49:46,070 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:49:47,509 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:49:48,140 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:49:53,569 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:50:03,128 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 14:50:03,149 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 14:50:03,178 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:50:13,648 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:50:47,975 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:52:17,104 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:53:44,811 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:53:45,352 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:54:41,873 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:54:44,882 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 14:54:44,893 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 14:54:44,929 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:54:46,032 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:54:47,499 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:54:48,581 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 14:54:48,581 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 14:54:48,624 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:55:13,008 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:55:16,440 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:55:33,995 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 14:55:34,001 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 14:55:34,084 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:55:48,152 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:56:32,041 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:56:47,188 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:57:13,189 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 14:57:13,190 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 14:57:13,219 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:57:19,029 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:57:19,211 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:57:19,515 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:57:31,129 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:57:44,799 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:57:45,848 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:57:49,524 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 14:57:49,529 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 14:57:49,608 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:57:52,231 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:58:18,868 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:58:44,648 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:58:45,608 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:58:45,768 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:58:46,467 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 14:58:46,467 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 14:58:46,468 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:59:10,478 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:59:44,531 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:59:44,779 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:59:45,838 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:59:46,287 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:59:47,835 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 14:59:47,855 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 14:59:47,893 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:59:48,226 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 14:59:48,231 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 14:59:48,246 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 14:59:53,266 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:00:03,106 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:00:13,346 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:00:13,366 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:00:13,389 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:00:48,604 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:02:16,743 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:02:16,744 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:02:16,780 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:03:45,019 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:03:45,539 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:04:44,678 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:04:47,203 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:04:48,198 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:04:48,346 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:04:51,328 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:05:13,718 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:05:17,163 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:05:33,719 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:05:47,837 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:05:47,858 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:05:47,865 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:06:31,817 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:06:46,916 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:06:46,937 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:06:46,966 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:07:12,997 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:07:19,156 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:07:19,176 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:07:19,199 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:07:19,726 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:07:19,920 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:07:30,825 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:07:30,825 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:07:30,858 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:07:44,516 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:07:44,516 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:07:44,517 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:07:46,596 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:07:49,236 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:07:51,955 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:07:51,960 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:07:51,960 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:08:19,568 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:08:45,247 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:08:45,268 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:08:45,276 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:08:45,502 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:08:45,507 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:08:45,511 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:08:46,208 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:08:46,688 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:09:11,213 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:09:44,233 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:09:44,933 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:09:44,933 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:09:44,945 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:09:45,737 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:09:45,753 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:09:45,762 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:09:46,613 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:09:46,631 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:09:46,662 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:09:47,553 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:09:47,913 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:09:54,072 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:13:35,246 - INFO - Connected with result code 0 to topic application/1/device/+/event/status
+2024-01-15 15:13:36,686 - INFO - Connected with result code 0 to topic AM107/by-room/#
+2024-01-15 15:13:44,772 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:13:44,801 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:13:45,231 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:13:45,246 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:13:50,126 - INFO - Connected with result code 0 to topic application/1/device/+/event/status
+2024-01-15 15:14:42,336 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:14:44,326 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:14:46,502 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:14:46,601 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:14:46,601 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:14:46,807 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:14:48,090 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:15:13,407 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:15:13,429 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:15:13,486 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:15:16,906 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:15:16,906 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:15:16,958 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:15:33,535 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:15:47,604 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:16:32,499 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:16:46,739 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:17:12,898 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:17:18,882 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:17:19,446 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:17:19,446 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:17:19,468 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:17:19,639 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:17:19,640 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:17:19,769 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:17:30,548 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:17:44,238 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:17:46,238 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:17:46,259 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:17:46,282 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:17:48,957 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:17:51,679 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:18:19,276 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:18:19,282 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:18:19,286 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:18:45,286 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:18:45,936 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:18:46,465 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:18:46,475 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:18:46,486 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:19:10,955 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:19:10,960 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:19:10,965 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:19:43,674 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:19:43,695 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:19:43,764 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:19:44,635 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:19:45,615 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:19:46,359 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:19:46,978 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:19:47,610 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:19:48,242 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:19:53,754 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:19:53,754 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:19:53,769 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:20:03,280 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:20:03,295 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:20:03,295 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:20:13,774 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:20:48,018 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:22:16,177 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:23:44,950 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:23:45,479 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:24:41,989 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:24:42,008 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:24:42,038 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:24:45,079 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:24:46,190 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:24:46,197 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:24:46,218 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:24:46,411 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:24:48,766 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:25:13,199 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:25:16,596 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:25:48,328 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:26:32,187 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:26:32,197 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:26:32,244 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:26:46,407 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:27:13,777 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:27:18,626 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:27:19,186 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:27:19,364 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:27:30,305 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:27:44,945 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:27:45,985 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:27:48,397 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:27:51,439 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:28:18,962 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:28:44,789 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:28:45,090 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:28:45,686 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:28:46,627 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:29:10,625 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:29:43,382 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:29:44,324 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:29:44,762 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:29:46,405 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:29:47,348 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:29:47,988 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:29:53,423 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:30:03,023 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:30:13,512 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:30:48,704 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:32:16,881 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:33:44,716 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:33:45,199 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:34:44,751 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:34:44,772 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:34:44,807 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:34:47,321 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:34:48,274 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:34:48,426 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:34:48,447 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:34:48,526 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:34:51,471 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:35:13,880 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:35:16,336 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:35:47,988 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:35:47,998 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:35:48,026 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:36:31,919 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:36:49,516 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:37:13,596 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:37:13,606 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:37:13,626 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:37:18,876 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:37:19,110 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:37:19,538 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:37:31,036 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:37:44,604 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:37:44,625 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:37:44,674 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:37:45,695 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:37:48,155 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:37:48,155 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:37:48,197 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:37:52,101 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:38:19,715 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:38:44,556 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:38:45,374 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:38:45,395 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:38:45,417 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:38:45,723 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:38:46,294 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:38:46,314 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:38:46,353 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:39:10,344 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:39:43,112 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:39:44,417 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:39:44,419 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:39:44,463 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:39:45,092 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:39:46,300 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:39:46,349 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:39:46,359 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:39:47,674 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:39:48,076 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:39:53,201 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:40:02,732 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:40:13,183 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:40:48,394 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:40:48,396 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:40:48,434 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:42:16,572 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:42:16,572 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:42:16,674 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:43:44,954 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:43:44,955 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:43:44,975 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:43:45,376 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:44:42,376 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:44:44,473 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:44:45,763 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:44:46,933 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:45:13,593 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:45:13,614 - INFO - Received message on application/1/device/+/event/status: 
+2024-01-15 15:45:13,631 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:45:17,043 - INFO - Received message on AM107/by-room/#: 
+2024-01-15 15:45:47,751 - INFO - Received message on AM107/by-room/#: 
