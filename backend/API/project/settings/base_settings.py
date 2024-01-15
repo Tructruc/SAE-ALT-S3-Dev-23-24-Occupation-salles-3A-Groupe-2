@@ -76,6 +76,9 @@ DATABASES = {
 
 TIMESCALE_DB_BACKEND_BASE = "django.contrib.gis.db.backends.postgis"
 
+DEFAULT_IP = os.environ.get("DJANGO_HOST")
+DEFAULT_PORT = os.environ.get("DJANGO_PORT")
+
 class ColorFormatter(logging.Formatter):
     # Codes de couleur ANSI
     COLORS = {
