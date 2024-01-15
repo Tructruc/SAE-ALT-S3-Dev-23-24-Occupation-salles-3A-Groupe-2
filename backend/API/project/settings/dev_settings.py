@@ -8,7 +8,3 @@ CORS_ORIGIN_ALLOW_ALL = True
 ALLOWED_HOSTS = ['localhost', 'localhost:8080', 'localhost:5173', "http://localhost:8080", "http://localhost:5173"]
 
 LOGGING_LEVEL = logging.DEBUG if DEBUG else logging.INFO
-
-
-from project.loggerconfig import setup_logger
-setup_logger()

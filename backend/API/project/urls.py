@@ -20,7 +20,6 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 from app.views import DataViewSet, ByRoomViewSet, SensorViewSet
-from app.processmqttlistenerstarter import start_process_mqtt_listener
 
 router = routers.DefaultRouter()
 DeepViewSet.init_router(router, [
@@ -34,8 +33,3 @@ router.register(r'ByRoom', ByRoomViewSet, basename='ByRoom')
 urlpatterns = [
     re_path(r'', include(router.urls)),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-
-import sys
-
-if 'runserver' or 'startserver' in sys.argv : # Start MQTT process and logger only if manage.py runserver is running (In development)
-    start_process_mqtt_listener()
