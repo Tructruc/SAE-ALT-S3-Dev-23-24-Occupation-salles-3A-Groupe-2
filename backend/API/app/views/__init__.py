@@ -1,3 +1,3 @@
-from .dataview import DataViewSet, DataSerializer
+from .dataview import DataViewSet
 from .byroomview import ByRoomViewSet
-from .sensorview import SensorViewSet, SensorSerializer
+from .sensorview import SensorViewSet
