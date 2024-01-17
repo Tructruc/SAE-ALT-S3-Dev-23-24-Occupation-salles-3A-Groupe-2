@@ -2,9 +2,12 @@
 **/.vscode/
 **/.idea/
 
+**/.history/
 **/node_modules/
 **/database/
 **/nodered/
 **/dist/
 **/__pycache__/
+**/migrations/**
+!**/migrations/__init__.py
 *.log
