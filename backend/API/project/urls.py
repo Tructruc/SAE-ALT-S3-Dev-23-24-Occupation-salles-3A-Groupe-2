@@ -18,6 +18,7 @@ from deepserializer import DeepViewSet
 from rest_framework import routers
 from django.conf.urls.static import static
 from django.conf import settings
+from django.urls import path
 
 from app.views import DataViewSet, ByRoomViewSet, SensorViewSet
 
@@ -28,6 +29,7 @@ DeepViewSet.init_router(router, [
 router.register(r'Sensor', SensorViewSet, basename='Sensor')
 router.register(r'Data', DataViewSet, basename='Data')
 router.register(r'ByRoom', ByRoomViewSet, basename='ByRoom')
+
 
 
 urlpatterns = [
