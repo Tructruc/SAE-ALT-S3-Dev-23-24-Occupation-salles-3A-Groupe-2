@@ -14,8 +14,8 @@ services:
     restart: unless-stopped
     ports:
       - "8000:8000"
-    volumes:
-      - ../backend/API:/API #Volume for DEV
+    # volumes:
+    #   - ../backend/API:/API #Volume for DEV when needed to prepare the production
     networks:
       private-network:
         ipv4_address: 172.69.69.2
