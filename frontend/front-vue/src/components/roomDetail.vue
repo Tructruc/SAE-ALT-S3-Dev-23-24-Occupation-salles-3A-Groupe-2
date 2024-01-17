@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1>{{room}}</h1>
+    <battery :battery=15 />
     <gauge :value=37 :min=-20 :max=50 :value-name='"Temperature"' :unit="'°C'" :danger-value=35></gauge>
     <gauge :value=52 :min=0 :max=100 :value-name='"Humidity"' :unit="'%'" :danger-value=80></gauge>
     <Line v-if="loaded" :data="chartData"  :options="chartOptions" width="500" height="400" style="background-color: white"></Line>
@@ -20,6 +21,7 @@ import {
   Legend
 } from 'chart.js'
 import Gauge from "@/components/gauge.vue";
+import Battery from "@/components/battery.vue";
 
 ChartJS.register(
     CategoryScale,
@@ -35,6 +37,7 @@ ChartJS.register(
 
 export default {
   components: {
+    Battery,
     Gauge,
     Line
   },
