@@ -3,6 +3,7 @@ version: '3'
 services:
   django-backend:
     platform: linux/amd64
+    image: piorigin/django-sae-devapp-alt:latest
     build:
       context: ../backend
       dockerfile: Dockerfile.Prod
@@ -35,6 +36,7 @@ services:
 
   vuejs-frontend :
     platform: linux/amd64
+    image: piorigin/vuejs-sae-devapp-alt:latest
     build:
       context: ../frontend
       dockerfile: Dockerfile
