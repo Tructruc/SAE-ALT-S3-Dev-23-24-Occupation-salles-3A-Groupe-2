@@ -1,12 +1,15 @@
 import pytz
+
 from dateutil import parser
 
 def data_date_sort(objet, date_from, date_to):
     """
+    Objet : objet Data
+
     date_from exemple : 2024-01-10T17:18:42.771040 01:00
     fromat : %Y-%m-%dT%H:%M:%S.%f %z
     """
-
+    
     utc = pytz.UTC
 
     objet_time = objet.time.replace(tzinfo=utc)
