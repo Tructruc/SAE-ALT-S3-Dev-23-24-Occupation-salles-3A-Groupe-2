@@ -76,9 +76,9 @@ export default {
       const isDanger = this.value > this.dangerValue;
 
       const cappedValue = Math.max(Math.min(this.value, this.max), this.min);
-      const adjustedValue = this.max - this.min - cappedValue;
-      const adjustedEmpty = this.value > this.dangerValue ? 0 : this.dangerValue-adjustedValue;
-      const adjustedDanger = this.value > this.dangerValue ? this.max - this.value : this.max - this.dangerValue;
+      const adjustedValue = cappedValue - this.min
+      const adjustedEmpty = this.value > this.dangerValue ? 0 : this.dangerValue-this.min -adjustedValue;
+      const adjustedDanger = this.value > this.dangerValue ? this.max - this.min - adjustedValue : this.max - this.dangerValue;
 
       const data = {
         labels: ["Value", "Empty", "Empty danger"],

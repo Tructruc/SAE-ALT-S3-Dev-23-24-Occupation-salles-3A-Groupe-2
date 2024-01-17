@@ -1,10 +1,14 @@
 <template>
   <div>
     <h1>{{room}}</h1>
-    <battery :battery=15 />
-    <gauge :value=37 :min=-20 :max=50 :value-name='"Temperature"' :unit="'°C'" :danger-value=35></gauge>
-    <gauge :value=52 :min=0 :max=100 :value-name='"Humidity"' :unit="'%'" :danger-value=80></gauge>
-    <Line v-if="loaded" :data="chartData"  :options="chartOptions" width="500" height="400" style="background-color: white"></Line>
+    <div id="gauges">
+      <battery v-if=loaded :battery=battery />
+      <gauge v-if=loaded :value=temp :min=-20 :max=50 :value-name='"Temperature"' :unit="'°C'" :danger-value=35 />
+      <gauge v-if=loaded :value=hum :min=0 :max=100 :value-name='"Humidity"' :unit="'%'" :danger-value=80 />
+      <gauge v-if=loaded :value=co2 :min=0 :max=2000 :value-name='"CO2"' :unit="'ppm'" :danger-value=1000 />
+    </div>
+
+    <Line v-if="loaded" :data="chartData"  :options="chartOptions" width="500" height="400" style="background-color: white" />
   </div>
 </template>
 
@@ -43,8 +47,13 @@ export default {
   },
 
   data: () => ({
+    battery: 0,
+    temp: 0,
+    hum: 0,
+    co2: 0,
     loaded: false,
     chartData: null,
+
     chartOptions: {
       scales: {
         x: {
@@ -133,7 +142,11 @@ export default {
         }
       }
 
+      this.battery = json.batterylevel
 
+      this.temp = json.all_data[json.all_data.length - 1].temperature
+      this.hum = json.all_data[json.all_data.length - 1].humidity
+      this.co2 = json.all_data[json.all_data.length - 1].co2
 
       this.chartData = tempdata
 
@@ -144,3 +157,13 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+#gauges {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+</style>
