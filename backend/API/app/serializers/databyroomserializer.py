@@ -2,6 +2,9 @@ from deepserializer import DeepSerializer
 from app.models import Data
 
 class DataByRoomSerializer(DeepSerializer):
+    """
+    This serializer is to serialize data from ByRoom endpoint
+    """
     class Meta:
         model = Data
         fields = [

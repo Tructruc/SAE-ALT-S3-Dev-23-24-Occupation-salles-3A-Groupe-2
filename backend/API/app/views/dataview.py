@@ -7,6 +7,10 @@ from app.usecases import data_date_sort
 from app.serializers import DataSerializer
 
 class DataViewSet(DeepViewSet):
+    """
+    View used for the Data model with data endpoint with the sort that we need on this endpoint
+    """
+
     depth = 0
     queryset = Data.objects
     use_case = 'data_date_sort'
@@ -15,9 +19,6 @@ class DataViewSet(DeepViewSet):
         queryset = super().get_queryset()
         params = self.request.query_params
 
-        # print(DeepViewSet.get_serializer(queryset.model, use_case='data_date_sort'))
-
-        # Convertir les paramètres de date en objets datetime conscients
         date_from = params.get('from')
         date_to = params.get('to')
 
