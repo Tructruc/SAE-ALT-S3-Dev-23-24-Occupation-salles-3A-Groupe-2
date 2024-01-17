@@ -2,6 +2,7 @@
 **/.vscode/
 **/.idea/
 
+**/.history/
 **/node_modules/
 **/database/
 **/nodered/
@@ -9,3 +10,4 @@
 **/__pycache__/
 **/migrations/**
 !**/migrations/__init__.py
+*.log
