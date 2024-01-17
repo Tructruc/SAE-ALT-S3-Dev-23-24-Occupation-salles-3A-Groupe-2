@@ -1,13 +1,6 @@
-import pytz, time
+import pytz
 
 from dateutil import parser
-
-def data_id_to_data_objet(objet, date_from, date_to):
-    """
-    Objet : objet Sensor
-    """
-    data_ids = objet.all_data.values_list('id', flat=True)
-    all_data_qs = objet.objects.filter(id__in=data_ids)
 
 def data_date_sort(objet, date_from, date_to):
     """
@@ -33,20 +26,10 @@ def data_date_sort(objet, date_from, date_to):
         date_to = parser.parse(date_to) if isinstance(date_to, str) else date_to
         date_to = date_to.replace(tzinfo=utc) if date_to.tzinfo is None else date_to
 
-    print("objet_time : ")
-    print(objet_time)
-    print("date_from : ")
-    print(date_from)
-    print("date_to : ")
-    print(date_to)
-
     if date_from is not None and objet_time < date_from:
-        print("On garde pas")
         return False
     
     if date_to is not None and objet_time > date_to:
-        print("On garde pas")
         return False
     
-    print("On garde")
     return True
