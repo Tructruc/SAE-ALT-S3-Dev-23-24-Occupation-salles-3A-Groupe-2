@@ -8,6 +8,10 @@ from app.serializers.databyroomserializer import DataByRoomSerializer
 from app.serializers.sensorbyroomserializer import SensorByRoomSerializer
 
 class ByRoomSerializer(DeepSerializer):
+    """
+    Serializer used for the ByRoom enpoint with the Sensor model behind
+    It used to get data by room
+    """
     all_data = serializers.SerializerMethodField()
     sensor = serializers.SerializerMethodField()
 
