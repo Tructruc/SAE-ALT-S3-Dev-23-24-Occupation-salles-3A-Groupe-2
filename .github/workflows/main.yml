@@ -1,6 +1,7 @@
 name: Docker Compose CI
 
 on:
+  workflow_dispatch:
   push:
     branches: [ "dev" ]
   pull_request:
@@ -29,7 +30,7 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         context: ./backend
-        file: ./Dockerfile.Prod
+        file: ./backend/Dockerfile.Prod
         push: true
         tags: piorigin/django-sae-devapp-alt:latest
 
@@ -37,6 +38,6 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         context: ./frontend
-        file: ./Dockerfile
+        file: ./frontend/Dockerfile
         push: true
         tags: piorigin/vuejs-sae-devapp-alt:latest
