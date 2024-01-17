@@ -2,9 +2,6 @@ from app.models import Sensor
 from deepserializer import DeepSerializer
 
 class SensorByRoomSerializer(DeepSerializer):
-    """
-    This serializer is to serialize sensor from ByRoom endpoint
-    """
     class Meta:
         model = Sensor
         fields =[

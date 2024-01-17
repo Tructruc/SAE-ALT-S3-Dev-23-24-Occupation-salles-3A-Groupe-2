@@ -1,6 +1,7 @@
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.exceptions import NotFound
+from rest_framework.exceptions import NotFound
 from app.models import Sensor, Data
 from deepserializer import DeepViewSet
 from app.serializers import ByRoomSerializer
@@ -24,38 +25,21 @@ class ByRoomViewSet(DeepViewSet):
     use_case = 'by_room_sort'
 
     def filter_sensor_data(self, sensor, date_from, date_to, depth, last_data=None):
-        """
-        This method is used to filter the data from a sensor with the date_from, date_to, depth and last_data parameters.
-
-        date_from: The date from which we want to get the data
-        date_to: The date to which we want to get the data
-        Those ise the the data_date_sort method to sort the data
-
-        depth: The depth of the data that we want to get
-        last_data: The number of last data that we want to get
-        """
-
-        if depth > 0:
-            # We use data_date_sort to sort the data by date
-            filtered_data = list(filter(lambda data: data_date_sort(data, date_from, date_to), sensor.all_data.all().order_by('time')))
-            # We get the data objects from the filtered data and we add them to the sensor object
-            sensor.filtered_data = filtered_data
-            # We get the current sensor and add it to the sensor object (Because we need to get the sensor next to the room)
-            sensor.sensor = sensor
-            # Last data define how many last data objects we want to return
-            if last_data: # If last_data is not None we will get the last data objects
-                sensor.filtered_data = filtered_data[-int(last_data):]
-        elif depth == 0:
-            # We use data_date_sort to sort the data by date
-            filtered_data = list(filter(lambda data: data_date_sort(data, date_from, date_to), sensor.all_data.all().order_by('time')))
-            # We get the data id from the filtered data and we add them to the sensor object
-            sensor.data_ids = [data.id for data in filtered_data]
-            # We get the current sensor devui (id) and add it to the sensor object (Because we need to get the sensor next to the room)
-            sensor.sensor_id = sensor.deveui
-            # Last data define how many last data objects we want to return
-            if last_data:
-                sensor.data_ids = sensor.data_ids[-int(last_data):]
-        return sensor
+            if depth > 0:
+                filtered_data = list(filter(lambda data: data_date_sort(data, date_from, date_to), sensor.all_data.all().order_by('time')))
+                sensor.filtered_data = filtered_data
+                sensor.sensor = sensor
+                 # Last data define how many last data objects we want to return
+                if last_data:
+                    sensor.filtered_data = filtered_data[-int(last_data):]
+            elif depth == 0:
+                filtered_data = list(filter(lambda data: data_date_sort(data, date_from, date_to), sensor.all_data.all().order_by('time')))
+                sensor.data_ids = [data.id for data in filtered_data]
+                sensor.sensor_id = sensor.deveui
+                # Last data define how many last data objects we want to return
+                if last_data:
+                    sensor.data_ids = sensor.data_ids[-int(last_data):]
+            return sensor
 
     def get_queryset(self):
         """
@@ -75,10 +59,6 @@ class ByRoomViewSet(DeepViewSet):
         return queryset
 
     def retrieve(self, request, *args, **kwargs):
-        """
-        This methode is call we the endpoint for one room is called.
-        Do the same things as get_queryset but for one room.
-        """
         room_id = kwargs.get('pk')
         params = request.query_params
         date_from = params.get('from')
