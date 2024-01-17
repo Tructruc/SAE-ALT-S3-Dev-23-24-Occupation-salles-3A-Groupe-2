@@ -26,43 +26,43 @@
             <path id="path7675" d="m 408.7634,371.6903 v -12.58135 l 70.82057,-6.17073 4.71664,56.09376 -49.30861,1.35377 -4.29195,-40.94227 z"/>
             <path id="path7677" d="m 604.38288,347.76472 71.8438,1.04375 -0.52908,14.0523 -19.94955,-2.07055 -2.11528,43.21386 -51.61564,-1.46461 z"/>
         </g>
-        <g id="b001" class="changeColor">
+        <g id="B001" class="changeColor">
             <title>B_001</title>
             <path id="path4166" d="m 623.4125,348.04118 52.81418,0.76729 -0.52908,14.0523 71.81984,7.45412 16.22241,-98.99891 c -43.79427,-6.14991 -88.57809,-9.57414 -133.96476,-11.33787 z"/>
         </g>
-        <g id="b002" class="changeColor">
+        <g id="B002" class="changeColor">
             <title>B_002</title>
             <path id="path4576" d="m 681.0319,494.06333 11.30254,-97.94636 c 35.25264,3.30875 71.61858,9.55191 108.37308,16.8192 l -21.52749,92.61469 c -33.37067,-5.10702 -66.15643,-9.07228 -98.14813,-11.48753 z"/>
         </g>
-        <g id="b003" class="changeColor">
+        <g id="B003" class="changeColor">
             <title>B_003</title>
             <path id="path4913" d="m 743.2288,402.61085 57.47868,10.32532 -21.5275,92.61469 c 30.9278,4.83673 62.8043,10.9873 95.9925,18.95436 l 32.807,-89.19812 9.7504,2.17174 8.427,-29.67102 c 8.6147,-7.95655 19.8282,-12.28494 35.3393,-6.79641 8.7588,3.09929 14.8039,10.67797 19.2521,20.29751 l 10.3094,-3.02319 36.34142,-84.94117 C 941.57278,304.31795 853.65608,283.76458 763.73985,271.31598 l -16.22241,98.99891 z"/>
         </g>
-        <g id="b004" class="changeColor">
+        <g id="B004" class="changeColor">
             <title>B_004</title>
             <path id="path3599" d="m 140.59992,483.85012 -11.3084,26.89069 24.7832,56.69992 c 27.13522,-12.18017 57.45721,-22.63375 89.16825,-32.33475 l -29.30905,-85.67003 -40.4988,9.94065 c -3.06794,17.02996 -14.60872,24.51685 -32.8352,24.47352 z"/>
         </g>
-        <g id="b005" class="changeColor">
+        <g id="B005" class="changeColor">
             <title>B_005</title>
             <path id="path3768" d="m 213.93392,449.43595 89.26075,-21.90961 23.88503,86.71268 c -28.34943,5.64032 -56.22396,12.82738 -83.83673,20.86696 z"/>
         </g>
-        <g id="b006" class="changeColor">
+        <g id="B006" class="changeColor">
             <title>B_006</title>
             <path id="path3860" d="m 303.19467,427.52634 92.03142,-22.58967 16.38986,95.33836 c -29.97523,3.69018 -57.58939,8.64796 -84.53625,13.96399 z"/>
         </g>
-        <g id="b007" class="changeColor">
+        <g id="B007" class="changeColor">
             <title>B_007</title>
             <path id="path3051" d="m 453.56813,265.72422 8.47191,88.74264 -53.27664,4.64209 v 12.58135 l -54.7299,13.50085 -22.00964,-101.91032 c 39.33772,-7.20538 79.38231,-13.59811 121.54427,-17.55661 z"/>
         </g>
-        <g id="b008" class="changeColor">
+        <g id="B008" class="changeColor">
             <title>B_008</title>
             <path id="path3144" d="m 243.62336,302.95689 c 28.7877,-7.05037 57.63366,-14.05856 88.4005,-19.67606 l 22.00964,101.91032 -78.75144,19.42652 z"/>
         </g>
-        <g id="b009" class="changeColor">
+        <g id="B009" class="changeColor">
             <title>B_009</title>
             <path id="path3147" d="m 146.79542,331.11587 c 27.28082,-8.85365 57.22303,-17.99111 96.82794,-28.15898 l 31.6587,101.66078 -89.65025,22.11506 z"/>
         </g>
-        <g id="b010" class="changeColor">
+        <g id="B010" class="changeColor">
             <title>B_010</title>
             <path id="path3354" d="m 58.614622,362.70239 88.180798,-31.58652 38.83639,95.61686 -26.12719,6.44509 c -11.45798,-7.50656 -22.61479,-9.04978 -33.0913,-4.9618 -15.0115,5.85755 -17.69079,13.23839 -20.5334,20.16686 l -10.957198,-3.78735 z"/>
         </g>
@@ -71,10 +71,59 @@
   </template>
   
   <script>
+  import { reactive, onMounted } from 'vue';
+  
   export default {
-    // Données propres au bâtiment C si nécessaire
-    methods: {
-
+    setup() {
+      const state = reactive({
+        roomData: [], // Array to store room data from the API
+        roomColors: {}, // Object to store room colors dynamically
+      });
+  
+      const calculateColor = (data) => {
+        // Implement your logic to determine the color based on data
+        // For example, change color based on temperature value
+        
+        if (data.temperature > 25) {
+          console.log('red');
+          return 'red';
+        } else if (data.temperature > 20) {
+            console.log('yellow');
+          return 'yellow';
+        } else {
+            console.log('green');
+          return 'green';
+        }
+        
+      };
+  
+      const updateRoomColors = () => {
+        // Iterate through roomData and update roomColors
+        state.roomData.forEach((room) => {
+          const lastData = room.all_data[room.all_data.length - 1];
+          console.log('Last data for room', room.room, 'is', lastData);
+          const color = calculateColor(lastData);
+          state.roomColors = { ...state.roomColors, [room.room]: color };
+        });
+      };
+  
+      // Fetch room data from the API
+      const fetchRoomData = async () => {
+        try {
+          const response = await fetch('http://localhost:8000/ByRoom/?depth=1');
+          const data = await response.json();
+          console.log('Fetched data:', data); // Log the fetched data
+          state.roomData = data;
+          updateRoomColors();
+        } catch (error) {
+          console.error('Error fetching room data:', error);
+        }
+      };
+  
+      // Call the fetchRoomData method when the component is mounted
+      onMounted(fetchRoomData);
+  
+      return state;
     },
   };
   </script>
@@ -105,6 +154,7 @@ g.changeColor:hover {
     /* stroke:rgb(255, 193, 183);
     fill: rgb(233, 8, 0); */
 }
+
 .etage {
     width: 100%;
     height: 100%;
@@ -112,6 +162,17 @@ g.changeColor:hover {
     top: 0;
     left: 0;}
 
+    .red {
+  fill: red;
+}
+
+.yellow {
+  fill: yellow;
+}
+
+.green {
+  fill: green;
+}
 
 
 </style>
