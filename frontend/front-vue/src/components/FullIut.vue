@@ -1,5 +1,4 @@
 <template>
-    
     <div :class="{ 'small-view': showBatB || showBatE }"> Full IUT
       <svg width="100%" height="100%" viewBox="0 0 1417.3333 524" >
             <g id="MI" class="changeColor">

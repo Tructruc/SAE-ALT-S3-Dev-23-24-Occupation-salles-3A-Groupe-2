@@ -10,12 +10,14 @@
 import FullIut from './components/FullIut.vue';
 import Header from "@/components/Header.vue";
 import RoomDetail from "@/components/roomDetail.vue";
+import ListeSalles from "@/components/ListeSalles.vue";
 
 export default {
   components: {
     RoomDetail,
     Header,
-    FullIut
+    FullIut,
+    ListeSalles
   },
   data() {
     return {
