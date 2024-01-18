@@ -1,17 +1,33 @@
 <template>
   <div>
     <h1 v-if=loaded>{{room}}</h1>
-    <div id="gauges">
-      <battery v-if=loaded :battery=battery />
-      <gauge v-if=loaded :value=temp :min=-20 :max=50 :value-name='"Temperature"' :unit="'°C'" :danger-value=35 />
-      <gauge v-if=loaded :value=hum :min=0 :max=100 :value-name='"Humidity"' :unit="'%'" :danger-value=80 />
-      <gauge v-if=loaded :value=co2 :min=0 :max=2000 :value-name='"CO2"' :unit="'ppm'" :danger-value=1000 />
-    </div>
 
-    <div class="graphique">
-      <TimeLine v-if=loaded :data="timedDate" :dates="timeLabel" />
-    </div>
+    <div class="grid">
+      <div id="battery">
+        <battery v-if=loaded :battery=battery />
+      </div>
 
+      <div id="Temperature">
+        <gauge v-if=loaded :value=temp :min=-20 :max=50 :value-name='"Temperature"' :unit="'°C'" :danger-value=35 />
+      </div>
+
+      <div id="Humidity">
+        <gauge v-if=loaded :value=hum :min=0 :max=100 :value-name='"Humidity"' :unit="'%'" :danger-value=80 />
+      </div>
+
+      <div id="CO2">
+        <gauge v-if=loaded :value=co2 :min=0 :max=2000 :value-name='"CO2"' :unit="'ppm'" :danger-value=1000 />
+      </div>
+
+      <div class="graphique">
+        <TimeLine v-if=loaded :data="timedDate" :dates="timeLabel" />
+      </div>
+
+      <div id="sensorinfo">
+        <DetailCapteur v-if=loaded :name="sensorName" :deveui="sensorDeveui" :building="sensorBuilding" :floor="sensorFloor" :externalPower="sensorExternalPower" />
+      </div>
+
+    </div>
   </div>
 </template>
 
@@ -30,6 +46,7 @@ import {
 import Gauge from "@/components/gauge.vue";
 import Battery from "@/components/battery.vue";
 import TimeLine from "@/components/TimeLine.vue";
+import DetailCapteur from "@/components/DetailCapteur.vue";
 
 ChartJS.register(
     CategoryScale,
@@ -45,6 +62,7 @@ ChartJS.register(
 
 export default {
   components: {
+    DetailCapteur,
     TimeLine,
     Battery,
     Gauge,
@@ -70,6 +88,12 @@ export default {
       pressure: [],
     },
     timeLabel: [],
+
+    sensorName: '',
+    sensorDeveui: '',
+    sensorBuilding: '',
+    sensorFloor: '',
+    sensorExternalPower: false,
 
     chartOptions: {
       type: "line",
@@ -125,6 +149,12 @@ export default {
       this.hum = json.all_data[json.all_data.length - 1].humidity
       this.co2 = json.all_data[json.all_data.length - 1].co2
 
+      this.sensorName = json.devicename;
+      this.sensorDeveui = json.deveui;
+      this.sensorBuilding = json.building;
+      this.sensorFloor = json.floor;
+      this.sensorExternalPower = json.external_power;
+
 
       this.loaded = true
     } catch (e) {
@@ -135,15 +165,51 @@ export default {
 </script>
 
 <style scoped>
-#gauges {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: center;
+
+.grid {
+  display: grid;
+  grid-gap: 10px;
+  width: 1200px;
 }
+
+#battery {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+#Temperature {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+#Humidity {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+#CO2 {
+  grid-column: 4;
+  grid-row: 1;
+}
+
+#sensorinfo {
+  grid-column: 4;
+  grid-row:  2;
+}
+
+
 
 .graphique {
   width: 900px;
   height: 500px;
+  grid-column: 1 / span 4;
+  grid-row: 2;
 }
+
+
+h1 {
+ font-weight: bold;
+}
+
+
 </style>
