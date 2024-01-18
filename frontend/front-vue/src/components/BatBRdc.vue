@@ -1,6 +1,6 @@
 
 <template>
-    <div>
+    <div :class="etage">
         <h2>RDC</h2>
       <!-- SVG avec les chemins spécifiques pour le bâtiment C -->
       <svg width="100%" height="100%" viewBox="50 250 990 320">
@@ -105,6 +105,12 @@ g.changeColor:hover {
     /* stroke:rgb(255, 193, 183);
     fill: rgb(233, 8, 0); */
 }
+.etage {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;}
 
 
 

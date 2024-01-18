@@ -3,6 +3,7 @@ version: '3'
 services:
   django-backend:
     platform: linux/amd64
+    image: piorigin/django-sae-devapp-alt:latest
     build:
       context: ../backend
       dockerfile: Dockerfile.Prod
@@ -14,8 +15,8 @@ services:
     restart: unless-stopped
     ports:
       - "8000:8000"
-    volumes:
-      - ../backend/API:/API #Volume for DEV
+    # volumes:
+    #   - ../backend/API:/API #Volume for DEV when needed to prepare the production
     networks:
       private-network:
         ipv4_address: 172.69.69.2
@@ -35,6 +36,7 @@ services:
 
   vuejs-frontend :
     platform: linux/amd64
+    image: piorigin/vuejs-sae-devapp-alt:latest
     build:
       context: ../frontend
       dockerfile: Dockerfile

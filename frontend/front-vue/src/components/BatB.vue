@@ -1,7 +1,6 @@
 
 <template>
-    <div>
-        <h2>Bat B</h2>
+    <div :class="{ 'small-view': showRdc || showEt1 || showEt2 }">Bat B
       <!-- SVG avec les chemins spécifiques pour le bâtiment C -->
       <svg viewBox="0 0 2141.3333 1064">
         <g id="rdc" class="changeColor" @click="displayBatBRdc">
@@ -108,10 +107,10 @@
             <path id="path6309" d="m 1722.6031,237.27661 -0.3909,410.25704 c -14.1432,21.49393 -86.2232,24.81863 -130.1379,25.68983 -46.1326,-0.45692 -123.5105,-5.24244 -127.2467,-32.37033 l -1.9903,-405.12579 c 27.5006,28.16085 79.191,24.29218 125.7864,27.16969 58.5079,-1.0565 115.7858,-2.77769 133.9794,-25.62044"/>
         </g>
     </svg>
+    </div>
     <BatBRdc v-if="showRdc" />
     <BatBetage1 v-else-if="showEt1" />
     <BatBetage2 v-else-if="showEt2" />
-    </div>
   </template>
   
   <script>
@@ -180,6 +179,12 @@ g.changeColor:hover {
     fill: rgb(233, 8, 0); */
 }
 
+.small-view {
+    float: left;
+  width: 20%; /* Ajustez la largeur comme nécessaire */
+  height: 20%; /* Ajustez la hauteur comme nécessaire */
+  left: 0; /* Ajustez la position par rapport à la gauche de la fenêtre */
+}
 
 
 </style>

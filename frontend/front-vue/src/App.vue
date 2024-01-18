@@ -1,8 +1,7 @@
 <template>
   <div id="app">
-    <Header></Header>
-    <room-detail></room-detail>
-    <FullIut />
+    <Header @changeView="changeView"></Header>
+    <component :is="currentView"></component>
   </div>
 </template>
 
@@ -17,11 +16,23 @@ export default {
     RoomDetail,
     Header,
     FullIut
-},
+  },
+  data() {
+    return {
+      currentView: 'FullIut'
+    };
+  },
+  methods: {
+    changeView(view) {
+      this.currentView = view;
+    }
+  }
 };
 </script>
 
 
 <style >
-
+#app {
+    padding-top: 80px; /* Adjust the padding to make space for the header */
+}
 </style>
