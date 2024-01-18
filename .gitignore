@@ -10,8 +10,4 @@
 **/__pycache__/
 **/migrations/**
 !**/migrations/__init__.py
-<<<<<<< HEAD
-**.log
-=======
-*.log
->>>>>>> 221df32 (Update .gitignore)
+api.log
