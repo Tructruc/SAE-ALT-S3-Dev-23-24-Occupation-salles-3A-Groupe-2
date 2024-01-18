@@ -68,6 +68,12 @@ export default {
     Gauge,
     Scatter
   },
+  props: {
+    room: {
+      type: String,
+      required: true
+    }
+  },
 
   data: () => ({
     battery: 0,
@@ -121,10 +127,10 @@ export default {
     this.loaded = false
 
     try {
-      const sensor = await fetch('http://localhost:8000/Sensor/24e124128c016684/?depth=1');
+      const sensor = await fetch('http://localhost:8000/ByRoom/'+this.room+'/?depth=1');
       const json = await sensor.json();
 
-      this.room = json.room
+
 
       for (const [key, value] of Object.entries(json.all_data)) {
         let time = new Date(value.time)
@@ -143,17 +149,17 @@ export default {
         this.timedDate.pressure.push(value.pressure)
       }
 
-      this.battery = json.batterylevel
+      this.battery = json.sensor.batterylevel
 
       this.temp = json.all_data[json.all_data.length - 1].temperature
       this.hum = json.all_data[json.all_data.length - 1].humidity
       this.co2 = json.all_data[json.all_data.length - 1].co2
 
-      this.sensorName = json.devicename;
-      this.sensorDeveui = json.deveui;
+      this.sensorName = json.sensor.devicename;
+      this.sensorDeveui = json.sensor.deveui;
       this.sensorBuilding = json.building;
       this.sensorFloor = json.floor;
-      this.sensorExternalPower = json.external_power;
+      this.sensorExternalPower = json.sensor.external_power;
 
 
       this.loaded = true

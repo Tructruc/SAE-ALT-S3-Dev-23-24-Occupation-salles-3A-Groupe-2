@@ -2,6 +2,7 @@
   <div id="app">
     <Header @changeView="changeView"></Header>
     <component :is="currentView"></component>
+  <room-detail room="B108"></room-detail>
   </div>
 </template>
 
