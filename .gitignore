@@ -10,5 +10,4 @@
 **/__pycache__/
 **/migrations/**
 !**/migrations/__init__.py
-api.log
 **.log
