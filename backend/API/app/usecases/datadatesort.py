@@ -27,11 +27,11 @@ def data_date_sort(objet, date_from, date_to):
     # Be sure that the time is in UTC
     objet_time = objet.time.replace(tzinfo=utc)
 
-    logger.debug("Début de data_date_sort")
+    # logger.debug("Début de data_date_sort")
 
-    logger.debug(f'date_to : {date_to}')
-    logger.debug(f'date_from : {date_from}')
-    logger.debug(f'objet_time : {objet_time}')
+    # logger.debug(f'date_to : {date_to}')
+    # logger.debug(f'date_from : {date_from}')
+    # logger.debug(f'objet_time : {objet_time}')
 
 
     if date_from: # If date_from is not None we will compare the date_from with the objet_time
@@ -46,19 +46,19 @@ def data_date_sort(objet, date_from, date_to):
         date_to = parser.parse(date_to) if isinstance(date_to, str) else date_to
         date_to = date_to.replace(tzinfo=utc) if date_to.tzinfo is None else date_to
 
-    logger.debug("Parse finish")
-    logger.debug(f'date_to : {date_to}')
-    logger.debug(f'date_from : {date_from}')
-    logger.debug(f'objet_time : {objet_time}')
+    # logger.debug("Parse finish")
+    # logger.debug(f'date_to : {date_to}')
+    # logger.debug(f'date_from : {date_from}')
+    # logger.debug(f'objet_time : {objet_time}')
 
     if date_from is not None and objet_time < date_from: # If objet_time is before date_from we return False
-        logger.debug("Date from is not none and objet_time < date_from")
+        # logger.debug("Date from is not none and objet_time < date_from")
         return False
     
     if date_to is not None and objet_time > date_to: # If objet_time is after date_to we return False
-        logger.debug("Date to is not none and objet_time > date_to")
+        # logger.debug("Date to is not none and objet_time > date_to")
         return False
     
     # If objet_time is between date_from and date_to we return True
-    logger.debug("Fin de data_date_sort")
+    # logger.debug("Fin de data_date_sort")
     return True
