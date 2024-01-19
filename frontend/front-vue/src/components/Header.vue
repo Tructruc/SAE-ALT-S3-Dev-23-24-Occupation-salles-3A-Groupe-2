@@ -6,7 +6,7 @@
     <div style="display:flex; justify-content:space-between; width:30%;">
         <!-- on met des liens vers la page d'accueil de google-->
         <button @click="changeView('FullIut')">Accueil</button>
-        <button @click="changeView('RoomDetail')">Salles</button>
+        <button @click="changeView('ListeSalles')">Salles</button>
 
     </div>
     
