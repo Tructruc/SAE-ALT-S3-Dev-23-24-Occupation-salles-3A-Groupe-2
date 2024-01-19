@@ -7,6 +7,25 @@ from datetime import datetime
 
 logger = logging.getLogger('API')
 
+# This dictionnary containe the data rande of the Sensor.
+ranges = {
+    'temperature': (-20, 70),
+    'humidity': (0, 100),
+    'activity': (0, 65535),
+    'co2': (400, 5000),
+    'tvoc': (0, 60000),
+    'illuminance': (0, 60000),
+    'infrared': (0, 60000),
+    'infrared_and_visible': (0, 60000),  
+    'pressure': (300, 1100)
+}
+
+def is_in_range(value, range):
+    """
+    This méthode is used to verify if the data of the sensor is in the right scope.
+    """
+    return value >= range[0] and value <= range[1]
+
 def create_sensor_data(receive_dict, topic)     :
     """
     This method is called by the MQTT listener when a message is received.
@@ -55,65 +74,84 @@ def create_sensor_data(receive_dict, topic)     :
     :param topic: The MQTT topic to listen to.
     """
 
-    logger.debug("Let's create a sensor !")
+    logger.debug("Let's create something !")
+
+    logger.debug("receive_dict")
+    logger.debug(receive_dict)
 
     if topic == "application/1/device/+/event/status":
-        logger.debug("Create Sensor from status message")
+        logger.info("Message receive on topic 'application/1/device/+/event/status'")
+        try :
+            logger.debug("Create Sensor from status message")
 
-        serializer = DeepSerializer.get_serializer(Sensor)
+            sensor = Sensor.objects.get(deveui=receive_dict['devEUI'])
 
-        serializer_instance = serializer()
+            serializer = DeepSerializer.get_serializer(Sensor)
 
-        _, representation = serializer_instance.update_or_create({
-            'deveui' : receive_dict['devEUI'],
-            'devicename' : receive_dict['deviceName'],
-            'batterylevel' : receive_dict['batteryLevel'],
-            'externalpowersource' : receive_dict['externalPowerSource']
-        }, {})
+            serializer_instance = serializer()
 
-        logger.debug("Sensor created !")
-        logger.debug(representation)
+            _, representation = serializer_instance.update_or_create({
+                'deveui' : receive_dict['devEUI'],
+                'devicename' : receive_dict['deviceName'],
+                **({'batterylevel' : receive_dict['batteryLevel']} if 'batteryLevel' in receive_dict else {}),
+                **({'externalpowersource' : receive_dict['externalPowerSource']} if 'externalPowerSource' in receive_dict else {})
+            }, {})
+
+            logger.debug("Sensor created !")
+            logger.debug(representation)
+        except Sensor.DoesNotExist:
+            logger.debug("Sensor does not exist, we will not update or create it to avoid conflicts or creation of Sensr that does")
 
     elif topic == "AM107/by-room/#" :
+        logger.info("Message receive on topic 'AM107/by-room/#'")
         logger.debug("Create Sensor from by-room message")
 
         serializer = DeepSerializer.get_serializer(Sensor)
 
         serializer_instance = serializer()
 
+        logger.debug("create the sensor from the byroom message")
         pk_sensor, representation_sensor = serializer_instance.update_or_create({
             'deveui' : receive_dict[1]['devEUI'],
             'devicename' : receive_dict[1]['deviceName'],
-            'room' : receive_dict[1]['room'],
-            'building' : receive_dict[1]['Building'],
+            **({'room': receive_dict[1]['room']} if 'room' in receive_dict[1] else {}),
+            **({'building': receive_dict[1]['Building']} if 'Building' in receive_dict[1] else {}),
             **({'floor': int(receive_dict[1]['floor'])} if 'floor' in receive_dict[1] else {})
         }, {})
+        logger.debug("sensor as been create from byroom")
 
         serializer = DeepSerializer.get_serializer(Data)
 
         serializer_instance = serializer()
 
-        sensor = {
-            'deveui' : pk_sensor
-        }
-        
+        sensor = {'deveui': pk_sensor}
         timezone = pytz.timezone('Europe/Paris')
         local_time = datetime.now(timezone)
 
+        required_fields = [
+            'temperature', 'humidity', 'activity', 'co2', 'tvoc', 'illumination',
+            'infrared', 'infrared_and_visible', 'pressure'
+        ]
 
-        pk_data = serializer_instance.deep_create({
-            'time': local_time,
-            'temperature' : receive_dict[0]['temperature'],
-            'humidity' : receive_dict[0]['humidity'],
-            'activity' : receive_dict[0]['activity'],
-            'co2' : receive_dict[0]['co2'],
-            'tvoc' : receive_dict[0]['tvoc'],
-            'illuminance' : receive_dict[0]['illumination'],
-            'infrared' : receive_dict[0]['infrared'],
-            'infrared_and_visible' : receive_dict[0]['infrared_and_visible'],
-            'pressure' : receive_dict[0]['pressure'],
-            'sensor' : sensor
-        }, {})
+        print("let's check")
+        if all(key in receive_dict and is_in_range(receive_dict[key], ranges[key]) for key in ranges):
+            print("all fields are here")
+            pk_data = serializer_instance.deep_create({
+                'time': local_time,
+                'temperature': receive_dict[0]['temperature'],
+                'humidity': receive_dict[0]['humidity'],
+                'activity': receive_dict[0]['activity'],
+                'co2': receive_dict[0]['co2'],
+                'tvoc': receive_dict[0]['tvoc'],
+                'illuminance': receive_dict[0]['illumination'],
+                'infrared': receive_dict[0]['infrared'],
+                'infrared_and_visible': receive_dict[0]['infrared_and_visible'],
+                'pressure': receive_dict[0]['pressure'],
+                'sensor': sensor
+            }, {})
+            logger.debug("data as been create from byroom")
+        else:
+            logger.error(f"le capteur {pk_sensor} n'a pas envoyé tous les champs nécessaires ou à envoyé des valeurs erronées, onjet data non créé")
 
         logger.debug("Data and Sensor create !")
     else :

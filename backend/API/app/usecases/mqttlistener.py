@@ -9,7 +9,8 @@ logger = logging.getLogger('API')
 class MqttClientProcess(multiprocessing.Process):
     def __init__(self, topic):
         super().__init__()
-        self.client = mqtt.Client(topic)
+        # Create a cleint wiht a unique ID by concate topic and time based String
+        self.client = mqtt.Client(topic + str(time.time()))
         self.topic = topic
         self.client.on_connect = self.on_connect
         self.client.on_message = self.on_message

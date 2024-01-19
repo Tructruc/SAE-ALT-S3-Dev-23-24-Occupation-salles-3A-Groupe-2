@@ -15,8 +15,7 @@ services:
     restart: unless-stopped
     ports:
       - "8000:8000"
-    volumes:
-        - ../backend/API/project/api.log:/API/project/api.log
+    # volumes:
     #   - ../backend/API:/API #Volume for DEV when needed to prepare the production
     networks:
       private-network:
