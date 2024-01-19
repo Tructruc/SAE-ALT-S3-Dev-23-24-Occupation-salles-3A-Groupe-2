@@ -79,7 +79,6 @@ export default {
 
 <style scoped>
 #battery {
-  padding: 10px;
   width: 300px;
   background-color: var(--color-background-mute);
   display: flex;
