@@ -20,6 +20,7 @@ export default {
     }
   },
   mounted() {
+    const textColor = getComputedStyle(document.documentElement).getPropertyValue('--color-text').trim();
 
     const batteryIsLow = this.battery < 20;
 
@@ -52,16 +53,22 @@ export default {
           x: {
             stacked: true,
             grid: {
-              display: true // Optionally, hide the grid lines for x-axis
+              display: false
+            },
+            ticks: {
+              color: textColor
             }
           },
           y: {
             stacked: true,
             grid: {
-              display: false // Optionally, hide the grid lines for y-axis
+              display: false
             },
             beginAtZero: true, // Ensures the y-axis starts at zero
-            max: 100 // Optionally, set the maximum value of y-axis
+            max: 100, // Optionally, set the maximum value of y-axis,
+            ticks: {
+              color: textColor
+            }
           }
         }
       }
@@ -74,8 +81,7 @@ export default {
 #battery {
   padding: 10px;
   width: 300px;
-  background-color: white;
-  color: black;
+  background-color: var(--color-background-mute);
   display: flex;
   flex-direction: column;
   justify-content: center;

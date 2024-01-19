@@ -16,7 +16,7 @@
       </div>
 
       <div id="CO2">
-        <gauge v-if=loaded :value=co2 :min=0 :max=2000 :value-name='"CO2"' :unit="'ppm'" :danger-value=1000 />
+        <gauge v-if=loaded :value=co2 :min=0 :max=3000 :value-name='"CO2"' :unit="'ppm'" :danger-value=1500 />
       </div>
 
       <div class="graphique">
@@ -174,8 +174,10 @@ export default {
 
 .grid {
   display: grid;
-  grid-gap: 10px;
+  gap: 10px;
   width: 1200px;
+  grid-template-columns: 300px 300px 300px 300px;
+
 }
 
 #battery {
@@ -206,9 +208,8 @@ export default {
 
 
 .graphique {
-  width: 900px;
   height: 500px;
-  grid-column: 1 / span 4;
+  grid-column: 1 / span 3;
   grid-row: 2;
 }
 
