@@ -7,3 +7,17 @@ CORS_ORIGIN_ALLOW_ALL = True
 ALLOWED_HOSTS = ['localhost', "localhost:8080", "http://localhost:8080"]
 
 LOGGING_LEVEL = logging.DEBUG if DEBUG else logging.INFO
+
+MEDIA_URL = f"{os.environ.get('ROOT_PATH')}/media/"
+STATIC_URL = f"{os.environ.get('ROOT_PATH')}/static/"
+
+MEDIA_ROOT = f"{os.environ.get('FILES_PATH')}/media"
+STATIC_ROOT = f"{os.environ.get('FILES_PATH')}/static"
+
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+    ),    'DEFAULT_PARSER_CLASSES': (
+        'rest_framework.parsers.JSONParser',
+    )
+}
