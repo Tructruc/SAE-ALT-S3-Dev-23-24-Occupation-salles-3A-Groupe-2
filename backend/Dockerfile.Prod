@@ -22,8 +22,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Ajouter uvicorn et gunicorn
 RUN pip install uvicorn gunicorn
 
-CMD python manage.py makemigrations \
-    && python manage.py wait_for_db \
+CMD python manage.py wait_for_db \
+    && python manage.py makemigrations \
     && python manage.py migrate \
     && gunicorn project.asgi:application -k uvicorn.workers.UvicornWorker -c gunicorn_config.py
 
