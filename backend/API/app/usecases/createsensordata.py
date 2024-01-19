@@ -14,7 +14,7 @@ ranges = {
     'activity': (0, 65535),
     'co2': (400, 5000),
     'tvoc': (0, 60000),
-    'illuminance': (0, 60000),
+    'illumination': (0, 60000),
     'infrared': (0, 60000),
     'infrared_and_visible': (0, 60000),  
     'pressure': (300, 1100)
@@ -133,8 +133,16 @@ def create_sensor_data(receive_dict, topic)     :
             'infrared', 'infrared_and_visible', 'pressure'
         ]
 
-        print("let's check")
-        if all(key in receive_dict and is_in_range(receive_dict[key], ranges[key]) for key in ranges):
+        logger.debug("boolean, all fields are here ?")
+        print(all(key in receive_dict[0] for key in required_fields))
+
+        logger.debug("boolean, all fields are in range ?")
+        print(all(is_in_range(receive_dict[0][key], ranges[key]) for key in ranges))
+
+        logger.debug("boolean, all are here and in range ?")
+        print(all(key in receive_dict[0] and is_in_range(receive_dict[0][key], ranges[key]) for key in ranges))
+
+        if all(key in receive_dict[0] and is_in_range(receive_dict[0][key], ranges[key]) for key in ranges):
             print("all fields are here")
             pk_data = serializer_instance.deep_create({
                 'time': local_time,

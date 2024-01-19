@@ -5,3 +5,4 @@ djangorestframework-deepserializer
 paho-mqtt
 python-dateutil
 django-cors-headers
+uuid
