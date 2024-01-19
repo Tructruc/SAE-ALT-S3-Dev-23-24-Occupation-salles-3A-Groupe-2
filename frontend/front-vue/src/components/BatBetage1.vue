@@ -307,8 +307,8 @@ g {
 }
 
 g.changeColor:hover {
-  stroke: rgb(56, 0, 102);
-  fill: rgb(247, 156, 239);
+  stroke-width: 4px;
+  /* Augmenter la largeur du contour à 2 pixels */
 }
 
 .etage {
