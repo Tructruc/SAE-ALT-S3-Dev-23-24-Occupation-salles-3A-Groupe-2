@@ -41,7 +41,7 @@ export default {
 div {
   width: 300px;
   height: 500px;
-  background-color: lightgrey;
+  background-color: var(--color-background-mute);
   padding: 30px;
   border-radius: 5px;
 }

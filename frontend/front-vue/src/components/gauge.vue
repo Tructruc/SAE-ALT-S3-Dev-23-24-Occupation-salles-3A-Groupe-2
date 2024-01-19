@@ -42,6 +42,15 @@ export default {
       }
     }
   },
+  computed: {
+    textColor() {
+      return getComputedStyle(document.documentElement).getPropertyValue('--color-text').trim();
+    },
+    backgroundColor() {
+      return getComputedStyle(document.documentElement).getPropertyValue('--color-background-mute').trim();
+    }
+  },
+
   mounted() {
     this.createChart();
   },
@@ -60,6 +69,7 @@ export default {
               fontSize = Math.min(100, width / text.length); // Dynamically set font size
 
           ctx.font = `${fontSize}px Arial`; // Use pixel size for more control
+          ctx.fillStyle = this.textColor;
           ctx.textBaseline = 'middle';
 
           let textX = Math.round((width - ctx.measureText(text).width) / 2),
@@ -84,7 +94,8 @@ export default {
         labels: ["Value", "Empty", "Empty danger"],
         datasets: [{
           data: [adjustedValue, adjustedEmpty, adjustedDanger],
-          backgroundColor: [isDanger ? "Red" : "Green", "lightgrey", "lightCoral"]
+          backgroundColor: [isDanger ? "Red" : "Green", "lightgrey", "lightCoral"],
+          borderColor: this.backgroundColor
         }]
       };
 
@@ -135,8 +146,7 @@ export default {
 div {
   width: 300px;
   padding: 10px;
-  background-color: white;
-  color: black;
+  background-color: var(--color-background-mute);
 }
 
 h3 {
