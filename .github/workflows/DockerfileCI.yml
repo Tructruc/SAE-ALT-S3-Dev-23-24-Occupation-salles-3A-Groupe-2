@@ -33,7 +33,7 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         context: ./backend
-        file: ./Dockerfile.Prod
+        file: ./backend/Dockerfile.Prod
         push: true
         tags: piorigin/django-sae-devapp-alt:latest
 
