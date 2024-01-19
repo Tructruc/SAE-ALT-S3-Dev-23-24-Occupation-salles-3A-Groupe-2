@@ -5,23 +5,29 @@
     <option value="co2">CO2</option>
     <option value="activity">Présence</option>
   </select>
-  <div :class="etage">
+  <div>
     <svg width="100%" height="100%" viewBox="50 250 990 320">
-      <g v-for="(room, roomId) in roomData" :key="roomId" :id="roomId" :class="{ changeColor: true }"
-        :style="{ fill: room.color }">
+      <g v-for="(room, roomId) in roomData" :key="roomId" :id="roomId" :class="{ changeColor: true } "
+        :style="{ fill: room.color }" @click="showRoomDetail(roomId)">
         <title>{{ roomId }}</title>
         <path v-for="(path, index) in room.path" :key="index" :id="'path' + roomId + '_' + index" :d="path" />
       </g>
     </svg>
   </div>
+  <RoomDetail v-if="roomName" :room="roomName" :key="roomName"></RoomDetail>
 </template>
   
   
 <script>
 import { ref, reactive, onMounted, watch } from 'vue';
+import RoomDetail from './roomDetail.vue';
 
 
 export default {
+  components: {
+    RoomDetail,
+  },
+
   setup() {
     const roomData = reactive({
       rgt: { color: "grey", state: true, path: ["m 608.19842,259.42256 21.57668,0.55555 -6.3626,88.06307 -19.02962,-0.27646 z"], data: {} },
@@ -42,13 +48,16 @@ export default {
     });
 
     const selectedOption = ref('temperature');
+    const roomName = ref(null);
 
 
     const updateSelectedOption = (event) => {
       selectedOption.value = event.target.value;
     };
 
-
+    const showRoomDetail = (roomId) => {
+      roomName.value = roomId;
+    };
 
     const fetchDataForRoom = async (roomId) => {
       try {
@@ -141,7 +150,7 @@ export default {
       fetchAllRoomData();
     });
 
-    return { roomData, selectedOption, updateColors, updateSelectedOption };
+    return { roomData, selectedOption, updateColors, updateSelectedOption , roomName, showRoomDetail};
   }
 };
 </script>
@@ -164,16 +173,9 @@ g {
 }
 
 g.changeColor:hover {
-  stroke: rgb(56, 0, 102);
-  fill: rgb(247, 156, 239);
+  stroke-width: 4px;
+  /* Augmenter la largeur du contour à 2 pixels */
 }
 
-.etage {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
 </style>
   

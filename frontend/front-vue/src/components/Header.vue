@@ -14,7 +14,7 @@
         <input type="text" class="search-input" placeholder="Rechercher salle ...">
         <button type="submit" class="search-button">
         </button>
-        <font-awesome-icon :icon="['fas', 'magnifying-glass']" />
+        <img src="/public/icons8-chercher.svg" />
 
     </div>
     </div>
