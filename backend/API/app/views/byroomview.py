@@ -1,68 +1,102 @@
-from rest_framework import serializers, status
+from rest_framework import status
 from rest_framework.response import Response
+from rest_framework.exceptions import NotFound
 from app.models import Sensor, Data
-from deepserializer import DeepSerializer, DeepViewSet
-from django.db.models import Prefetch
-from app.views import DataSerializer 
+from deepserializer import DeepViewSet
+from app.serializers import ByRoomSerializer
 from app.usecases import data_date_sort
+from django.utils import timezone
+from dateutil.parser import parse
 
-def test(data, date_from, date_to):
-    print("cac")
-    
-class ByRoomSerializer(DeepSerializer):
-    all_data = serializers.SerializerMethodField()
+import logging
+import time
 
-    class Meta:
-        model = Sensor
-        fields = ['room', 'all_data']
-        depth = 0
-        use_case = 'by_room_sort'
-
-    def get_all_data(self, obj):        
-        print("coucou")
-        date_from = self.context.get('date_from')
-        date_to = self.context.get('date_to')
-
-        for data in obj.all_data.all():
-            print(data.time)
-
-        data_ids = obj.all_data.values_list('id', flat=True)
-        all_data_qs = Data.objects.filter(id__in=data_ids)
-
-        all_data_filtered = filter(lambda data: test(data, date_from, date_to), obj.all_data.all())
-        return DataSerializer(all_data_filtered, many=True).data
-
-# class ByRoomViewSet(DeepViewSet):
-#     queryset = Sensor.objects.all()
-
-#     def get_queryset(self):
-#         queryset = super().get_queryset()
-#         params = self.request.query_params
-#         date_from = params.get('from')
-#         date_to = params.get('to')
-
-#         # Appliquer la logique de tri dans Prefetch
-#         data_queryset = Data.objects.all()
-#         data_queryset = data_date_sort(data_queryset, date_from, date_to)
-
-#         return queryset.prefetch_related(
-#             Prefetch('all_data', queryset=data_queryset)
-#         )
-
-#     def list(self, request, *args, **kwargs):
-#         queryset = self.get_queryset()
-#         serializer = ByRoomSerializer(queryset, many=True, context={'date_from': request.query_params.get('from'), 'date_to': request.query_params.get('to')})
-#         return Response(serializer.data, status=status.HTTP_200_OK)
+logger = logging.getLogger('API')
 
 class ByRoomViewSet(DeepViewSet):
+    """
+    View uses for ByRoom endpoint using Sensor model, that permit to get all the data from 
+    a room with the sort that we need on this endpoint
+    """
+
     depth = 0
-    queryset = Sensor.objects.all()
+    queryset = Sensor.objects
     use_case = 'by_room_sort'
 
-    def get_queryset(self):
-        return super().get_queryset()
+    def filter_sensor_data(self, sensor, date_from, date_to, depth, last_data=None):
+        """
+        This method is used to filter the data from a sensor with the date_from, date_to, depth and last_data parameters.
 
+        date_from: The date from which we want to get the data
+        date_to: The date to which we want to get the data
+        Those ise the the data_date_sort method to sort the data
+
+        depth: The depth of the data that we want to get
+        last_data: The number of last data that we want to get
+        """
+
+        if depth > 0:
+            # We use data_date_sort to sort the data by date
+            filtered_data = list(filter(lambda data: data_date_sort(data, date_from, date_to), sensor.all_data.all().order_by('time')))
+            # We get the data objects from the filtered data and we add them to the sensor object
+            sensor.filtered_data = filtered_data
+            # We get the current sensor and add it to the sensor object (Because we need to get the sensor next to the room)
+            sensor.sensor = sensor
+            # Last data define how many last data objects we want to return
+            if last_data: # If last_data is not None we will get the last data objects
+                sensor.filtered_data = filtered_data[-int(last_data):]
+        elif depth == 0:
+            # We use data_date_sort to sort the data by date
+            filtered_data = list(filter(lambda data: data_date_sort(data, date_from, date_to), sensor.all_data.all().order_by('time')))
+            # We get the data id from the filtered data and we add them to the sensor object
+            sensor.data_ids = [data.id for data in filtered_data]
+            # We get the current sensor devui (id) and add it to the sensor object (Because we need to get the sensor next to the room)
+            sensor.sensor_id = sensor.deveui
+            # Last data define how many last data objects we want to return
+            if last_data:
+                sensor.data_ids = sensor.data_ids[-int(last_data):]
+        return sensor
+
+    def get_queryset(self):
+        """
+        This methode is call we the endpoint for all room is called.
+        Is getting all the parameters from the request and call the filter_sensor_data method for each sensor, to sort them properly.
+        """
+        queryset = super().get_queryset()
+        params = self.request.query_params
+        date_from = params.get('from')
+        date_to = params.get('to')
+        depth = 0 if params.get('depth') is None else int(params.get('depth'))
+        last_data = params.get('last_data')
+
+        for sensor in queryset:
+            self.filter_sensor_data(sensor, date_from, date_to, depth, last_data)
+
+        return queryset
+
+    def retrieve(self, request, *args, **kwargs):
+        """
+        This methode is call we the endpoint for one room is called.
+        Do the same things as get_queryset but for one room.
+        """
+        room_id = kwargs.get('pk')
+        params = request.query_params
+        date_from = params.get('from')
+        date_to = params.get('to')
+        depth = 0 if params.get('depth') is None else int(params.get('depth'))
+        last_data = params.get('last_data')
+
+        try:
+            sensor = Sensor.objects.get(room=room_id)
+            sensor = self.filter_sensor_data(sensor, date_from, date_to, depth, last_data)
+        except Sensor.DoesNotExist:
+            raise NotFound('Room does not exist')
+
+        serializer = ByRoomSerializer(sensor)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
     def list(self, request, *args, **kwargs):
         queryset = self.get_queryset()
-        serializer = ByRoomSerializer(queryset, many=True, context={'date_from': request.query_params.get('from'), 'date_to': request.query_params.get('to')})
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        serializers = ByRoomSerializer(queryset, many=True)
+        return Response(serializers.data, status=status.HTTP_200_OK)
+    

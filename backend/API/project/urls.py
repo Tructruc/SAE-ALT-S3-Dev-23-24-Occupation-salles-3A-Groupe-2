@@ -13,16 +13,12 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import include, path, re_path
+from django.urls import include, re_path
 from deepserializer import DeepViewSet
-from app.models import Sensor, Data
 from rest_framework import routers
 from django.conf.urls.static import static
 from django.conf import settings
-
-from app.usecases.mqttlistener import MqttClientProcess
-
+from app.models import Data, Sensor
 from app.views import DataViewSet, ByRoomViewSet, SensorViewSet
 
 router = routers.DefaultRouter()
@@ -34,21 +30,7 @@ router.register(r'Data', DataViewSet, basename='Data')
 router.register(r'ByRoom', ByRoomViewSet, basename='ByRoom')
 
 
+
 urlpatterns = [
     re_path(r'', include(router.urls)),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-
-import sys
-
-if 'runserver' in sys.argv : # Only run the MQTT client when running the server
-    print("Démarrage des Process MQTT")
-
-    mqtt_process_1 = MqttClientProcess("application/1/device/+/event/status")
-    mqtt_process_1.daemon = True
-    mqtt_process_1.start()
-    print("Process 1 started")
-
-    mqtt_process_2 = MqttClientProcess("AM107/by-room/#")
-    mqtt_process_2.daemon = True
-    mqtt_process_2.start()
-    print("Process 2 started")

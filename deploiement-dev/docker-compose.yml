@@ -5,7 +5,9 @@ services:
     platform: linux/amd64
     build:
       context: ../backend
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.Dev
+    depends_on:
+      - timescaledb
     env_file:
       - .env
     container_name: django-backend
@@ -27,7 +29,6 @@ services:
     restart: unless-stopped
     volumes:
       - ./database:/var/lib/postgresql/data
-      - ./my_postgresql.conf:/var/lib/postgresql/data/postgresql.conf
     networks:
       private-network:
         ipv4_address: 172.69.69.3
@@ -53,6 +54,7 @@ services:
     image: adminer
     env_file:
       - .env
+    container_name: adminer-for-dev
     restart: unless-stopped
     ports:
       - 8081:8080

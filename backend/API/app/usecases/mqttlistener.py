@@ -1,44 +1,75 @@
 import paho.mqtt.client as mqtt
 import multiprocessing
 import json
-from pprint import pprint
+import logging
+import time
+import uuid
 
+logger = logging.getLogger('API')
 
 class MqttClientProcess(multiprocessing.Process):
     def __init__(self, topic):
         super().__init__()
-        self.client = mqtt.Client()
+        # Create a cleint wiht a unique ID by concate topic and uuid
+        self.client = mqtt.Client(topic + str(uuid.uuid4()))
         self.topic = topic
+        self.client.on_connect = self.on_connect
+        self.client.on_message = self.on_message
+        self.client.on_disconnect = self.on_disconnect
+        self.is_running = True
 
-        # Utilisez des fonctions lambda pour passer les arguments supplémentaires
-        self.client.on_connect = lambda client, userdata, flags, rc: self.on_connect(client, userdata, flags, rc, self.topic)
-        self.client.on_message = lambda client, userdata, msg: self.on_message(client, userdata, msg, self.topic)
+    def on_connect(self, client, userdata, flags, rc):
+        logger.info(f"Connected to MQTT broker on topic: {self.topic}")
+        client.subscribe(self.topic)
 
-    def on_connect(self, client, userdata, flags, rc, topic):
-        print("Connected with result code " + str(rc) + f" to topic {topic}")
-        client.subscribe(topic)
-
-    def on_message(self, client, userdata, msg, topic):
-        from app.usecases import create_sensor
+    def on_message(self, client, userdata, msg):
         try:
-            # Décodez le payload et convertissez-le en dictionnaire
             message_dict = json.loads(msg.payload.decode('utf-8'))
-            # Affichez le message de manière formatée
-            print(f"Received message on {topic}: ")
-            pprint(message_dict)
-
-            create_sensor(message_dict, topic)
-
+            logger.debug(f"Message received on {self.topic}")
+            from app.usecases import create_sensor_data
+            create_sensor_data(message_dict, self.topic)
         except json.JSONDecodeError:
-            print(f"Error decoding JSON: {msg.payload}")
+            logger.error("Unknown error during message deserialization")
+
+    def on_disconnect(self, client, userdata, rc):
+        if rc != 0:
+            logger.warning(f"Unexpectedly disconnected from MQTT broker (code {rc}). Attempting to reconnect... \n Topic: {self.topic}")
+            self.is_running = False
 
     def run(self):
-        self.client.connect("chirpstack.iut-blagnac.fr", 1883, 60)
-        self.client.loop_start()
+        logger.debug("Attempting to connect to MQTT broker")
+        while True:
+            if not self.is_running:
+                self.reconnect()
+            try:
+                self.client.connect("chirpstack.iut-blagnac.fr", 1883, 60)
+                self.is_running = True
+                self.client.loop_start()
+                while self.is_running:
+                    time.sleep(10)
+            except TimeoutError:
+                logger.warning(f"Connection to MQTT broker timed out. Retrying in 10 seconds... \nTopic: {self.topic}")
+                time.sleep(10)
+            except KeyboardInterrupt:
+                logger.info(f"Stopping MQTT process for topic {self.topic}")
+                break
+            except Exception as e:
+                logger.error(f"Unknown error connecting to MQTT broker: {e}")
+                time.sleep(10)
+        self.client.disconnect()
 
-        try:
-            while True:
-                pass
-        except KeyboardInterrupt:
-            print("Arrêt du processus.")
-            self.client.disconnect()
+    def reconnect(self):
+        logger.info(f"Attempting to reconnect to MQTT broker on topic {self.topic}")
+        self.client.loop_stop()
+        while not self.is_running:
+            try:
+                self.client.reconnect()
+                self.is_running = True
+                self.client.loop_start()  # Redémarre la boucle de gestion des messages
+                logger.info(f"Successfully reconnected to MQTT broker on topic {self.topic}")
+            except TimeoutError:
+                logger.warning(f"Connection to MQTT broker timed out. Retrying in 10 seconds... \nTopic: {self.topic}")
+                time.sleep(10)
+            except Exception as e:
+                logger.error(f"Failed to reconnect to MQTT broker. Retrying in 10 seconds... Error: {e}")
+                time.sleep(10)

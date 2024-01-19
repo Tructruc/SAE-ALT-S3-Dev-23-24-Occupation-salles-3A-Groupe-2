@@ -1,13 +1,38 @@
 <template>
   <div>
-    <h1>{{room}}</h1>
+    <h1 v-if=loaded>{{room}}</h1>
 
-    <Line v-if="loaded" :data="chartData"  :options="chartOptions" width="500" height="400"></Line>
+    <div class="grid">
+      <div id="battery">
+        <battery v-if=loaded :battery=battery />
+      </div>
+
+      <div id="Temperature">
+        <gauge v-if=loaded :value=temp :min=-20 :max=50 :value-name='"Temperature"' :unit="'°C'" :danger-value=35 />
+      </div>
+
+      <div id="Humidity">
+        <gauge v-if=loaded :value=hum :min=0 :max=100 :value-name='"Humidity"' :unit="'%'" :danger-value=80 />
+      </div>
+
+      <div id="CO2">
+        <gauge v-if=loaded :value=co2 :min=0 :max=3000 :value-name='"CO2"' :unit="'ppm'" :danger-value=1500 />
+      </div>
+
+      <div class="graphique">
+        <TimeLine v-if=loaded :data="timedDate" :dates="timeLabel" />
+      </div>
+
+      <div id="sensorinfo">
+        <DetailCapteur v-if=loaded :name="sensorName" :deveui="sensorDeveui" :building="sensorBuilding" :floor="sensorFloor" :externalPower="sensorExternalPower" />
+      </div>
+
+    </div>
   </div>
 </template>
 
 <script>
-import {Line} from 'vue-chartjs'
+import {Scatter} from 'vue-chartjs'
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -18,6 +43,10 @@ import {
   Tooltip,
   Legend
 } from 'chart.js'
+import Gauge from "@/components/gauge.vue";
+import Battery from "@/components/battery.vue";
+import TimeLine from "@/components/TimeLine.vue";
+import DetailCapteur from "@/components/DetailCapteur.vue";
 
 ChartJS.register(
     CategoryScale,
@@ -33,25 +62,64 @@ ChartJS.register(
 
 export default {
   components: {
-    Line
+    DetailCapteur,
+    TimeLine,
+    Battery,
+    Gauge,
+    Scatter
+  },
+  props: {
+    room: {
+      type: String,
+      required: true
+    }
   },
 
   data: () => ({
+    battery: 0,
+    temp: 0,
+    hum: 0,
+    co2: 0,
     loaded: false,
     chartData: null,
+    timedDate: {
+      temperature: [],
+      humidity: [],
+      co2: [],
+      activity: [],
+      tvoc: [],
+      illuminance: [],
+      infrared: [],
+      infrared_and_visible: [],
+      pressure: [],
+    },
+    timeLabel: [],
+
+    sensorName: '',
+    sensorDeveui: '',
+    sensorBuilding: '',
+    sensorFloor: '',
+    sensorExternalPower: false,
+
     chartOptions: {
-      scales: {
-        x: {
-          ticks: {
-            // Custom tick configuration
-            callback: function(val, index) {
-              // Show label only for every 5th data point
-              return index % 3 === 0 ? this.getLabelForValue(val) : '';
-            },
-          },
+      type: "line",
+      x: {
+        type: 'time',
+        time: {
+          // Luxon format string
+          tooltipFormat: 'DD t'
         },
-        // ... other scale configurations if needed
+        title: {
+          display: true,
+          text: 'Date'
+        }
       },
+      y: {
+        title: {
+          display: true,
+          text: 'value'
+        }
+      }
       // ... other chart options if needed
     },
   }),
@@ -59,77 +127,40 @@ export default {
     this.loaded = false
 
     try {
-      const sensor = await fetch('http://localhost:8000/Sensor/24e124128c016684/?depth=1');
+      const sensor = await fetch('http://localhost:8000/ByRoom/'+this.room+'/?depth=1');
       const json = await sensor.json();
 
-      this.room = json.room
 
-      var tempdata = {
-        labels: [],
-        datasets: []
-
-      }
-
-      /*
-      example json:
-      {
-    "deveui": "24e124128c016684",
-    "devicename": "AM107-14",
-    "room": "B106",
-    "building": "B",
-    "floor": 1,
-    "batterylevel": 7.87,
-    "externalpowersource": false,
-    "all_data": [
-        {
-            "id": 81,
-            "time": "2024-01-10T16:55:15.243039+01:00",
-            "temperature": 21.8,
-            "humidity": 38.0,
-            "activity": 134.0,
-            "co2": 1691.0,
-            "tvoc": 273.0,
-            "illuminance": 31.0,
-            "infrared": 4.0,
-            "infrared_and_visible": 23.0,
-            "pressure": 994.1
-        },
-       */
-
-      const datasetTemplates= {
-        temperature: { label: 'Temperature', backgroundColor: 'red' },
-        humidity: { label: 'Humidity', backgroundColor: 'blue' },
-        activity: { label: 'Activity', backgroundColor: 'green', hidden: true },
-        co2: { label: 'CO2', backgroundColor: 'orange', hidden: true },
-        tvoc: { label: 'TVOC', backgroundColor: 'purple', hidden: true },
-        illuminance: { label: 'Illuminance', backgroundColor: 'yellow', hidden: true },
-        infrared: { label: 'Infrared', backgroundColor: 'black', hidden: true },
-        infrared_and_visible: { label: 'Infrared and visible', backgroundColor: 'brown', hidden: true },
-        pressure: { label: 'Pressure', backgroundColor: 'pink', hidden: true },
-      }
-
-      for (const [key, value] of Object.entries(datasetTemplates)) {
-        tempdata.datasets.push({
-          label: value.label,
-          backgroundColor: value.backgroundColor,
-          data: [],
-          hidden: value.hidden
-        })
-      }
 
       for (const [key, value] of Object.entries(json.all_data)) {
         let time = new Date(value.time)
-        let timeformated = time.toLocaleString("fr-FR", {timeZone: "Europe/Paris", year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit'});
-
-        tempdata.labels.push(timeformated)
-        for (const [key2, value2] of Object.entries(datasetTemplates)) {
-          tempdata.datasets.find(x => x.label === value2.label).data.push(value[key2])
+        if (!this.timeLabel.includes(time)) {
+          this.timeLabel.push(time)
         }
+        // add the values to the correct array
+        this.timedDate.temperature.push(value.temperature)
+        this.timedDate.humidity.push(value.humidity)
+        this.timedDate.co2.push(value.co2)
+        this.timedDate.activity.push(value.activity)
+        this.timedDate.tvoc.push(value.tvoc)
+        this.timedDate.illuminance.push(value.illuminance)
+        this.timedDate.infrared.push(value.infrared)
+        this.timedDate.infrared_and_visible.push(value.infrared_and_visible)
+        this.timedDate.pressure.push(value.pressure)
       }
 
+      this.battery = json.sensor.batterylevel
 
+      this.temp = json.all_data[json.all_data.length - 1].temperature
+      this.hum = json.all_data[json.all_data.length - 1].humidity
+      this.co2 = json.all_data[json.all_data.length - 1].co2
 
-      this.chartData = tempdata
+      this.sensorName = json.sensor.devicename;
+      this.sensorDeveui = json.sensor.deveui;
+      this.sensorBuilding = json.building;
+      this.sensorFloor = json.floor;
+      this.sensorExternalPower = json.sensor.external_power;
+
 
       this.loaded = true
     } catch (e) {
@@ -138,3 +169,53 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+
+.grid {
+  display: grid;
+  gap: 10px;
+  width: 64vw;
+  grid-template-columns: 16vw 16vw 16vw 16vw;
+  grid-template-rows: auto 50vh;
+
+}
+
+#battery {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+#Temperature {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+#Humidity {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+#CO2 {
+  grid-column: 4;
+  grid-row: 1;
+}
+
+#sensorinfo {
+  grid-column: 4;
+  grid-row:  2;
+}
+
+.graphique {
+  grid-column: 1 / span 3;
+  grid-row: 2;
+  height: 50vh;
+}
+
+
+h1 {
+ font-weight: bold;
+}
+
+
+</style>

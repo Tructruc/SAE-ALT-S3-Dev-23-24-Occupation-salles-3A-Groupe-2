@@ -1,0 +1,29 @@
+FROM python:3.12.1-bullseye
+
+# Définit le fuseau horaire (remplacez par votre fuseau horaire souhaité)
+ENV TZ=Europe/Paris
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+# Définit le répertoire de travail dans le conteneur
+WORKDIR /API/
+
+# Copie les fichiers de dépendances Python dans le conteneur
+COPY ./API/ /API/
+COPY ./requirements.txt /API/
+RUN touch /API/project/api.log
+
+# Delete the last migration file
+RUN rm -rf /API/app/migrations/*
+RUN touch /API/app/migrations/__init__.py
+
+# Installe les dépendances Python
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Ajouter uvicorn et gunicorn
+RUN pip install uvicorn gunicorn
+
+CMD python manage.py wait_for_db \
+    && python manage.py makemigrations \
+    && python manage.py migrate \
+    && gunicorn project.asgi:application -k uvicorn.workers.UvicornWorker -c gunicorn_config.py
+

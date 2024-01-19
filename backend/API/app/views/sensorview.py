@@ -5,6 +5,10 @@ from rest_framework import status
 from rest_framework.response import Response
 
 class SensorViewSet(DeepViewSet):
+    """
+    View used for the Sensor model with sensor endpoint
+    """
+
     depth = 0
     queryset = Sensor.objects
     use_case = 'sensor'

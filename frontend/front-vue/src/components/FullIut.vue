@@ -1,7 +1,6 @@
 <template>
-    <h2>Full IUT</h2> 
-    <div> 
-      <svg width="100%" height="100%" viewBox="0 0 2000.3333 524" >
+    <div :class="{ 'small-view': showBatB || showBatE }"> Full IUT
+      <svg width="100%" height="100%" viewBox="0 0 1417.3333 524" >
             <g id="MI" class="changeColor">
                 <title>Maison intelligente</title>
                 <path id="path47751" d="m 1275.5549,283.99611 -0.4068,-25.87164 27.0614,42.74674 0.058,23.6013 -26.7126,-40.4764"/>
@@ -137,6 +136,14 @@ g.changeColor:hover {
     
     /* stroke:rgb(255, 193, 183);
     fill: rgb(233, 8, 0); */
+}
+
+
+.small-view {
+    float: left;
+  width: 20%; /* Ajustez la largeur comme nécessaire */
+  height: 20%; /* Ajustez la hauteur comme nécessaire */
+  left: 0; /* Ajustez la position par rapport à la gauche de la fenêtre */
 }
 
 

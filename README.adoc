@@ -33,7 +33,8 @@ image::https://cdn.discordapp.com/attachments/579303130886569984/106518314847384
 
 - link:https://github.com/Baraphe[Raphaël Bar] - Développeur / Illustrateur
 
-- link:https://github.com/mel2k3n[(Melissa Dequesne)] - Développeuse
+- link:https://perdu.com[(Melissa Dequesne)] - Pas là (╥﹏╥)
+
 
 ==== • Enseignant.e.s
 
@@ -96,18 +97,38 @@ En résumé, cette architecture n'est pas seulement une infrastructure technique
 
 :sectnums:
 
-== Méthode AGILE
+== Gestion de projet
 
-Le suivi de la méthode AGILE se trouve dans le wiki du repository à l’adresse suivante https://github.com/Tructruc/SAE-ALT-S3-Dev-23-24-Occupation-salles-3A-Groupe-2/wiki/M%C3%A9thode-AGILE[]
+=== Backlog Produit
+
+* https://github.com/Tructruc/SAE-ALT-S3-Dev-23-24-Occupation-salles-3A-Groupe-2/issues?q=is%3Aopen+is%3Aissue+label%3A%22user+story%22[Backlog Produit]
+
+=== Retours d’experience de sprints
+
+* https://github.com/Tructruc/SAE-ALT-S3-Dev-23-24-Occupation-salles-3A-Groupe-2/wiki/M%C3%A9thode-AGILE#retour-dexp%C3%A9rience-sprint-1[Sprint 1]
+* https://github.com/Tructruc/SAE-ALT-S3-Dev-23-24-Occupation-salles-3A-Groupe-2/wiki/M%C3%A9thode-AGILE#retour-dexp%C3%A9rience-de-sprint-2[Sprint 2]
+
+=== Backlogs de sprint
+
+* https://github.com/users/Tructruc/projects/3[Sprint 1]
+* https://github.com/users/Tructruc/projects/4[Sprint 2]
 
 == Documentation
 
 La documentation du projet se trouve dans l’onglet wiki de GitHub https://github.com/Tructruc/SAE-ALT-S3-Dev-23-24-Occupation-salles-3A-Groupe-2/wiki[]
 
-== Retours Sprint
+* https://github.com/Tructruc/SAE-ALT-S3-Dev-23-24-Occupation-salles-3A-Groupe-2/wiki/Documentation-Technique-%E2%80%90-SAE%E2%80%90ALT%E2%80%90S3%E2%80%90Dev%E2%80%9023%E2%80%9024%E2%80%90Occupation%E2%80%90salles[Documentation Technique]
+* https://github.com/Tructruc/SAE-ALT-S3-Dev-23-24-Occupation-salles-3A-Groupe-2/wiki/Documentation-Utilisateur-%E2%80%90-SAE%E2%80%90ALT%E2%80%90S3%E2%80%90Dev%E2%80%9023%E2%80%9024%E2%80%90Occupation%E2%80%90salles[Documenation Utilisateur]
+* https://github.com/Tructruc/SAE-ALT-S3-Dev-23-24-Occupation-salles-3A-Groupe-2/wiki/Cahier-de-Test-%E2%80%90-SAE%E2%80%90ALT%E2%80%90S3%E2%80%90Dev%E2%80%9023%E2%80%9024%E2%80%90Occupation%E2%80%90salles[Cahier de Test]
 
-Les retours de sprint pourront s’effectuer via la page discussion du repository GitHub https://github.com/Tructruc/SAE-ALT-S3-Dev-23-24-Occupation-salles-3A-Groupe-2/discussions/categories/retours[] 
+== Évaluations hebdomadaires
 
-Voici un tutoriel pour créer une discussion : https://github.com/Tructruc/SAE-ALT-S3-Dev-23-24-Occupation-salles-3A-Groupe-2/wiki/Tutoriel-Cr%C3%A9ation-discussion-Retour-Sprint[]
+=== Semaine 2
 
+NOTE: Les notes ci-dessous sont mises à jour directement par les enseignants responsables de la compétence 5.
 
+ifdef::env-github[]
+image:https://docs.google.com/spreadsheets/d/e/2PACX-1vRtGk-4u-mv4RE4q76-qFY-Iy48o1WzcqSP-upBv9doa23kDXzFfHmnZaux3pDt5g/pubchart?oid=9183741&format=image[link=https://docs.google.com/spreadsheets/d/e/2PACX-1vRtGk-4u-mv4RE4q76-qFY-Iy48o1WzcqSP-upBv9doa23kDXzFfHmnZaux3pDt5g/pubchart?oid=9183741&format=image]
+endif::[]
+
+Sprint 1 :Release ok pour un sprint 1. DOC :  pensez à préciser le projet, version, date , équipe. Doc user non initialisée. Il me manque le backlog produit global contenant les US, priorité, complexité (issues du projet). Esprit Scrum on compris :  US/ISSUES eclatée en tâches, je n'ai que les tâches sur votre dépôt.  A chaque sprint on traite des US et donc les tâches liées. Bilan OK. readme ok bien qu'un peu confus.
