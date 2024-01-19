@@ -23,12 +23,12 @@
     },
     computed: {
       filteredApiData() {
-        // Filter out entries with null "room" and remove duplicates
-        const uniqueEntries = Array.from(
+        // On garde seulement les données qui ont une sall, et dont le capteur n'est pas déjà affiché.
+        const dataUnique = Array.from(
           new Set(this.apiData.map(entry => JSON.stringify(entry)))
         ).map(entry => JSON.parse(entry));
   
-        return uniqueEntries.filter(entry => entry.room !== null);
+        return dataUnique.filter(entry => entry.room !== null);
       },
     },
     mounted() {
@@ -37,18 +37,18 @@
     methods: {
       async fetchApiData() {
         try {
-          const response = await fetch('http://localhost:8000/ByRoom?depth=4');
+          const response = await fetch('http://localhost:8000/ByRoom/?format=json');
           const jsonData = await response.json();
           this.apiData = jsonData;
         } catch (error) {
-          console.error('Error fetching API data:', error);
+          console.error('Error fetching API :', error);
         }
       },
     },
   };
   </script>
   
-  <style scoped>
+<style scoped>
   .data-label {
     margin: 5px;
     padding: 10px;
@@ -58,10 +58,11 @@
     text-decoration: none;
     display: inline-block;
     transition: background-color 0.3s, color 0.3s;
+    user-select: none;
   }
   
   .data-label:hover {
-    background-color: #4caf50;
+    background-color: #3498db;
     color: white;
   }
   
