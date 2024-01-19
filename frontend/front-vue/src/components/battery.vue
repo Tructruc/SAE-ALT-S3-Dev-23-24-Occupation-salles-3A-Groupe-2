@@ -1,9 +1,7 @@
 <template>
-  <div id="battery">
+  <div>
     <h3>Battery</h3>
-    <div class="chart-container" style="position: relative;">
-      <canvas id="myChart"></canvas>
-    </div>
+    <canvas id="myChart"></canvas>
   </div>
 </template>
 
@@ -78,22 +76,20 @@ export default {
 </script>
 
 <style scoped>
-#battery {
-  width: 300px;
+
+div {
+  width: auto;
+  max-height: 32vh;
+  padding: 1rem;
   background-color: var(--color-background-mute);
+  border-radius: 5px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
 }
-
 h3 {
   margin: 0;
   padding: 0;
-}
-
-canvas {
-  height: 300px;
 }
 
 </style>

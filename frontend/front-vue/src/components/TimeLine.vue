@@ -182,6 +182,6 @@ div{
 
 canvas {
   width: 100%;
-  height: 500px;
+  height: 50vh;
 }
 </style>

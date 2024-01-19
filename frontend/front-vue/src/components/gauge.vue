@@ -144,9 +144,14 @@ export default {
 
 <style scoped>
 div {
-  width: 300px;
-  padding: 10px;
+  width: auto;
+  max-height: 32vh;
+  padding: 1rem;
   background-color: var(--color-background-mute);
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 h3 {

@@ -39,10 +39,10 @@ export default {
 
 <style scoped>
 div {
-  width: 300px;
-  height: 500px;
+  width: 16vw;
+  height: 50vh;
   background-color: var(--color-background-mute);
-  padding: 30px;
+  padding: 2rem;
   border-radius: 5px;
 }
 
@@ -50,5 +50,8 @@ h3 {
   font-weight: bold;
 }
 
+p {
+  word-wrap: break-word;
+}
 
 </style>
