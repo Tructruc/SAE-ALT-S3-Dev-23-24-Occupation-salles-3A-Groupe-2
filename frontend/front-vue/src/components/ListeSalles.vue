@@ -37,7 +37,7 @@
     methods: {
       async fetchApiData() {
         try {
-          const response = await fetch('http://localhost:8000/ByRoom/?format=json');
+          const response = await fetch('http://localhost:8000/ByRoom/?depth=1');
           const jsonData = await response.json();
           this.apiData = jsonData;
         } catch (error) {
