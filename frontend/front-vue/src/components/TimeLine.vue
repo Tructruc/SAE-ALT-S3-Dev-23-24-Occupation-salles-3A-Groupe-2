@@ -178,10 +178,12 @@ export default {
 div{
   background-color: var(--color-background-mute);
   border-radius: 5px;
+  width: 100%;
+  height: 100%
 }
 
-canvas {
+canvas{
   width: 100%;
-  height: 50vh;
+  height: 100%;
 }
 </style>

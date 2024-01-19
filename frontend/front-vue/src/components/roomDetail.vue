@@ -177,6 +177,7 @@ export default {
   gap: 10px;
   width: 64vw;
   grid-template-columns: 16vw 16vw 16vw 16vw;
+  grid-template-rows: auto 50vh;
 
 }
 
@@ -206,9 +207,9 @@ export default {
 }
 
 .graphique {
-  height: 50vh;
   grid-column: 1 / span 3;
   grid-row: 2;
+  height: 50vh;
 }
 
 

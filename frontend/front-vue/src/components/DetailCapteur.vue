@@ -40,7 +40,7 @@ export default {
 <style scoped>
 div {
   width: 16vw;
-  height: 50vh;
+  height: 100%;
   background-color: var(--color-background-mute);
   padding: 2rem;
   border-radius: 5px;
