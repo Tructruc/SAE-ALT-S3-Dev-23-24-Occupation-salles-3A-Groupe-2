@@ -36,3 +36,4 @@ jobs:
         python ./backend/API/manage.py test
       env:
         DATABASE_URL: postgres://postgres:postgres@localhost:5432/data-iot
+        DJANGO_SETTINGS_MODULE: project.settings.prod_settings
