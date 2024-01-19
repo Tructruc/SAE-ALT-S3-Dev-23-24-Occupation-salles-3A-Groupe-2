@@ -5,23 +5,28 @@
     <option value="co2">CO2</option>
     <option value="activity">Présence</option>
   </select>
-  <div :class="etage">
+  <div>
     <svg width="100%" height="100%" viewBox="0 0 877.99769 300">
       <g v-for="(room, roomId) in roomData" :key="roomId" :id="roomId" :class="{ changeColor: true }"
-        :style="{ fill: room.color }">
+        :style="{ fill: room.color }" @click="showRoomDetail(roomId)">
         <title>{{ roomId }}</title>
         <path v-for="(path, index) in room.path" :key="index" :id="'path' + roomId + '_' + index" :d="path" />
       </g>
     </svg>
   </div>
+  <RoomDetail v-if="roomName" :room="roomName" :key="roomName"></RoomDetail>
 </template>
     
     
 <script>
 import { ref, reactive, onMounted, watch } from 'vue';
+import RoomDetail from './roomDetail.vue';
 
 
 export default {
+  components: {
+    RoomDetail,
+  },
   setup() {
     const roomData = reactive({
       san: {
@@ -185,10 +190,15 @@ export default {
     });
 
     const selectedOption = ref('temperature');
+    const roomName = ref(null);
 
 
     const updateSelectedOption = (event) => {
       selectedOption.value = event.target.value;
+    };
+
+    const showRoomDetail = (roomId) => {
+      roomName.value = roomId;
     };
 
 
@@ -284,7 +294,7 @@ export default {
       fetchAllRoomData();
     });
 
-    return { roomData, selectedOption, updateColors, updateSelectedOption };
+    return { roomData, selectedOption, updateColors, updateSelectedOption, roomName, showRoomDetail };
   }
 };
 </script>
@@ -311,12 +321,5 @@ g.changeColor:hover {
   /* Augmenter la largeur du contour à 2 pixels */
 }
 
-.etage {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
 </style>
     

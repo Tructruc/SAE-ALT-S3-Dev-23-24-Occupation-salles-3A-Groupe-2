@@ -5,7 +5,7 @@
     <option value="co2">CO2</option>
     <option value="activity">Présence</option>
   </select>
-  <div :class="etage">
+  <div>
     <svg width="100%" height="100%" viewBox="50 250 990 320">
       <g v-for="(room, roomId) in roomData" :key="roomId" :id="roomId" :class="{ changeColor: true } "
         :style="{ fill: room.color }" @click="showRoomDetail(roomId)">
@@ -177,12 +177,5 @@ g.changeColor:hover {
   /* Augmenter la largeur du contour à 2 pixels */
 }
 
-.etage {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
 </style>
   
