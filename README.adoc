@@ -117,6 +117,10 @@ En résumé, cette architecture n'est pas seulement une infrastructure technique
 
 La documentation du projet se trouve dans l’onglet wiki de GitHub https://github.com/Tructruc/SAE-ALT-S3-Dev-23-24-Occupation-salles-3A-Groupe-2/wiki[]
 
+* https://github.com/Tructruc/SAE-ALT-S3-Dev-23-24-Occupation-salles-3A-Groupe-2/wiki/Documentation-Technique-%E2%80%90-SAE%E2%80%90ALT%E2%80%90S3%E2%80%90Dev%E2%80%9023%E2%80%9024%E2%80%90Occupation%E2%80%90salles[Documentation Technique]
+* https://github.com/Tructruc/SAE-ALT-S3-Dev-23-24-Occupation-salles-3A-Groupe-2/wiki/Documentation-Utilisateur-%E2%80%90-SAE%E2%80%90ALT%E2%80%90S3%E2%80%90Dev%E2%80%9023%E2%80%9024%E2%80%90Occupation%E2%80%90salles[Documenation Utilisateur]
+* https://github.com/Tructruc/SAE-ALT-S3-Dev-23-24-Occupation-salles-3A-Groupe-2/wiki/Cahier-de-Test-%E2%80%90-SAE%E2%80%90ALT%E2%80%90S3%E2%80%90Dev%E2%80%9023%E2%80%9024%E2%80%90Occupation%E2%80%90salles[Cahier de Test]
+
 == Évaluations hebdomadaires
 
 === Semaine 2
