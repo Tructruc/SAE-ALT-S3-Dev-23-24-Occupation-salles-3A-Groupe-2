@@ -97,7 +97,7 @@ En résumé, cette architecture n'est pas seulement une infrastructure technique
 
 :sectnums:
 
-== Suivi de projet
+== Gestion de projet
 
 === Backlog Produit
 
