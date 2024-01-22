@@ -19,7 +19,7 @@ from rest_framework import routers
 from django.conf.urls.static import static
 from django.conf import settings
 from app.models import Data, Sensor
-from app.views import DataViewSet, ByRoomViewSet, SensorViewSet
+from app.views import DataViewSet, ByRoomViewSet, SensorViewSet, SearchViewSet
 
 router = routers.DefaultRouter()
 DeepViewSet.init_router(router, [
@@ -28,6 +28,7 @@ DeepViewSet.init_router(router, [
 router.register(r'Sensor', SensorViewSet, basename='Sensor')
 router.register(r'Data', DataViewSet, basename='Data')
 router.register(r'ByRoom', ByRoomViewSet, basename='ByRoom')
+router.register(r'Search', SearchViewSet, basename='Search')
 
 
 
