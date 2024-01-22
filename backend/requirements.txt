@@ -7,3 +7,4 @@ python-dateutil
 django-cors-headers
 uuid
 dj_database_url
+django_extensions

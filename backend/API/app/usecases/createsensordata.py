@@ -38,36 +38,36 @@ def create_sensor_data(receive_dict, topic)     :
 
     - application/1/device/+/event/status :
         {
-        'applicationID': '1',
-        'applicationName': 'AM107',
-        'batteryLevel': 9.84,
-        'batteryLevelUnavailable': False,
-        'devEUI': '24e124128c010640',
-        'deviceName': 'AM107-40',
-        'externalPowerSource': False,
-        'margin': 12
+            'applicationID': '1',
+            'applicationName': 'AM107',
+            'batteryLevel': 9.84,
+            'batteryLevelUnavailable': False,
+            'devEUI': '24e124128c010640',
+            'deviceName': 'AM107-40',
+            'externalPowerSource': False,
+            'margin': 12
         }
 
     - AM107/by-room/# :
         [
-        {
-        'activity': 171,
-        'co2': 997,
-        'humidity': 39.5,
-        'illumination': 47,
-        'infrared': 8,
-        'infrared_and_visible': 38,
-        'pressure': 994.9,
-        'temperature': 17.1,
-        'tvoc': 227
-        },
-        {
-        'Building': 'B',
-        'devEUI': '24e124128c019661',
-        'deviceName': 'AM107-46',
-        'floor': 2,
-        'room': 'Foyer-personnels'
-        }
+            {
+                'activity': 171,
+                'co2': 997,
+                'humidity': 39.5,
+                'illumination': 47,
+                'infrared': 8,
+                'infrared_and_visible': 38,
+                'pressure': 994.9,
+                'temperature': 17.1,
+                'tvoc': 227
+            },
+            {
+                'Building': 'B',
+                'devEUI': '24e124128c019661',
+                'deviceName': 'AM107-46',
+                'floor': 2,
+                'room': 'Foyer-personnels'
+            }
         ]
 
     :param receive_dict: The MQTT message received.
@@ -125,6 +125,7 @@ def create_sensor_data(receive_dict, topic)     :
         serializer_instance = serializer()
 
         sensor = {'deveui': pk_sensor}
+
         timezone = pytz.timezone('Europe/Paris')
         local_time = datetime.now(timezone)
 
@@ -136,14 +137,13 @@ def create_sensor_data(receive_dict, topic)     :
         logger.debug("boolean, all fields are here ?")
         print(all(key in receive_dict[0] for key in required_fields))
 
-        logger.debug("boolean, all fields are in range ?")
-        print(all(is_in_range(receive_dict[0][key], ranges[key]) for key in ranges))
-
-        logger.debug("boolean, all are here and in range ?")
-        print(all(key in receive_dict[0] and is_in_range(receive_dict[0][key], ranges[key]) for key in ranges))
-
         if all(key in receive_dict[0] and is_in_range(receive_dict[0][key], ranges[key]) for key in ranges):
-            print("all fields are here")
+            logger.debug("boolean, all fields are in range ?")
+            print(all(is_in_range(receive_dict[0][key], ranges[key]) for key in ranges))
+
+            logger.debug("boolean, all are here and in range ?")
+            print(all(key in receive_dict[0] and is_in_range(receive_dict[0][key], ranges[key]) for key in ranges))
+
             pk_data = serializer_instance.deep_create({
                 'time': local_time,
                 'temperature': receive_dict[0]['temperature'],
