@@ -123,8 +123,6 @@ La documentation du projet se trouve dans l’onglet wiki de GitHub https://gith
 
 == Évaluations hebdomadaires
 
-=== Semaine 2
-
 NOTE: Les notes ci-dessous sont mises à jour directement par les enseignants responsables de la compétence 5.
 
 ifdef::env-github[]
