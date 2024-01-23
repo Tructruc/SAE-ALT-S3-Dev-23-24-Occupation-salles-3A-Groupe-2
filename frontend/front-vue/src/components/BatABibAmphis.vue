@@ -1,11 +1,13 @@
 <template>
-	<select :value="selectedOption" @change="updateSelectedOption">
+	
+	<div class="grid">
+		<h2>Bat A</h2>
+		<select :value="selectedOption" @change="updateSelectedOption">
 	  <option value="temperature">Température</option>
 	  <option value="humidity">Humidité</option>
 	  <option value="co2">CO2</option>
 	  <option value="activity">Présence</option>
 	</select>
-	<div>
 		<svg viewBox="0 0 877.99769 800">
         <g transform="matrix(0 -6.1357 6.1357 0 -508.28 1358.5)" stroke="#000" stroke-opacity="0" stroke-width=".016258">
 		<g v-for="(room, roomId) in roomData" :key="roomId" :id="roomId" :class="{ changeColor: true } "
@@ -71,7 +73,7 @@
   
 	  });
   
-	  const selectedOption = ref('temperature');
+	  const selectedOption = ref('activity');
 	  const roomName = ref(null);
   
   
@@ -128,9 +130,7 @@
 			console.log('Updating colors...');
 			if (!isNaN(metricValue)) {
 			  roomData[roomId].color = getColorForMetric(metricValue, selectedOption.value);
-			  console.log("VOUI");
 			}
-			console.log("toto");
 		  }
 		}
 	  };
@@ -195,7 +195,48 @@
 	stroke-opacity: 1;
 	transition: fill 1.2s, stroke 1s;
   }
-  
+  .grid{
+    display: flex;
+    flex-direction: column; /* Aligner les éléments en colonne */
+    align-items: center;
+    gap: 50px;
+    width: 80vw;
+}
+/* Style de base pour le sélecteur */
+select {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #333;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+
+
+
+/* Flèche personnalisée */
+select::after {
+  content: '\25BC';
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+/* Style de la liste déroulante */
+select option {
+  padding: 10px;
+}
+
+/* Style pour les options survolées */
+select option:hover {
+  background-color: #66afe9;
+  color: #fff;
+}
   g.changeColor:hover {
 	stroke-width: 0.8px;
 	/* Augmenter la largeur du contour à 2 pixels */

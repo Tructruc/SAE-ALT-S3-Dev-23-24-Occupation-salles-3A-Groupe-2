@@ -35,6 +35,6 @@ export default {
 
 <style >
 #app {
-    padding-top: 80px; /* Adjust the padding to make space for the header */
+    padding-top: 50px; /* Adjust the padding to make space for the header */
 }
 </style>

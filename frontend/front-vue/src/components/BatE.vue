@@ -1,6 +1,6 @@
 
 <template>
-    <div>
+    <div :class="{'grid':true}">
         <h2>Bat E</h2>
         <svg id="svg3" inkscape:version="1.3.2 (091e20ef0f, 2023-11-25, custom)" sodipodi:docname="batiment-e.svg" version="1.1" viewBox="0 0 2141.3 1064" xmlns="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd">
             <g id="rdc" class="changeColor" transform="matrix(.99999 0 0 .99999 -14.992 -18.924)">
@@ -74,31 +74,44 @@
     }
   </script> -->
 
-<style>
-svg {
-    border: dashed black 1px;
-}
-g {
-    fill:rgb(183, 232, 247);
-    stroke:rgb(0, 26, 255);
-    
-    /* stroke:rgb(0, 0, 0);
-    fill: rgb(248, 183, 43); */
-    
-    fill-opacity:1;
-    stroke-width:1px;
-    stroke-linecap:round;
-    stroke-linejoin:round;
-    stroke-opacity:1;
-    
-    transition: fill 1.2s, stroke 1s
-}
-g.changeColor:hover {
-    stroke:rgb(56, 0, 102);
-    fill: rgb(247, 156, 239);
-    
-    /* stroke:rgb(255, 193, 183);
-    fill: rgb(233, 8, 0); */
-}
-</style>
+  <style>
+  svg {
+      border: dashed black 1px;
+  }
+  g {
+      fill:rgb(183, 232, 247);
+      stroke:rgb(0, 26, 255);
+      
+      /* stroke:rgb(0, 0, 0);
+      fill: rgb(248, 183, 43); */
+      
+      fill-opacity:1;
+      stroke-width:1px;
+      stroke-linecap:round;
+      stroke-linejoin:round;
+      stroke-opacity:1;
+      
+      transition: fill 1.2s, stroke 1s
+  }
+  g.changeColor:hover {
+      stroke:rgb(56, 0, 102);
+      fill: rgb(247, 156, 239);
+      
+      /* stroke:rgb(255, 193, 183);
+      fill: rgb(233, 8, 0); */
+  }
+  .grid{
+      display: flex;
+      gap: 50px;
+      width: 80vw;
+  }
+  .small-view {
+      float: left;
+    width: 20%; /* Ajustez la largeur comme nécessaire */
+    height: 20%; /* Ajustez la hauteur comme nécessaire */
+    left: 0; /* Ajustez la position par rapport à la gauche de la fenêtre */
+  }
+  
+  
+  </style>
   

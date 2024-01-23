@@ -1,5 +1,6 @@
 <template>
-    <div :class="{ 'small-view': showBatB || showBatE || showBatA}"> Full IUT
+    <div :class="{ 'small-view': showBatB || showBatE || showBatA, 'grid':true}"> 
+    <h2 >IUT</h2>
       <svg width="100%" height="100%" viewBox="0 0 1417.3333 524" >
             <g id="MI" class="changeColor">
                 <title>Maison intelligente</title>
@@ -123,6 +124,7 @@
 <style>
 svg {
     border: dashed black 1px;
+    margin-top: 0;
 }
 
 g {
@@ -148,12 +150,20 @@ g.changeColor:hover {
     fill: rgb(233, 8, 0); */
 }
 
+.grid{
+    display: flex;
+    width: 80vw;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    
 
+}
+ h2 {
+    margin-bottom: 0;
+}
 .small-view {
-    float: left;
   width: 20%; /* Ajustez la largeur comme nécessaire */
   height: 20%; /* Ajustez la hauteur comme nécessaire */
-  left: 0; /* Ajustez la position par rapport à la gauche de la fenêtre */
 }
 
 

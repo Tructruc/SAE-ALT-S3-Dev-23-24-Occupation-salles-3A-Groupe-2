@@ -1,11 +1,13 @@
 <template>
-  <select :value="selectedOption" @change="updateSelectedOption">
+  
+  <div class="grid">
+    <h2>Etage 2</h2>
+    <select :value="selectedOption" @change="updateSelectedOption">
     <option value="temperature">Température</option>
     <option value="humidity">Humidité</option>
     <option value="co2">CO2</option>
     <option value="activity">Présence</option>
   </select>
-  <div>
     <svg width="100%" height="100%" viewBox="0 0 1074.5197 411.70081">
       <g v-for="(room, roomId) in roomData" :key="roomId" :id="roomId" :class="{ changeColor: true }"
         :style="{ fill: room.color }" @click="showRoomDetail(roomId)">
@@ -383,7 +385,7 @@ export default {
       // ... ajouter plus si nécessaire
     });
 
-    const selectedOption = ref('temperature');
+    const selectedOption = ref('activity');
     const roomName = ref(null);
 
 
@@ -509,6 +511,47 @@ g.changeColor:hover {
   /* Augmenter la largeur du contour à 2 pixels */
 }
 
+.grid{
+    display: flex;
+    flex-direction: column; /* Aligner les éléments en colonne */
+    align-items: center;
+    gap: 50px;
+    width: 80vw;
+}
+/* Style de base pour le sélecteur */
+select {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #333;
+  outline: none;
+  transition: border-color 0.3s;
+}
 
+
+
+
+/* Flèche personnalisée */
+select::after {
+  content: '\25BC';
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+/* Style de la liste déroulante */
+select option {
+  padding: 10px;
+}
+
+/* Style pour les options survolées */
+select option:hover {
+  background-color: #66afe9;
+  color: #fff;
+}
 </style>
             
