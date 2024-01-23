@@ -12,7 +12,7 @@ class SearchViewSet(ViewSet):
 
     def list(self, request, *args, **kwargs):
         queryset = Sensor.objects.all()
-        search = request.query_params.get('search', None)
+        search = request.query_params.get('q', None)
 
         if search:
             queryset = queryset.filter(

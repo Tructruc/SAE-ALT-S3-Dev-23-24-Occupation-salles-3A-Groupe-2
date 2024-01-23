@@ -1,7 +1,7 @@
 <template>
   <Header @changeView="changeView"></Header>
   <div id="app">
-    <component :is="currentView"></component>
+    <component :is="currentView.component" v-bind="currentView.props"></component>
   </div>
 </template>
 
@@ -21,12 +21,14 @@ export default {
   },
   data() {
     return {
-      currentView: 'FullIut'
+      currentView: 'FullIut',
+      props: {}
     };
   },
   methods: {
-    changeView(view) {
-      this.currentView = view;
+    changeView(component, props) {
+      console.log("caca",component,props);
+      this.currentView = { component, props };
     }
   }
 };
