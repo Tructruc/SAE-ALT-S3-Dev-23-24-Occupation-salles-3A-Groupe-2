@@ -11,14 +11,12 @@
           class="search-input"
           v-model="searchQuery"
           @input="fetchSuggestions"
-          @keyup.enter="performSearch(searchQuery)"
-          @keyup.down="navigateSuggestions(1)"
-          @keyup.up="navigateSuggestions(-1)"
+          @keydown="handleKeydown"
           ref="searchInput"
           placeholder="Rechercher salle ..."
         />
         <!-- Modification: Ajout de && searchQuery à la condition v-if -->
-        <ul v-if="suggestions.length && searchQuery" class="suggestions">
+        <ul ref="suggestionsContainer" v-if="suggestions.length && searchQuery" class="suggestions">
           <li
             v-for="(suggestion, index) in suggestions"
             :key="suggestion"
@@ -57,7 +55,7 @@
       return {
         searchQuery: "",
         suggestions: [],
-        highlightedIndex: -1, // Ajout: Index de l'élément surligné dans les suggestions
+        highlightedIndex: -1,
       };
     },
     methods: {
@@ -87,21 +85,47 @@
             if (data.length === 1) {
               console.log("Recherche pour:", data[0].room);
               this.changeView("roomDetail", { room: data[0].room});
+              document.getElementsByClassName("search-input")[0].value = ""; // Modification: Vider le champ de recherche
             } else {
               // Modification: Afficher la liste des salles trouvées
               this.$emit("showRoomList", data);
             }
           });
       },
-      // Ajout: Fonction pour naviguer dans les suggestions avec les flèches Haut et Bas
-      navigateSuggestions(step) {
-        this.highlightedIndex += step;
-        if (this.highlightedIndex < 0) {
-          this.highlightedIndex = this.suggestions.length - 1;
-        } else if (this.highlightedIndex >= this.suggestions.length) {
-          this.highlightedIndex = 0;
+      handleKeydown(event) {
+        let container, activeItem, itemHeight, containerHeight, scrollPosition, itemPosition;
+
+        switch (event.key) {
+          case 'ArrowDown':
+            this.highlightedIndex = (this.highlightedIndex + 1) % this.suggestions.length;
+            break;
+          case 'ArrowUp':
+            this.highlightedIndex = (this.highlightedIndex - 1 + this.suggestions.length) % this.suggestions.length;
+            break;
+          case 'Enter':
+            if (this.highlightedIndex >= 0) {
+              this.performSearch(this.suggestions[this.highlightedIndex]);
+              this.highlightedIndex = -1; // Reset the index
+            }
+            break;
         }
-        this.$refs.searchInput.focus(); // Mettre le focus sur l'input après la navigation
+
+        container = this.$refs.suggestionsContainer; // Add a ref to your ul element
+        activeItem = container.children[this.highlightedIndex];
+        if (activeItem) {
+          itemHeight = activeItem.offsetHeight;
+          containerHeight = container.offsetHeight;
+          scrollPosition = container.scrollTop;
+          itemPosition = activeItem.offsetTop;
+
+          if (itemPosition + itemHeight > scrollPosition + containerHeight) {
+            // Scroll down
+            container.scrollTop = itemPosition + itemHeight - containerHeight;
+          } else if (itemPosition < scrollPosition) {
+            // Scroll up
+            container.scrollTop = itemPosition;
+          }
+        }
       },
     },
   };
@@ -109,7 +133,7 @@
   
 
 
-<style>
+<style scoped>
     .header {
         position: fixed;
         top: 0;
@@ -219,7 +243,11 @@
 
     /* Style au survol des éléments de la liste */
     .suggestions li:hover {
-        background-color: #f8f8f8;
+        background-color: #e6e6e6;
+    }
+
+    .suggestions li.active {
+        background-color: #e6e6e6;
     }
 
     /* Pas de bordure en bas pour le dernier élément */
