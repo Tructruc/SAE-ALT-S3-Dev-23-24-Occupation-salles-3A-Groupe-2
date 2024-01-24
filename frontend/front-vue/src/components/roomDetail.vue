@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <h1 v-if=loaded>{{room}}</h1>
-
+  <div ref="view">
+    <h1 v-if="loaded">{{room}}</h1>
+    <h2 v-if="error_message">{{error_message}}</h2>
     <div class="grid">
       <div id="battery">
         <battery v-if=loaded :battery=battery />
@@ -81,6 +81,7 @@ export default {
     hum: 0,
     co2: 0,
     loaded: false,
+    error_message: "",
     chartData: null,
     timedDate: {
       temperature: [],
@@ -129,6 +130,20 @@ export default {
     try {
       const sensor = await fetch('http://localhost:8000/ByRoom/'+this.room+'/?depth=1');
       const json = await sensor.json();
+
+      if (json.all_data === undefined){
+        this.error_message = "La salle « " + this.room + " » ne comporte pas de capteur"
+        return;
+      } else{
+        const view = this.$refs.view;
+        const viewPosition = view.offsetTop;
+        const offset = viewPosition + 80;
+
+        window.scrollBy({
+          top: 1000,
+          behavior: "smooth"
+        });
+      }
 
 
 

@@ -16,7 +16,7 @@ export default {
       default: ''
     },
     floor: {
-      type: String,
+      type: Number,
       default: ''
     },
     externalPower: {

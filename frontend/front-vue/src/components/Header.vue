@@ -60,7 +60,6 @@
     },
     methods: {
       changeView(view, props = {}) {
-        console.log("changeView", view, props);
         this.$emit("changeView", view, props);
       },
       fetchSuggestions() {
@@ -76,14 +75,11 @@
       performSearch(searchTerm) {
         this.searchQuery = searchTerm; // Modification: Mise à jour de searchQuery
         this.suggestions = []; // Ajout: Vider les suggestions lors de la recherche
-        console.log(`${apiBaseUrl}/Search?q=${this.searchQuery}`);
         fetch(`${apiBaseUrl}/Search?q=${this.searchQuery}`)
           .then((response) => response.json())
           .then((data) => {
-            console.log(data);
             // Si le tableau est de longeur 1
             if (data.length === 1) {
-              console.log("Recherche pour:", data[0].room);
               this.changeView("roomDetail", { room: data[0].room});
               document.getElementsByClassName("search-input")[0].value = ""; // Modification: Vider le champ de recherche
             } else {
@@ -111,7 +107,11 @@
         }
 
         container = this.$refs.suggestionsContainer; // Add a ref to your ul element
-        activeItem = container.children[this.highlightedIndex];
+        try {
+          activeItem = container.children[this.highlightedIndex];
+        } catch (e) {
+          // Do nothing if there is no active item
+        }
         if (activeItem) {
           itemHeight = activeItem.offsetHeight;
           containerHeight = container.offsetHeight;

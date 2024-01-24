@@ -164,9 +164,6 @@ export default {
       }
     }
 
-    //log the datasets
-    console.log(options.data.datasets[0])
-
     new Chart(ctx, options)
 
 
