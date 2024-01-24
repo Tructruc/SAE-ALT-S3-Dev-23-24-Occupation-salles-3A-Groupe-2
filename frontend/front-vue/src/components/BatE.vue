@@ -30,16 +30,18 @@
                 <path id="path4" d="m1722.8 243.5-0.5687 404.03c-14.143 21.494-86.223 24.819-130.14 25.69-46.133-0.45692-123.51-5.2424-127.25-32.37l-1.9903-405.13c30.519 23.13 56.554 28.316 125.79 27.17 58.508-1.0565 92.646-1.7612 133.98-19.574"/>
             </g>
         </svg>
-        <BatERdc v-if="showRdc" />
-        <BatEetage1 v-else-if="showEt1" />
-        <BatEetage2 v-else-if="showEt2" /> 
     </div>
+    <BatERdc v-if="showRdc" />
+    <BatEetage1 v-else-if="showEt1" />
+    <BatEetage2 v-else-if="showEt2" />
+
   </template>
   
   <script>
   import BatERdc from './BatERdc.vue';
   import BatEetage1 from './BatEetage1.vue';
   import BatEetage2 from './BatEetage2.vue';
+  import BatBRdc from "@/components/BatBRdc.vue";
   export default {
         data() {
             return {
@@ -67,51 +69,32 @@
                 },
             },
         components: {
+          BatBRdc,
             BatERdc,
             BatEetage1,
             BatEetage2
         },
     }
-  </script> 
+  </script>
 
-  <style>
-  svg {
-      border: dashed black 1px;
-  }
-  g {
-      fill:rgb(183, 232, 247);
-      stroke:rgb(0, 26, 255);
-      
-      /* stroke:rgb(0, 0, 0);
-      fill: rgb(248, 183, 43); */
-      
-      fill-opacity:1;
-      stroke-width:1px;
-      stroke-linecap:round;
-      stroke-linejoin:round;
-      stroke-opacity:1;
-      
-      transition: fill 1.2s, stroke 1s
-  }
-  g.changeColor:hover {
-      stroke:rgb(56, 0, 102);
-      fill: rgb(247, 156, 239);
-      
-      /* stroke:rgb(255, 193, 183);
-      fill: rgb(233, 8, 0); */
-  }
-  .grid{
-      display: flex;
-      gap: 50px;
-      width: 80vw;
-  }
-  .small-view {
-      float: left;
-    width: 20%; /* Ajustez la largeur comme nécessaire */
-    height: 20%; /* Ajustez la hauteur comme nécessaire */
-    left: 0; /* Ajustez la position par rapport à la gauche de la fenêtre */
-  }
-  
-  
-  </style>
-  
+<style scoped>
+g {
+  fill:rgb(183, 232, 247);
+  stroke:rgb(0, 26, 255);
+  fill-opacity:1;
+  stroke-width:1px;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  stroke-opacity:1;
+
+  transition: fill 1.2s, stroke 1s
+}
+
+g.changeColor:hover {
+  stroke:rgb(56, 0, 102);
+  fill: rgb(247, 156, 239);
+
+  /* stroke:rgb(255, 193, 183);
+  fill: rgb(233, 8, 0); */
+}
+</style>

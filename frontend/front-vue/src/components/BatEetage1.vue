@@ -8,7 +8,7 @@
 			<option value="activity">Présence</option>
 		</select>
 		<dataScale :min="valMin" :max="valMax" :real-min="realMin" :real-max="realMax" :unit="unit"></dataScale>
-		<svg width="200%" height="50vw" viewBox="0 90 867.29 615.11">
+		<svg width="100%" height="100%" viewBox="0 90 880 390">
 			<g v-for="(room, roomId) in roomData" :key="roomId" :id="roomId" :class="{ changeColor: true }"
 				:style="{ fill: room.color }" @click="showRoomDetail(roomId)">
 				<title>{{ roomId }}</title>
@@ -215,72 +215,57 @@ export default {
 	}
 };
 </script>
-	
-	
+
+
 <style scoped>
-svg {
-	border: dashed black 1px;
-}
-
-g {
-	fill: rgb(183, 232, 247);
-	stroke: rgb(0, 26, 255);
-	fill-opacity: 1;
-	stroke-width: 1px;
-	stroke-linecap: round;
-	stroke-linejoin: round;
-	stroke-opacity: 1;
-	transition: fill 1.2s, stroke 1s;
-}
-
 .grid {
-	display: flex;
-	flex-direction: column;
-	/* Aligner les éléments en colonne */
-	align-items: center;
-	gap: 50px;
-	width: 80vw;
+  align-items: center;
+  gap: 2vh;
 }
 
 /* Style de base pour le sélecteur */
 select {
-	padding: 10px;
-	font-size: 16px;
-	border: 1px solid #ccc;
-	border-radius: 5px;
-	background-color: #fff;
-	color: #333;
-	outline: none;
-	transition: border-color 0.3s;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #333;
+  outline: none;
+  transition: border-color 0.3s;
 }
-
-
-
 
 /* Flèche personnalisée */
 select::after {
-	content: '\25BC';
-	position: absolute;
-	top: 50%;
-	right: 10px;
-	transform: translateY(-50%);
-	pointer-events: none;
+  content: '\25BC';
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  pointer-events: none;
 }
 
-/* Style de la liste déroulante */
 select option {
-	padding: 10px;
+  padding: 10px;
 }
 
-/* Style pour les options survolées */
 select option:hover {
-	background-color: #66afe9;
-	color: #fff;
+  background-color: #66afe9;
+  color: #fff;
+}
+
+g {
+  stroke: black;
+  fill-opacity:1;
+  stroke-width:1px;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  stroke-opacity:1;
+
+  transition: fill 1.2s, stroke 1s
 }
 
 g.changeColor:hover {
-	stroke-width: 4px;
-	/* Augmenter la largeur du contour à 2 pixels */
+  filter: brightness(0.8);
 }
 </style>
-		

@@ -336,7 +336,7 @@ export default {
 {
   display: flex;
   flex-direction: column;
-
+  width: 67vw;
   justify-content: left;
 }
 

@@ -250,28 +250,26 @@ export default {
   
   
 <style scoped>
-svg {
-	border: dashed black 1px;
+g {
+  stroke: black;
+  fill-opacity:1;
+  stroke-width:0.2px;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  stroke-opacity:1;
+
+  transition: fill 1.2s, stroke 1s
 }
 
-g {
-	fill: rgb(183, 232, 247);
-	stroke: rgb(0, 26, 255);
-	fill-opacity: 1;
-	stroke-width: 0.2px;
-	stroke-linecap: round;
-	stroke-linejoin: round;
-	stroke-opacity: 1;
-	transition: fill 1.2s, stroke 1s;
+g.changeColor:hover {
+  filter: brightness(0.8);
 }
 
 .grid {
 	display: flex;
 	flex-direction: column;
-	/* Aligner les éléments en colonne */
 	align-items: center;
 	gap: 50px;
-	width: 80vw;
 }
 
 /* Style de base pour le sélecteur */
@@ -285,9 +283,6 @@ select {
 	outline: none;
 	transition: border-color 0.3s;
 }
-
-
-
 
 /* Flèche personnalisée */
 select::after {
@@ -308,11 +303,6 @@ select option {
 select option:hover {
 	background-color: #66afe9;
 	color: #fff;
-}
-
-g.changeColor:hover {
-	stroke-width: 0.8px;
-	/* Augmenter la largeur du contour à 2 pixels */
 }
 </style>
 	

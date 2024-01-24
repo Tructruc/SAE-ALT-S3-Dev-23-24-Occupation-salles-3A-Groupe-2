@@ -42,6 +42,8 @@ export default {
 <style scoped>
 #app {
   width: 100%;
-    padding-top: 80px; /* Adjust the padding to make space for the header */
+  padding-top: 80px; /* Adjust the padding to make space for the header */
+  max-width: 80vw;
+justify-content: center;
 }
 </style>
