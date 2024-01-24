@@ -1,6 +1,7 @@
 
 <template>
-    <div :class="{ 'small-view': showRdc || showEt1 || showEt2 }">Bat B
+    <div :class="{ 'small-view': showRdc || showEt1 || showEt2 , 'grid':true}">
+    <h2>BatB</h2>
       <!-- SVG avec les chemins spécifiques pour le bâtiment C -->
       <svg viewBox="0 0 2141.3333 1064">
         <g id="rdc" class="changeColor" @click="displayBatBRdc">
@@ -178,7 +179,11 @@ g.changeColor:hover {
     /* stroke:rgb(255, 193, 183);
     fill: rgb(233, 8, 0); */
 }
-
+.grid{
+    display: flex;
+    gap: 50px;
+    width: 80vw;
+}
 .small-view {
     float: left;
   width: 20%; /* Ajustez la largeur comme nécessaire */

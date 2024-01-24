@@ -192,8 +192,8 @@ export default {
 .grid {
   display: grid;
   gap: 10px;
-  width: 64vw;
-  grid-template-columns: 16vw 16vw 16vw 16vw;
+  width: 80vw;
+  grid-template-columns: 20vw 20vw 20vw 20vw;
   grid-template-rows: auto 50vh;
 
 }

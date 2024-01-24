@@ -165,6 +165,7 @@ export default {
       }
     }
 
+
     new Chart(ctx, options)
 
 

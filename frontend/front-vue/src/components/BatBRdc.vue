@@ -1,13 +1,15 @@
 <template>
-  <select :value="selectedOption" @change="updateSelectedOption">
-    <option value="temperature">Température</option>
-    <option value="humidity">Humidité</option>
-    <option value="co2">CO2</option>
-    <option value="activity">Présence</option>
-  </select>
-  <div>
+  <div class="grid">
+    <h2>RDC</h2>
+    <select :value="selectedOption" @change="updateSelectedOption">
+      <option value="temperature">Température</option>
+      <option value="humidity">Humidité</option>
+      <option value="co2">CO2</option>
+      <option value="activity">Présence</option>
+    </select>
+    <dataScale :min="valMin" :max="valMax" :real-min="realMin" :real-max="realMax" :unit="unit"></dataScale>
     <svg width="100%" height="100%" viewBox="50 250 990 320">
-      <g v-for="(room, roomId) in roomData" :key="roomId" :id="roomId" :class="{ changeColor: true } "
+      <g v-for="(room, roomId) in roomData" :key="roomId" :id="roomId" :class="{ changeColor: true }"
         :style="{ fill: room.color }" @click="showRoomDetail(roomId)">
         <title>{{ roomId }}</title>
         <path v-for="(path, index) in room.path" :key="index" :id="'path' + roomId + '_' + index" :d="path" />
@@ -21,14 +23,23 @@
 <script>
 import { ref, reactive, onMounted, watch } from 'vue';
 import RoomDetail from './roomDetail.vue';
+import dataScale from './dataScale.vue';
 
 
 export default {
   components: {
     RoomDetail,
+    dataScale
   },
 
   setup() {
+
+    const valMin = ref(0);
+    const valMax = ref(500);
+    const realMax = ref(500);
+    const realMin = ref(0);
+    const unit = ref("");
+
     const roomData = reactive({
       rgt: { color: "grey", state: true, path: ["m 608.19842,259.42256 21.57668,0.55555 -6.3626,88.06307 -19.02962,-0.27646 z"], data: {} },
       magasin: { color: "grey", state: true, path: ["m 907.97947,435.3071 9.75036,2.17174 c 4.81623,21.39286 18.55939,22.092 31.43436,24.80373 l 8.17867,20.57223 -28.03037,56.07916 -54.14,-14.42874 z"], data: {} },
@@ -47,7 +58,7 @@ export default {
       B010: { color: "grey", state: true, path: ["m 58.614622,362.70239 88.180798,-31.58652 38.83639,95.61686 -26.12719,6.44509 c -11.45798,-7.50656 -22.61479,-9.04978 -33.0913,-4.9618 -15.0115,5.85755 -17.69079,13.23839 -20.5334,20.16686 l -10.957198,-3.78735 z"], data: {} }
     });
 
-    const selectedOption = ref('temperature');
+    const selectedOption = ref('activity');
     const roomName = ref(null);
 
 
@@ -59,54 +70,55 @@ export default {
       roomName.value = roomId;
     };
 
-    const fetchDataForRoom = async (roomId) => {
-      try {
-        const response = await fetch(`http://localhost:8000/ByRoom/${roomId}/?last_data=1&depth=1`);
-        const data = await response.json();
-
-        roomData[roomId]['data'] = {
-          id: data.all_data[0].id,
-          time: data.all_data[0].time,
-          temperature: data.all_data[0].temperature,
-          humidity: data.all_data[0].humidity,
-          activity: data.all_data[0].activity,
-          co2: data.all_data[0].co2,
-          tvoc: data.all_data[0].tvoc,
-          illuminance: data.all_data[0].illuminance,
-          infrared: data.all_data[0].infrared,
-          infrared_and_visible: data.all_data[0].infrared_and_visible,
-          pressure: data.all_data[0].pressure,
-          state: true
-        };
-
-        // Vous pouvez également traiter les autres données de l'API si nécessaire
-        // data.sensor, data.building, data.floor, etc.
-      } catch (error) {
-        roomData[roomId]['state'] = false;
-      }
-    };
-
     const fetchAllRoomData = async () => {
-      // Pour chaque salle, appelez fetchDataForRoom
-      for (const roomId in roomData) {
-        if (roomData.hasOwnProperty(roomId)) {
-          await fetchDataForRoom(roomId);
+      try {
+        const response = await fetch('http://localhost:8000/ByRoom/?last_data=1&depth=1');
+        const roomsData = await response.json();
+
+        for (const roomKey in roomData) {
+          if (roomData.hasOwnProperty(roomKey)) {
+            const roomId = roomKey;
+            const roomInfo = roomsData.find(room => room.room === roomId);
+
+            if (roomInfo) {
+              roomData[roomId].data = {
+                id: roomInfo.all_data[0].id,
+                time: roomInfo.all_data[0].time,
+                temperature: roomInfo.all_data[0].temperature,
+                humidity: roomInfo.all_data[0].humidity,
+                activity: roomInfo.all_data[0].activity,
+                co2: roomInfo.all_data[0].co2,
+                tvoc: roomInfo.all_data[0].tvoc,
+                illuminance: roomInfo.all_data[0].illuminance,
+                infrared: roomInfo.all_data[0].infrared,
+                infrared_and_visible: roomInfo.all_data[0].infrared_and_visible,
+                pressure: roomInfo.all_data[0].pressure,
+                state: true
+              };
+            } else {
+              // Gérer le cas où les données de la salle ne sont pas disponibles
+              roomData[roomId].state = false;
+            }
+          }
         }
+
+        updateColors();
+        updateScale();
+      } catch (error) {
+        console.error('Erreur lors de la récupération des données des salles.', error);
       }
-      console.log(roomData);
-      updateColors();
     };
+
+
 
     const updateColors = () => {
       for (const roomId in roomData) {
         if (roomData.hasOwnProperty(roomId) && roomData[roomId].state) {
           const metricValue = parseFloat(roomData[roomId]['data'][selectedOption.value]);
-          console.log('Updating colors...');
+
           if (!isNaN(metricValue)) {
             roomData[roomId].color = getColorForMetric(metricValue, selectedOption.value);
-            console.log("VOUI");
           }
-          console.log("toto");
         }
       }
     };
@@ -126,15 +138,69 @@ export default {
       };
 
       if (option === "temperature") {
+        valMin.value = 14;
+        valMax.value = 30;
+        if (value > valMax.value) {
+          realMax.value = value + 5;
+        } else {
+          realMax.value = 30;
+        }
+        if (value < valMin.value) {
+          realMin.value = value - 5;
+        } else {
+          realMin.value = 14;
+        }
+        unit.value = "°C";
         return getColor(14, 30, value);
       }
       if (option == "humidity") {
+        valMin.value = 40;
+        valMax.value = 60;
+        if (value > valMax.value) {
+          realMax.value = value + 5;
+        } else {
+          realMax.value = 60;
+        }
+
+        if (value < valMin.value) {
+          realMin.value = value - 5;
+        } else {
+          realMin.value = 40;
+        }
+
+        unit.value = "%";
         return getColor(40, 60, value);
       };
       if (option == "co2") {
+        valMin.value = 0;
+        valMax.value = 1500;
+        if (value > valMax.value) {
+          realMax.value = value + 5;
+        } else {
+          realMax.value = 1500;
+        }
+        if (value < valMin.value) {
+          realMin.value = value - 5;
+        } else {
+          realMin.value = 0;
+        }
+        unit.value = "ppm";
         return getColor(0, 1500, value);
       };
       if (option == "activity") {
+        valMin.value = 0;
+        valMax.value = 500;
+        if (value > valMax.value) {
+          realMax.value = value + 5;
+        } else {
+          realMax.value = 500;
+        }
+        if (value < valMin.value) {
+          realMin.value = value - 5;
+        } else {
+          realMin.value = 0;
+        }
+        unit.value = "";
         return getColor(0, 500, value);
       };
     };
@@ -150,7 +216,7 @@ export default {
       fetchAllRoomData();
     });
 
-    return { roomData, selectedOption, updateColors, updateSelectedOption , roomName, showRoomDetail};
+    return { roomData, selectedOption, updateColors, updateSelectedOption, roomName, showRoomDetail, valMin, valMax, realMin, realMax, unit };
   }
 };
 </script>
@@ -172,10 +238,51 @@ g {
   transition: fill 1.2s, stroke 1s;
 }
 
-g.changeColor:hover {
-  stroke-width: 4px;
-  /* Augmenter la largeur du contour à 2 pixels */
+.grid {
+  display: flex;
+  flex-direction: column;
+  /* Aligner les éléments en colonne */
+  align-items: center;
+  gap: 50px;
+  width: 80vw;
 }
 
+/* Style de base pour le sélecteur */
+select {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #333;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+
+
+
+/* Flèche personnalisée */
+select::after {
+  content: '\25BC';
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+select option {
+  padding: 10px;
+}
+
+select option:hover {
+  background-color: #66afe9;
+  color: #fff;
+}
+
+g.changeColor:hover {
+  stroke-width: 4px;
+}
 </style>
   
