@@ -44,6 +44,7 @@ div {
   background-color: var(--color-background-mute);
   padding: 2rem;
   border-radius: 5px;
+  overflow: scroll;
 }
 
 h3 {
