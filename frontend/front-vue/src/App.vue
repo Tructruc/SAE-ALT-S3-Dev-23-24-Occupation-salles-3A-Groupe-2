@@ -39,8 +39,9 @@ export default {
 </script>
 
 
-<style >
+<style scoped>
 #app {
-    padding-top: 50px; /* Adjust the padding to make space for the header */
+  width: 100%;
+    padding-top: 80px; /* Adjust the padding to make space for the header */
 }
 </style>

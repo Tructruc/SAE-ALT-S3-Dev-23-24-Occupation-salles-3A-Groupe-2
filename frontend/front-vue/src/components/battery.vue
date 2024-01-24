@@ -78,7 +78,7 @@ export default {
 <style scoped>
 
 div {
-  width: auto;
+  width: 16vw;
   max-height: 32vh;
   padding: 1rem;
   background-color: var(--color-background-mute);
