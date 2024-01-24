@@ -8,14 +8,17 @@
 			<option value="activity">Présence</option>
 		</select>
 		<dataScale :min="valMin" :max="valMax" :real-min="realMin" :real-max="realMax" :unit="unit"></dataScale>
-		<svg width="100%" height="100%" viewBox="0 90 867.29 615.11">
+		<svg width="289.81mm" height="205.94mm" viewBox="0 90 867.29 615.11">
 			<g v-for="(room, roomId) in roomData" :key="roomId" :id="roomId" :class="{ changeColor: true }"
 				:style="{ fill: room.color }" @click="showRoomDetail(roomId)">
 				<title>{{ roomId }}</title>
 				<path v-for="(path, index) in room.path" :key="index" :id="'path' + roomId + '_' + index" :d="path" />
 			</g>
 		</svg>
+		<div class="det">
 		
+	</div>
+	
 	</div>
 	<RoomDetail v-if="roomName" :room="roomName" :key="roomName"></RoomDetail>
 	
@@ -286,4 +289,10 @@ g.changeColor:hover {
 	stroke-width: 4px;
 	/* Augmenter la largeur du contour à 2 pixels */
 }
+
+.det {
+	position: center;
+	
+}
+
 </style>
