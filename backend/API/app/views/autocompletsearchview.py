@@ -3,8 +3,17 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from app.models import Sensor
 from django.db.models import Q
+import re
 
 class AutoCompletSearchViewSet(APIView):
+    @staticmethod
+    def natural_sort_key(s):
+        """
+        Une fonction auxiliaire pour obtenir une clé de tri naturel.
+        """
+        return [int(text) if text.isdigit() else text.lower() for text in re.split('([0-9]+)', s)]
+
+
     def get(self, request, format=None):
         query = request.GET.get('q', '')
         suggestions_set = set()  # Utiliser un ensemble pour éviter les doublons
@@ -24,5 +33,8 @@ class AutoCompletSearchViewSet(APIView):
 
         # Convertir l'ensemble en liste pour la réponse
         suggestions = list(suggestions_set)
+        # Trier la liste de suggestions
+        suggestions = sorted(suggestions_set, key=AutoCompletSearchViewSet.natural_sort_key)
+
 
         return Response(suggestions)

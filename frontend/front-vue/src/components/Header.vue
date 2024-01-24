@@ -64,12 +64,13 @@
       },
       fetchSuggestions() {
         if (this.searchQuery) {
-          fetch(`${apiBaseUrl}/AutoCompletSearch?q=${this.searchQuery}`)
-            .then((response) => response.json())
-            .then((data) => (this.suggestions = data))
-            .catch((error) => console.error("Error:", error));
+            this.highlightedIndex = 0;
+            fetch(`${apiBaseUrl}/AutoCompletSearch?q=${this.searchQuery}`)
+                .then((response) => response.json())
+                .then((data) => (this.suggestions = data))
+                .catch((error) => console.error("Error:", error));
         } else {
-          this.suggestions = [];
+            this.suggestions = [];
         }
       },
       performSearch(searchTerm) {
