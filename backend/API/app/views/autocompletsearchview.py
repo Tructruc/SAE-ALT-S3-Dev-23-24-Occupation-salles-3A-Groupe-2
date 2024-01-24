@@ -25,6 +25,4 @@ class AutoCompletSearchViewSet(APIView):
         # Convertir l'ensemble en liste pour la réponse
         suggestions = list(suggestions_set)
 
-        shuffle(suggestions)
-
         return Response(suggestions)

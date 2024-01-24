@@ -21,16 +21,6 @@ class ByRoomSortTestCase(TestCase):
             externalpowersource=False
         )
 
-        # self.sensor_2 = Sensor.objects.create(
-        #     deveui="24e124128c019416", 
-        #     devicename="AM107-33", 
-        #     room="E102", 
-        #     building="E", 
-        #     floor=1, 
-        #     batterylevel=11.7, 
-        #     externalpowersource=True
-        # )
-
         timezone = pytz.timezone('Europe/Paris')
         self.local_time_1 = datetime.now(timezone).isoformat()
 
