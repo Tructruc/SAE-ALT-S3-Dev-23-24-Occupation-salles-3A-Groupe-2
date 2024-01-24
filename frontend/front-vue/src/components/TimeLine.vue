@@ -115,8 +115,9 @@ export default {
             time: {
               unit: 'hour',
               displayFormats: {
-                hour: 'HH:mm' // Format for hours
-              }
+                hour: 'dd/MM HH:mm' // Format for hours
+              },
+              tooltipFormat: 'dd/MM/yyyy HH:mm', // Format for tooltip
             },
             adapters: {
               date: {

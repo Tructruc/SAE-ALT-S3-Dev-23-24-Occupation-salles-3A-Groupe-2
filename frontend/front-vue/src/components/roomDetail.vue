@@ -148,7 +148,9 @@ export default {
 
 
       for (const [key, value] of Object.entries(json.all_data)) {
-        let time = new Date(value.time)
+        let utcTime = new Date(value.time);
+
+        let time = new Date(utcTime.getTime() - utcTime.getTimezoneOffset() * 60 * 1000);
         if (!this.timeLabel.includes(time)) {
           this.timeLabel.push(time)
         }
