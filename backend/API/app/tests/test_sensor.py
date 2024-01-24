@@ -9,7 +9,6 @@ logger = logging.getLogger("TEST")
 
 class SensorTestCase(TestCase):
     def setUp(self):
-        logger.info("\nStarting SensorTestCase")
         self.deveui_sensor_1 = (
             Sensor.objects.create(
                 deveui="24e124128c019417", 
@@ -22,9 +21,6 @@ class SensorTestCase(TestCase):
             )
         ).deveui
 
-        logger.debug(f"deveui_sensor_1 : {self.deveui_sensor_1}")
-        logger.debug(f'/Sensor/{self.deveui_sensor_1}/')
-        
         self.deveui_sensor_2 = (
             Sensor.objects.create(
                 deveui="24e124128c019416", 
@@ -37,8 +33,6 @@ class SensorTestCase(TestCase):
             )
         ).deveui
         
-        logger.debug(f"deveui_sensor_2 : {self.deveui_sensor_2}")
-        logger.debug(f'/Sensor/{self.deveui_sensor_2}/')
 
     def test_basic_creation_1(self):
         sensor_test = Sensor.objects.get(deveui=self.deveui_sensor_1)
@@ -64,8 +58,6 @@ class SensorTestCase(TestCase):
         # Get the response for the endpoint.
         response = self.client.get('/Sensor/')
     
-        logger.debug(f"Sensor_basic_reponse : {response.json()}")
-
         # Define the expected response.
         expected = [
             {
@@ -99,9 +91,6 @@ class SensorTestCase(TestCase):
     def test_endpoint_Sensor_by_deveui_1(self):
         # Get the response for the endpoint.
         response = self.client.get(f'/Sensor/{self.deveui_sensor_1}/')
-        logger.debug(f'/Sensor/{self.deveui_sensor_1}/')
-
-        logger.debug(f"Sensor_by_deveui_1_reponse : {response.json()}")
 
         # Define the expected response.
         excepted = {
@@ -124,8 +113,6 @@ class SensorTestCase(TestCase):
     def test_endpoint_Sensor_by_deveui_2(self):
         # Get the response for the endpoint.
         response = self.client.get(f'/Sensor/{self.deveui_sensor_2}/')
-
-        logger.debug(f"Sensor_by_deveui_2_reponse : {response.json()}")
 
         # Define the expected response.
         excepted = {

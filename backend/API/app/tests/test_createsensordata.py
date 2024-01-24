@@ -47,8 +47,6 @@ class CreateSensorDataTestCase(TestCase):
     
     @classmethod
     def setUpTestData(cls):
-        logger.info("\nSetting up data for CreateSensorDataTestCase")
-
         topic_1 = "application/1/device/+/event/status"
         topic_2 = "AM107/by-room/#"
 
@@ -125,15 +123,6 @@ class CreateSensorDataTestCase(TestCase):
     
     def test_basics_sensor_creation_1(self):
         sensor_test = Sensor.objects.get(deveui="24e124128c010640")
-        logger.info(f"sensor_test : {sensor_test}")
-        #lets show content of sensor_test
-        logger.info(f"sensor_test.deveui : {sensor_test.deveui}")
-        logger.info(f"sensor_test.devicename : {sensor_test.devicename}")
-        logger.info(f"sensor_test.room : {sensor_test.room}")
-        logger.info(f"sensor_test.building : {sensor_test.building}")
-        logger.info(f"sensor_test.floor : {sensor_test.floor}")
-        logger.info(f"sensor_test.batterylevel : {sensor_test.batterylevel}")
-        logger.info(f"sensor_test.externalpowersource : {sensor_test.externalpowersource}")
 
         self.assertEqual(sensor_test.deveui, "24e124128c010640")
         self.assertEqual(sensor_test.devicename, "AM107-41")

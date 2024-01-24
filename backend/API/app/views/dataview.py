@@ -21,12 +21,14 @@ class DataViewSet(DeepViewSet):
 
         date_from = params.get('from')
         date_to = params.get('to')
-
+        
         if date_from:
+            date_from = date_from.split(' ')[0]
             date_from = parse_datetime(date_from)
             queryset = queryset.filter(time__gte=date_from)
 
         if date_to:
+            date_to = date_to.split(' ')[0]
             date_to = parse_datetime(date_to)
             queryset = queryset.filter(time__lte=date_to)
 

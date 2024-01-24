@@ -135,14 +135,14 @@ def create_sensor_data(receive_dict, topic)     :
         ]
 
         logger.debug("boolean, all fields are here ?")
-        print(all(key in receive_dict[0] for key in required_fields))
+        logger.debug(all(key in receive_dict[0] for key in required_fields))
 
         if all(key in receive_dict[0] and is_in_range(receive_dict[0][key], ranges[key]) for key in ranges):
             logger.debug("boolean, all fields are in range ?")
-            print(all(is_in_range(receive_dict[0][key], ranges[key]) for key in ranges))
+            logger.debug(all(is_in_range(receive_dict[0][key], ranges[key]) for key in ranges))
 
             logger.debug("boolean, all are here and in range ?")
-            print(all(key in receive_dict[0] and is_in_range(receive_dict[0][key], ranges[key]) for key in ranges))
+            logger.debug(all(key in receive_dict[0] and is_in_range(receive_dict[0][key], ranges[key]) for key in ranges))
 
             pk_data = serializer_instance.deep_create({
                 'time': local_time,

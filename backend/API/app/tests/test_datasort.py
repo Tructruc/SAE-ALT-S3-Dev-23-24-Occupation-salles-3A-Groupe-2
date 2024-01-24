@@ -31,7 +31,7 @@ class DataSortTestCase(TestCase):
         for i in range(1, 10):
             current_local_time = datetime.now(timezone).isoformat()
 
-            current_data_id =  (
+            current_data =  (
                 Data.objects.create(
                     time=current_local_time,
                     temperature=23.5,
@@ -45,27 +45,20 @@ class DataSortTestCase(TestCase):
                     pressure=1013.25,
                     sensor=cls.sensor_test
                 )
-            ).id
+            )
 
-            if i == 3 or i == 8:
+            if i == 3 or i == 4:
+
                 cls.data_save_times.append(current_local_time)
-                cls.data_save_ids.append(current_data_id)
+                cls.data_save_ids.append(current_data.id)
 
-            logger.debug(f"Data save times: {cls.data_save_times}")
-            logger.debug(f"Data save IDs: {cls.data_save_ids}")
-
-
-    def test_endpoint_datasort_1(self):
-        logger.debug("COUCOU")
-        logger.debug(f"Data save times: {self.data_save_times}")
-        logger.debug(f"Data save IDs: {self.data_save_ids}")
-        response = self.client.get(f'/Data/?from={self.data_save_times[0]}&to={self.data_save_times[1]}')
-        # logger.debug(f"DataSort_1_reponse : {response.json()}")
+    def test_endpoint_datasort(self):
+        response = self.client.get('/Data/?from=' + self.data_save_times[0] + '&to=' + self.data_save_times[1])
 
         expected = [
             {
                 "id": self.data_save_ids[0],
-                "time": self.data_save_times[0],
+                "time": self.data_save_times[0].split('+')[0],
                 "temperature": 23.5,
                 "humidity": 45.3,
                 "activity": 0,
@@ -79,7 +72,7 @@ class DataSortTestCase(TestCase):
             },
             {
                 "id": self.data_save_ids[1],
-                "time": self.data_save_times[1],
+                "time": self.data_save_times[1].split('+')[0],
                 "temperature": 23.5,
                 "humidity": 45.3,
                 "activity": 0,
