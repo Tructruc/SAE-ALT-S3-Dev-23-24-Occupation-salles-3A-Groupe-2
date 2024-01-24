@@ -12,8 +12,6 @@ logger = logging.getLogger("TEST")
 
 class DataTestCase(TestCase):
     def setUp(self):
-        logger.info("\nStarting DataTestCase")
-
         timezone = pytz.timezone('Europe/Paris')
         self.local_time_data_1 = datetime.now(timezone).isoformat()
 
@@ -64,8 +62,6 @@ class DataTestCase(TestCase):
     def test_basic_creation_1(self):
         data_test = Data.objects.get(id=self.id_data_1)
 
-        logger.debug(f"data_test_time {data_test.time}")
-
         self.assertEqual(data_test.time.isoformat(), str(self.local_time_data_1).split('+')[0])
         self.assertEqual(data_test.temperature, 23.5)
         self.assertEqual(data_test.humidity, 45.3)
@@ -83,8 +79,6 @@ class DataTestCase(TestCase):
     def test_basic_creation_2(self):
         data_test = Data.objects.get(id=self.id_data_2)
 
-        logger.debug(f"data_test_time {data_test.time}")
-
         self.assertEqual(data_test.time.isoformat(), str(self.local_time_data_2).split('+')[0])
         self.assertEqual(data_test.temperature, 30.5)
         self.assertEqual(data_test.humidity, 60.3)
@@ -99,8 +93,6 @@ class DataTestCase(TestCase):
 
     def test_endpoint_Data_basic(self):
         response = self.client.get('/Data/')
-
-        logger.debug(f"Data_basic_reponse : {response.json()}")
 
         expected = [
             {
@@ -139,8 +131,6 @@ class DataTestCase(TestCase):
     def test_endpoint_Data_by_id_1(self):
         response = self.client.get(f'/Data/{self.id_data_1}/')
 
-        logger.debug(f"Data_by_id_1_reponse : {response.json()}")
-
         expected = {
             "id": self.id_data_1,
             "time": str(self.local_time_data_1).split('+')[0],
@@ -161,8 +151,6 @@ class DataTestCase(TestCase):
 
     def test_endpoint_Data_by_id_2(self):
         response = self.client.get(f'/Data/{self.id_data_2}/')
-
-        logger.debug(f"Data_by_id_2_reponse : {response.json()}")
 
         expected = {
             "id": self.id_data_2,

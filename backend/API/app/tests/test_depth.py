@@ -13,12 +13,9 @@ class DepthTestCase(TestCase):
 
     @classmethod
     def setUpTestData(cls):
-        logger.info("\nSetting up data for DepthTestCase")
 
         timezone = pytz.timezone('Europe/Paris')
         cls.local_time = datetime.now(timezone).isoformat()
-
-        logger.debug(f"Local time : {cls.local_time}")
 
         # Création d'un sensor unique pour chaque test
         cls.sensor = Sensor.objects.create(
@@ -47,11 +44,9 @@ class DepthTestCase(TestCase):
 
         cls.local_time = str(cls.local_time).split('+')[0]
 
-        logger.debug(f"Data created : {cls.data_id} at time {cls.local_time}")
 
     def test_endpoint_depth_0_sensor(self):
         response = self.client.get('/Sensor/?depth=0')
-        logger.debug(f"Depth_0_sensor_reponse : {response.json()}")
 
         expected = [
             {
@@ -71,8 +66,6 @@ class DepthTestCase(TestCase):
 
     def test_endpoint_depth_0_data(self):
         response = self.client.get('/Data/?depth=0')
-
-        logger.debug(f"Depth_0_data_reponse : {response.json()}")
 
         expected = [
             {
@@ -97,8 +90,6 @@ class DepthTestCase(TestCase):
     def test_endpoint_depth_0_byroom(self):
         reponse = self.client.get('/ByRoom/?depth=0')
 
-        logger.debug(f"Depth_0_byroom_reponse : {reponse.json()}")
-
         expected = [
             {
                 "room": "E103",
@@ -116,8 +107,6 @@ class DepthTestCase(TestCase):
 
     def test_endpoint_depth_1_sensor(self):
         response = self.client.get('/Sensor/?depth=1')
-
-        logger.debug(f"Depth_1_sensor_reponse : {response.json()}")
 
         expected = [
             {
@@ -152,8 +141,6 @@ class DepthTestCase(TestCase):
     def test_endpoint_depth_1_data(self): 
         response = self.client.get('/Data/?depth=1')
 
-        logger.debug(f"Depth_1_data_reponse : {response.json()}")
-
         expected = [
             {
                 "id": self.data_id,
@@ -185,8 +172,6 @@ class DepthTestCase(TestCase):
 
     def test_endpoint_depth_1_byroom(self):
         response = self.client.get('/ByRoom/?depth=1')
-
-        logger.debug(f"Depth_1_byroom_reponse : {response.json()}")
 
         expected = [
             {
