@@ -26,12 +26,23 @@
   --color-background: var(--vt-c-white);
   --color-background-soft: var(--vt-c-white-soft);
   --color-background-mute: var(--vt-c-white-mute);
+  --color-inverted-background: var(--vt-c-black);
+  --color-inverted-background-soft: var(--vt-c-black-soft);
+  --color-inverted-background-mute: var(--vt-c-black-mute);
+  --color-inverted-background-hard: var(--vt-c-divider-dark-1);
 
   --color-border: var(--vt-c-divider-light-2);
   --color-border-hover: var(--vt-c-divider-light-1);
+  --color-inverted-border: var(--vt-c-divider-dark-2);
+  --color-inverted-border-hover: var(--vt-c-divider-dark-1);
 
   --color-heading: var(--vt-c-text-light-1);
   --color-text: var(--vt-c-text-light-1);
+  --color-inverted-heading: var(--vt-c-text-dark-1);
+  --color-inverted-text: var(--vt-c-text-dark-1);
+
+  --color-background-hover: var(--vt-c-white-soft);
+  --color-text-hover: var(--vt-c-text-light-2);
 
   --section-gap: 160px;
 }
@@ -41,12 +52,23 @@
     --color-background: var(--vt-c-black);
     --color-background-soft: var(--vt-c-black-soft);
     --color-background-mute: var(--vt-c-black-mute);
+    --color-inverted-background: var(--vt-c-white);
+    --color-inverted-background-soft: var(--vt-c-white-soft);
+    --color-inverted-background-mute: var(--vt-c-white-mute);
+    --color-inverted-background-hard: var(--vt-c-text-light-2);
 
     --color-border: var(--vt-c-divider-dark-2);
     --color-border-hover: var(--vt-c-divider-dark-1);
+    --color-inverted-border: var(--vt-c-divider-light-2);
+    --color-inverted-border-hover: var(--vt-c-divider-light-1);
 
     --color-heading: var(--vt-c-text-dark-1);
-    --color-text: var(--vt-c-text-dark-2);
+    --color-text: var(--vt-c-text-dark-1);
+    --color-inverted-heading: var(--vt-c-text-light-1);
+    --color-inverted-text: var(--vt-c-text-dark-1);
+
+    --color-background-hover: var(--vt-c-black-soft);
+    --color-text-hover: var(--vt-c-text-dark-1);
   }
 }
 

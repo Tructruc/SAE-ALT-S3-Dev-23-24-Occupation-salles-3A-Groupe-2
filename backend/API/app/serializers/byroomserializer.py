@@ -1,5 +1,4 @@
 from django.db.models import Prefetch
-from app.usecases import data_date_sort
 from deepserializer import DeepSerializer
 from app.models import Sensor, Data
 from rest_framework import serializers

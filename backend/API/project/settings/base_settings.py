@@ -15,6 +15,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'corsheaders',
+    'timescale',
+    'django_extensions',
     'rest_framework',
     'app',
 ]
@@ -73,8 +75,6 @@ DATABASES = {
         'PORT': os.environ.get("DB_PORT"),
     }
 }
-
-TIMESCALE_DB_BACKEND_BASE = "django.contrib.gis.db.backends.postgis"
 
 DEFAULT_IP = os.environ.get("DJANGO_HOST")
 DEFAULT_PORT = os.environ.get("DJANGO_PORT")

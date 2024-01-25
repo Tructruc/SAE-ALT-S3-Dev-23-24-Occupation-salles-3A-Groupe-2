@@ -21,13 +21,19 @@ export default {
       type: Object,
       default: null
     },
+    visibleDatasets: { // array of booleans
+      type: Array,
+      default: [true, true, false, false, false, false, false, false, false]
+    }
   },
+  data: () => ({
+    chart: null
+  }),
   mounted () {
 
 
     const textColor = getComputedStyle(document.documentElement).getPropertyValue('--color-text');
     const borderColor =getComputedStyle(document.documentElement).getPropertyValue('--color-border');
-
 
     const ctx = document.getElementById('lineChart').getContext('2d')
     const options = {
@@ -40,14 +46,16 @@ export default {
           borderColor: 'rgb(31,119,180)',
           backgroundColor: 'rgb(31,119,180)',
           fill: false,
-          tension: 0.1
+          tension: 0.1,
+          hidden: !this.visibleDatasets[0]
         }, {
           label: 'Humidity',
           data: this.data.humidity,
           borderColor: 'rgb(255,127,14)',
           backgroundColor: 'rgb(255,127,14)',
           fill: false,
-          tension: 0.1
+          tension: 0.1,
+          hidden: !this.visibleDatasets[1]
         }, {
           label: 'CO2',
           data: this.data.co2,
@@ -55,7 +63,7 @@ export default {
           backgroundColor: 'rgb(44,160,44)',
           fill: false,
           tension: 0.1,
-          hidden: true
+          hidden: !this.visibleDatasets[2]
         }, {
           label: 'Activity',
           data: this.data.activity,
@@ -63,7 +71,7 @@ export default {
           backgroundColor: 'rgb(214,39,40)',
           fill: false,
           tension: 0.1,
-          hidden: true
+          hidden: !this.visibleDatasets[3]
         }, {
           label: 'TVOC',
           data: this.data.tvoc,
@@ -71,7 +79,7 @@ export default {
           borderColor: 'rgb(148,103,189)',
           fill: false,
           tension: 0.1,
-          hidden: true
+          hidden: !this.visibleDatasets[4]
         }, {
           label: 'Illuminance',
           data: this.data.illuminance,
@@ -79,7 +87,7 @@ export default {
           backgroundColor: 'rgb(140,86,75)',
           fill: false,
           tension: 0.1,
-          hidden: true
+          hidden: !this.visibleDatasets[5]
         }, {
           label: 'Infrared',
           data: this.data.infrared,
@@ -87,7 +95,7 @@ export default {
           backgroundColor: 'rgb(227,119,194)',
           fill: false,
           tension: 0.1,
-          hidden: true
+          hidden: !this.visibleDatasets[6]
         }, {
           label: 'Infrared and visible',
           data: this.data.infrared_and_visible,
@@ -95,7 +103,7 @@ export default {
           backgroundColor: 'rgb(188,189,34)',
           fill: false,
           tension: 0.1,
-          hidden: true
+          hidden: !this.visibleDatasets[7]
         }, {
           label: 'Pressure',
           data: this.data.pressure,
@@ -103,7 +111,7 @@ export default {
           backgroundColor: 'rgb(23,190,207)',
           fill: false,
           tension: 0.1,
-          hidden: true
+          hidden: !this.visibleDatasets[8]
         }]
       },
       options: {
@@ -115,8 +123,9 @@ export default {
             time: {
               unit: 'hour',
               displayFormats: {
-                hour: 'HH:mm' // Format for hours
-              }
+                hour: 'dd/MM HH:mm' // Format for hours
+              },
+              tooltipFormat: 'dd/MM/yyyy HH:mm', // Format for tooltip
             },
             adapters: {
               date: {
@@ -124,7 +133,7 @@ export default {
               }
             },
             title: {
-              display: true,
+              display: false,
               text: 'Date',
               color: textColor
             },
@@ -137,7 +146,7 @@ export default {
           },
           y: {
             title: {
-              display: true,
+              display: false,
               text: 'value',
               color: textColor
             },
@@ -164,10 +173,7 @@ export default {
       }
     }
 
-    //log the datasets
-    console.log(options.data.datasets[0])
-
-    new Chart(ctx, options)
+    this.chart = new Chart(ctx, options)
 
 
   }
@@ -178,12 +184,8 @@ export default {
 div{
   background-color: var(--color-background-mute);
   border-radius: 5px;
-  width: 100%;
-  height: 100%
+  width: 50vw;
+  height:100%;
 }
 
-canvas{
-  width: 100%;
-  height: 100%;
-}
 </style>

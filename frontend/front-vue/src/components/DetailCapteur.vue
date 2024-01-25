@@ -16,7 +16,7 @@ export default {
       default: ''
     },
     floor: {
-      type: String,
+      type: Number,
       default: ''
     },
     externalPower: {
@@ -44,6 +44,7 @@ div {
   background-color: var(--color-background-mute);
   padding: 2rem;
   border-radius: 5px;
+  overflow: scroll;
 }
 
 h3 {

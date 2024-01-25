@@ -1,6 +1,7 @@
 
 <template>
-    <div :class="{ 'small-view': showRdc || showEt1 || showEt2 }">Bat B
+    <div :class="{ 'small-view': showRdc || showEt1 || showEt2 , 'grid':true}">
+    <h2>BatB</h2>
       <!-- SVG avec les chemins spécifiques pour le bâtiment C -->
       <svg viewBox="0 0 2141.3333 1064">
         <g id="rdc" class="changeColor" @click="displayBatBRdc">
@@ -123,11 +124,9 @@
             showRdc: false,
             showEt1: false,
             showEt2: false,
-            };
-            
+            }
         },
         methods: {
-            
             displayBatBRdc() {
                 this.showRdc = true;
                 this.showEt1 = false;
@@ -152,40 +151,24 @@
     }
   </script>
 
-<style>
-svg {
-    border: dashed black 1px;
-}
+<style scoped>
 g {
-    fill:rgb(183, 232, 247);
-    stroke:rgb(0, 26, 255);
-    
-    /* stroke:rgb(0, 0, 0);
-    fill: rgb(248, 183, 43); */
-    
-    fill-opacity:1;
-    stroke-width:1px;
-    stroke-linecap:round;
-    stroke-linejoin:round;
-    stroke-opacity:1;
-    
-    transition: fill 1.2s, stroke 1s
+  fill:rgb(183, 232, 247);
+  stroke:rgb(0, 26, 255);
+  fill-opacity:1;
+  stroke-width:1px;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  stroke-opacity:1;
+
+  transition: fill 1.2s, stroke 1s
 }
+
 g.changeColor:hover {
-    stroke:rgb(56, 0, 102);
-    fill: rgb(247, 156, 239);
-    
-    /* stroke:rgb(255, 193, 183);
-    fill: rgb(233, 8, 0); */
+  stroke:rgb(56, 0, 102);
+  fill: rgb(247, 156, 239);
+
+  /* stroke:rgb(255, 193, 183);
+  fill: rgb(233, 8, 0); */
 }
-
-.small-view {
-    float: left;
-  width: 20%; /* Ajustez la largeur comme nécessaire */
-  height: 20%; /* Ajustez la hauteur comme nécessaire */
-  left: 0; /* Ajustez la position par rapport à la gauche de la fenêtre */
-}
-
-
 </style>
-  

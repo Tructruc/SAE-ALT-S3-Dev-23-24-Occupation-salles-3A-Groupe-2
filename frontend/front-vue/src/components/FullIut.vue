@@ -1,5 +1,7 @@
 <template>
-    <div :class="{ 'small-view': showBatB || showBatE }"> Full IUT
+  <div class="map-container">
+    <div :class="{ 'small-view': showBatB || showBatE || showBatA, 'grid':true}"> 
+    <h2 >IUT</h2>
       <svg width="100%" height="100%" viewBox="0 0 1417.3333 524" >
             <g id="MI" class="changeColor">
                 <title>Maison intelligente</title>
@@ -50,7 +52,7 @@
                 <path id="path28858" d="m 368.29515,141.01713 c 0.23328,-11.63405 18.44577,-15.70788 35.56189,-15.57162 13.66431,0.83301 29.26605,2.11887 34.39747,14.02635 0.65552,2.57467 -7.17258,15.11092 -34.78654,15.49775 -18.41025,-1.73761 -33.03532,-5.12451 -35.17282,-13.95248"/>
                 <path id="path45131" d="m 440.39418,192.84141 97.04792,44.98247 -10.30951,5.67689 -35.24783,0.80507 2.00103,-4.90798 -11.59948,0.53742 -64.57876,-31.96046 22.68663,-15.13341"/>
             </g>
-            <g id="bat_Aadm" class="changeColor">
+            <g id="bat_Aadm" class="changeColor" @click="displayBatA">
                 <title>Batiment A (administration)</title>
                 <path id="path37905" d="m 550.55088,259.06347 48.79591,-17.2121 19.01889,14.63956 0.0736,51.95062 -67.88839,-49.37808"/>
                 <path id="path37973" d="m 599.34679,241.85137 -107.46203,2.45447 2.00103,-4.90798 c -98.5921,4.29655 -197.84637,8.71554 -313.44379,16.15634 l 213.22462,8.74617 156.88426,-5.2369 48.79591,-17.2121"/>
@@ -70,83 +72,106 @@
             </g>
         </svg>
     </div>
-      <BatB v-if="showBatB" />
-      <BatE v-else-if="showBatE" />
-
+    <BatB v-if="showBatB" />
+    <BatE v-else-if="showBatE" />
+    <BatABibAmphis v-else-if="showBatA" />
+  </div>
   </template>
   
   <script>
   import BatB from './BatB.vue'; // Adjust the path according to your project structure
-  import BatE from './BatE.vue'; // Adjust the path according to your project structure
+  import BatE from './BatE.vue';
+  import BatABibAmphis from './BatABibAmphis.vue'; 
 
     export default {
         data() {
             return {
             showBatB: false,
             showBatE: false,
+            showBatA: false,
             };
             
         },
         methods: {
             
             displayBatB() {
-                console.log('baba', this.showBatB);
                 this.showBatB = true;
                 this.showBatE = false;
-                console.log('blblblblb', this.showBatB);
+                this.showBatA = false;
                 },
 
             displayBatE() {
                 this.showBatE = true;
                 this.showBatB = false;
+                this.showBatA = false;
+                },
+            displayBatA() {
+                this.showBatA = true;
+                this.showBatB = false;
+                this.showBatE = false;
                 },
             },
 
         components: {
-            BatB,
-            BatE
-        },
+          BatB,
+          BatE,
+          BatABibAmphis
+      },
     }
   </script>
 
 
+<style scoped>
+g {
+  fill:rgb(183, 232, 247);
+  stroke:rgb(0, 26, 255);
+  fill-opacity:1;
+  stroke-width:1px;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  stroke-opacity:1;
+
+  transition: fill 1.2s, stroke 1s
+}
+
+g.changeColor:hover {
+  stroke:rgb(56, 0, 102);
+  fill: rgb(247, 156, 239);
+
+  /* stroke:rgb(255, 193, 183);
+  fill: rgb(233, 8, 0); */
+}
+</style>
+
 <style>
 svg {
-    border: dashed black 1px;
-}
-
-g {
-    fill:rgb(183, 232, 247);
-    stroke:rgb(0, 26, 255);
-    
-    /* stroke:rgb(0, 0, 0);
-    fill: rgb(248, 183, 43); */
-    
-    fill-opacity:1;
-    stroke-width:1px;
-    stroke-linecap:round;
-    stroke-linejoin:round;
-    stroke-opacity:1;
-    
-    transition: fill 1.2s, stroke 1s
-}
-g.changeColor:hover {
-    stroke:rgb(56, 0, 102);
-    fill: rgb(247, 156, 239);
-    
-    /* stroke:rgb(255, 193, 183);
-    fill: rgb(233, 8, 0); */
+  border: dashed black 1px;
+  margin-top: 0;
 }
 
 
+
+.grid{
+  display: flex;
+  width: 67vw;
+  justify-content: center;
+  flex-direction: column;
+}
 .small-view {
-    float: left;
-  width: 20%; /* Ajustez la largeur comme nécessaire */
-  height: 20%; /* Ajustez la hauteur comme nécessaire */
-  left: 0; /* Ajustez la position par rapport à la gauche de la fenêtre */
+  width: 20vw;
+}
+</style>
+
+
+<style scoped>
+.map-container{
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 67vw;
 }
 
-
-/* Adjust the size of the div containing the SVG to adapt to the screen width */
+ h2 {
+    margin-bottom: 0;
+}
 
 </style>
