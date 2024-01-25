@@ -79,9 +79,9 @@
   </template>
   
   <script>
-  import BatB from './BatB.vue'; // Adjust the path according to your project structure
-  import BatE from './BatE.vue';
-  import BatABibAmphis from './BatABibAmphis.vue'; 
+  import BatB from './B/BatB.vue'; // Adjust the path according to your project structure
+  import BatE from './E/BatE.vue';
+  import BatABibAmphis from './A/BatABibAmphis.vue'; 
 
     export default {
         data() {

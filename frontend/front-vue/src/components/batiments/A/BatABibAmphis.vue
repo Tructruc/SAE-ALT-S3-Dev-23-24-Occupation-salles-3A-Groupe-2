@@ -25,8 +25,8 @@
 	
 <script>
 import { ref, reactive, onMounted, watch } from 'vue';
-import dataScale from './dataScale.vue';
-import RoomDetail from './roomDetail.vue';
+import dataScale from '../utils/dataScale.vue';
+import RoomDetail from '@/components/roomDetail/roomDetail.vue';
 
 
 export default {

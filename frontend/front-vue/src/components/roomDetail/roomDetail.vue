@@ -1,6 +1,7 @@
 <template>
   <div ref="view" class="view">
     <h1 v-if="loaded">{{room}}</h1>
+    <h2 v-if="loaded && lastDataReceived">Dernière donnée reçue : {{ lastDataReceived }}</h2>
     <h2 v-if="error_message">{{error_message}}</h2>
     <div class="dataContainer">
       <div class="topContainer">
@@ -60,10 +61,10 @@ import {
   Tooltip,
   Legend
 } from 'chart.js'
-import Gauge from "@/components/gauge.vue";
-import Battery from "@/components/battery.vue";
-import TimeLine from "@/components/TimeLine.vue";
-import DetailCapteur from "@/components/DetailCapteur.vue";
+import Gauge from "@/components/roomDetail/gauge.vue";
+import Battery from "@/components/roomDetail/battery.vue";
+import TimeLine from "@/components/roomDetail/TimeLine.vue";
+import DetailCapteur from "@/components/roomDetail/DetailCapteur.vue";
 
 ChartJS.register(
     CategoryScale,
@@ -93,6 +94,7 @@ export default {
   },
 
   data: () => ({
+    lastDataReceived: "",
     battery: 0,
     temp: 0,
     hum: 0,
@@ -180,11 +182,6 @@ export default {
       this.loadedTimeLine = false
       this.visibleDatasets = this.getHiddenDatasetsFromTimeline();
       try {
-
-
-
-
-
         const sensor = await fetch('http://localhost:8000/ByRoom/'+this.room+'/?depth=1&from='+from+'&to='+to);
         const json = await sensor.json();
 
@@ -213,8 +210,7 @@ export default {
             behavior: "smooth"
           });
         }
-
-
+        
 
         for (const [key, value] of Object.entries(json.all_data)) {
           let utcTime = new Date(value.time);
@@ -251,11 +247,21 @@ export default {
         // Calculate the date with the offset from now in minutes using thit format %Y-%m-%dT%H:%M:%S.%f %z
         let date = new Date(Date.now() - minutes * 60 * 1000).toISOString().slice(0, -5);
 
-
-
-
         const sensor = await fetch('http://localhost:8000/ByRoom/'+this.room+'/?depth=1&from='+date);
         const json = await sensor.json();
+
+        if (json.all_data && json.all_data.length > 0) {
+          const lastData = json.all_data[json.all_data.length - 1];
+          const date = new Date(lastData.time); 
+          const options = {
+              year: 'numeric', 
+              month: 'numeric', 
+              day: 'numeric', 
+              hour: '2-digit', 
+              minute: '2-digit' 
+          };  
+          this.lastDataReceived = date.toLocaleString(undefined, options);
+        }
 
         if (json.all_data === undefined){
           this.error_message = "La salle « " + this.room + " » ne comporte pas de capteur"
@@ -364,6 +370,11 @@ export default {
   justify-content: center;
   column-gap: 1vw;
   width: 67vw;
+  overflow: hidden;
+}
+
+.bottomContainer::-webkit-scrollbar {
+  display: none;
 }
 
 .graphique {
@@ -376,8 +387,13 @@ export default {
   height: 40vh;
 }
 
+#sensorinfo::-webkit-scrollbar {
+  display: none;
+}
+
 #sensorinfo{
   height: 40vh;
+  overflow: hidden;
 }
 
 h1 {

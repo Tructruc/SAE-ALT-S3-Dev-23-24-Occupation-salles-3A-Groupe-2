@@ -16,7 +16,7 @@
 </template>
   
 <script>
-import RoomDetail from "@/components/roomDetail.vue";
+import RoomDetail from "@/components/roomDetail/roomDetail.vue";
 
   export default {
     name: 'ApiDataDisplay',
