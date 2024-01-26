@@ -6,8 +6,11 @@
       </div>
 
       <div class="title">
+        <div class="logo-container">
+          <img src="@/assets/logo.webp" alt="Logo" class="header-logo">
+        </div>
         <h1>
-            Dashboard de surveillance des salles
+          Dashboard de surveillance des salles
         </h1>
       </div>
   
@@ -222,9 +225,10 @@
     }
 
     .title {
-        display: flex;
-        justify-content: center;
-        flex: 1; /* Ajouté pour permettre au titre de prendre l'espace disponible */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
       color: var(--color-inverted-text);
     }
 
@@ -269,4 +273,14 @@
         border-bottom: none;
     }
 
+    .header-logo {
+        height: 60px; /* Ajustez la hauteur selon vos besoins */
+        margin-right: 20px; /* Espace entre le logo et le titre */
+        border-radius: 10px;
+    }
+
+    .logo-container {
+        display: flex;
+        align-items: center;
+    }
 </style>
