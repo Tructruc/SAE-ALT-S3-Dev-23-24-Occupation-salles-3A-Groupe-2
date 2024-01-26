@@ -65,7 +65,7 @@
     --color-heading: var(--vt-c-text-dark-1);
     --color-text: var(--vt-c-text-dark-1);
     --color-inverted-heading: var(--vt-c-text-light-1);
-    --color-inverted-text: var(--vt-c-text-dark-1);
+    --color-inverted-text: var(--vt-c-text-light-1);
 
     --color-background-hover: var(--vt-c-black-soft);
     --color-text-hover: var(--vt-c-text-dark-1);
