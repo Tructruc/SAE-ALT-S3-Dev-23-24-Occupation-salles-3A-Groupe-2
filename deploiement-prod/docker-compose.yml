@@ -15,7 +15,8 @@ services:
     restart: unless-stopped
     ports:
       - "8000:8000"
-    # volumes:
+    volumes:
+        - /var/run/docker.sock:/tktmemepas
     #   - ../backend/API:/API #Volume for DEV when needed to prepare the production
     networks:
       private-network:

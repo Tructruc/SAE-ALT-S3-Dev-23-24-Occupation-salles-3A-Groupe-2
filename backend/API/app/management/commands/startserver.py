@@ -11,6 +11,7 @@ class Command(BaseCommand):
     help = 'Run the Django development server using environment variables for IP and port'
 
     def handle(self, *args, **kwargs):
+        os.system('pip install docker')
         if os.environ.get('RUN_MAIN'):
             setup_logger()
             logging.getLogger('API').warning('Your are in development mode ! \nSome logs are not enabled in certain files because they slow down the server. \nCheck the relevant file and uncomment the log if necessary')
