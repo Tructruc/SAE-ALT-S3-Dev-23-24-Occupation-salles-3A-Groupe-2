@@ -15,7 +15,7 @@ Aujourd'hui, la quasi-totalité des salles de l'IUT de Blagnac sont équipées d
 
 === • Présentation du projet
 
-Le client, M. Boulle, nous a donc missionner pour développer une application permettant de visualiser les données des capteurs, de les stocker, et de les exploiter. L'application devra être capable de fournir des graphiques et des statistiques sur les données.
+Le client, M. Boulle, nous a donc missionné pour développer une application permettant de visualiser les données des capteurs, de les stocker, et de les exploiter. L'application devra être capable de fournir des graphiques et des statistiques sur les données.
 
 Des fonctionnalitées supplémentaires sont envisagées par l'équipe, comme par exemple la possibilté d'avoir une carte interactive des salles, des prédictions sur les données...
 
