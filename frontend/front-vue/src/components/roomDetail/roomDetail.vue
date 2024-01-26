@@ -204,11 +204,6 @@ export default {
           const view = this.$refs.view;
           const viewPosition = view.offsetTop;
           const offset = viewPosition + 80;
-
-          window.scrollBy({
-            top: 1000,
-            behavior: "smooth"
-          });
         }
         
 
@@ -250,17 +245,21 @@ export default {
         const sensor = await fetch('http://localhost:8000/ByRoom/'+this.room+'/?depth=1&from='+date);
         const json = await sensor.json();
 
-        if (json.all_data && json.all_data.length > 0) {
-          const lastData = json.all_data[json.all_data.length - 1];
-          const date = new Date(lastData.time); 
-          const options = {
-              year: 'numeric', 
-              month: 'numeric', 
-              day: 'numeric', 
-              hour: '2-digit', 
-              minute: '2-digit' 
-          };  
-          this.lastDataReceived = date.toLocaleString(undefined, options);
+
+        const jsonLastDate = await fetch('http://localhost:8000/ByRoom/'+this.room+'/?depth=1&last_data=1');
+        const jsonLastDateJson = await jsonLastDate.json();
+        if (jsonLastDateJson.all_data && jsonLastDateJson.all_data.length > 0) {
+          this.temp = jsonLastDateJson.all_data[jsonLastDateJson.all_data.length - 1].temperature;
+          this.hum = jsonLastDateJson.all_data[jsonLastDateJson.all_data.length - 1].humidity;
+          this.co2 = jsonLastDateJson.all_data[jsonLastDateJson.all_data.length - 1].co2;
+          const lastData = jsonLastDateJson.all_data[jsonLastDateJson.all_data.length - 1];
+          this.lastDataReceived = new Date(lastData.time).toLocaleString(undefined, {
+            year: 'numeric',
+            month: 'numeric',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+          });
         }
 
         if (json.all_data === undefined){
@@ -310,11 +309,7 @@ export default {
           this.timedDate.pressure.push(value.pressure)
         }
 
-        this.battery = json.sensor.batterylevel
-
-        this.temp = json.all_data[json.all_data.length - 1].temperature
-        this.hum = json.all_data[json.all_data.length - 1].humidity
-        this.co2 = json.all_data[json.all_data.length - 1].co2
+        this.battery = json.sensor.batterylevel;
 
         this.sensorName = json.sensor.devicename;
         this.sensorDeveui = json.sensor.deveui;
