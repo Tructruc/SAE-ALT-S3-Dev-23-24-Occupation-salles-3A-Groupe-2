@@ -38,10 +38,10 @@
   </template>
   
   <script>
-  import BatERdc from './BatERdc.vue';
-  import BatEetage1 from './BatEetage1.vue';
-  import BatEetage2 from './BatEetage2.vue';
-  import BatBRdc from "@/components/BatBRdc.vue";
+  import BatERdc from './etages/BatERdc.vue';
+  import BatEetage1 from './etages/BatEetage1.vue';
+  import BatEetage2 from './etages/BatEetage2.vue';
+  import BatBRdc from "@/components/batiments/B/etages/BatBRdc.vue";
   export default {
         data() {
             return {

@@ -1,13 +1,14 @@
 <template>
 	<div class="grid">
-		<h2>Etage 1</h2>
-		<select :value="selectedOption" @change="updateSelectedOption">
-			<option value="temperature">Température</option>
-			<option value="humidity">Humidité</option>
-			<option value="co2">CO2</option>
-			<option value="activity">Présence</option>
-		</select>
-		<dataScale :min="valMin" :max="valMax" :real-min="realMin" :real-max="realMax" :unit="unit"></dataScale>
+		<Selector 
+  		  :current-floor="1"
+  		  :min="valMin"
+  		  :max="valMax"
+  		  :real-min="realMin"
+  		  :real-max="realMax"
+  		  :unit="unit"
+        @updateSelectedOption="updateSelectedOption"
+  		></Selector>
 		<svg width="100%" height="100%" viewBox="0 90 880 390">
 			<g v-for="(room, roomId) in roomData" :key="roomId" :id="roomId" :class="{ changeColor: true }"
 				:style="{ fill: room.color }" @click="showRoomDetail(roomId)">
@@ -22,14 +23,14 @@
 		
 <script>
 import { ref, reactive, onMounted, watch } from 'vue';
-import dataScale from './dataScale.vue';
-import RoomDetail from './roomDetail.vue';
+import Selector from '../../utils/selector.vue';
+import RoomDetail from '@/components/roomDetail/roomDetail.vue';
 
 
 export default {
 	components: {
 		RoomDetail,
-		dataScale
+		Selector
 	},
 
 	setup() {
@@ -54,12 +55,14 @@ export default {
 
     });
 
-		const selectedOption = ref('activity');
+		let selectedOption = 'activity';
 		const roomName = ref(null);
 
 
-		const updateSelectedOption = (event) => {
-			selectedOption.value = event.target.value;
+		const updateSelectedOption = (selected) => {
+      console.log(selected)
+      selectedOption = selected;
+      updateColors();
 		};
 
 		const showRoomDetail = (roomId) => {
@@ -100,7 +103,6 @@ export default {
 				}
 
 				updateColors();
-				updateScale();
 			} catch (error) {
 				console.error('Erreur lors de la récupération des données des salles.', error);
 			}
@@ -109,10 +111,10 @@ export default {
 		const updateColors = () => {
 			for (const roomId in roomData) {
 				if (roomData.hasOwnProperty(roomId) && roomData[roomId].state) {
-					const metricValue = parseFloat(roomData[roomId]['data'][selectedOption.value]);
+					const metricValue = parseFloat(roomData[roomId]['data'][selectedOption]);
 
 					if (!isNaN(metricValue)) {
-						roomData[roomId].color = getColorForMetric(metricValue, selectedOption.value);
+						roomData[roomId].color = getColorForMetric(metricValue, selectedOption);
 
 					}
 
@@ -220,10 +222,14 @@ export default {
 
 
 <style scoped>
-.grid {
-  align-items: center;
-  gap: 2vh;
-}
+.grid{
+	align-items: center;
+    background-color: var(--color-background-hover);
+    margin: 2vh 2vw;
+    padding: 2vh 2vw;
+    border-radius: 20px;
+	gap: 2vh;
+  }
 
 /* Style de base pour le sélecteur */
 select {

@@ -115,9 +115,9 @@
   </template>
   
   <script>
-  import BatBRdc from './BatBRdc.vue';
-  import BatBetage1 from './BatBetage1.vue';
-  import BatBetage2 from './BatBetage2.vue';
+  import BatBRdc from './etages/BatBRdc.vue';
+  import BatBetage1 from './etages/BatBetage1.vue';
+  import BatBetage2 from './etages/BatBetage2.vue';
   export default {
         data() {
             return {
