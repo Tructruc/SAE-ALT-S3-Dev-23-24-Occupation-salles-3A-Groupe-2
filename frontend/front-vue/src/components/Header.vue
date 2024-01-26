@@ -180,7 +180,7 @@
 
     .search-button {
         background-color: var(--color-inverted-background-hard);
-        color: var(--color-inverted-text);
+        color: var(--vt-c-text-dark-1);
         border: none;
         cursor: pointer;
         border-radius: 0 5px 5px 0;
@@ -195,7 +195,7 @@
     .search-button svg {
         margin: 5px;
         height: 35px;
-        fill: var(--color-inverted-text);
+        fill: var(--vt-c-text-dark-1);
         border: none;
     }
 
@@ -206,7 +206,7 @@
 
     .headerButtonContainer button {
         background-color: var(--color-inverted-background-hard);
-        color: var(--color-inverted-text);
+        color: var(--vt-c-text-dark-1);
         border: none;
         padding: 10px 15px;
         cursor: pointer;
@@ -225,6 +225,7 @@
         display: flex;
         justify-content: center;
         flex: 1; /* Ajouté pour permettre au titre de prendre l'espace disponible */
+      color: var(--color-inverted-text);
     }
 
     .headerButtonContainer {

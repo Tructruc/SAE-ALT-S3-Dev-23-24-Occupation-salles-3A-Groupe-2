@@ -52,8 +52,8 @@
       },
       methods: {
         updateSelectedOption(event) {
+          this.$emit('updateSelectedOption', event.target.value);
           this.selectedOption = event.target.value;
-          // Mettre à jour les valeurs en fonction de l'option sélectionnée
         }
       }
     };
@@ -63,7 +63,6 @@
     .grid-scoped {
       align-items: center;
       gap: 2vh;
-      width: auto;
       margin: 0 2vw;
       padding: 0;
       display: flex;
