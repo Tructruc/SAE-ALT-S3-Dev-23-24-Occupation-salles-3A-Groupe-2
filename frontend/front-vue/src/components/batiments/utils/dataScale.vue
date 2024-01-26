@@ -1,16 +1,16 @@
 <template>
-  <div class="scale-wrapper">
-    <div class="scale-container">
-      <div class="solid-color left-color" :style="{ width: leftWidth + '%' }"></div>
-      <div class="scale-bar" :style="{ width: gradientWidth + '%' }"></div>
-      <div class="solid-color right-color" :style="{ width: rightWidth + '%' }"></div>
+    <div class="scale-wrapper">
+      <div class="scale-container">
+        <div class="solid-color left-color" :style="{ width: leftWidth + '%' }"></div>
+        <div class="scale-bar" :style="{ width: gradientWidth + '%' }"></div>
+        <div class="solid-color right-color" :style="{ width: rightWidth + '%' }"></div>
+      </div>
+      <ul class="scale-values">
+        <li v-for="value in scaleValues" :key="value" class="value">
+          {{ value + unit }}
+        </li>
+      </ul>
     </div>
-    <ul class="scale-values">
-      <li v-for="value in scaleValues" :key="value" class="value">
-        {{ value + unit }}
-      </li>
-    </ul>
-  </div>
 </template>
 
 <script>

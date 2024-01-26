@@ -1,5 +1,12 @@
 <template>
 	<div class="grid">
+		<!-- <Selector 
+			:min="valMin" 
+			:max="valMax" 
+			:real-min="realMin" 
+			:real-max="realMax" 
+			:unit="unit" 
+			@change="updateSelectedOption" -->
 		<h2>Etage 2</h2>
 		<select :value="selectedOption" @change="updateSelectedOption">
 			<option value="temperature">Température</option>

@@ -1,7 +1,7 @@
 <template>
   <div class="map-container">
     <div :class="{ 'small-view': showBatB || showBatE || showBatA, 'grid':true}"> 
-    <h2 >IUT</h2>
+    <h2> Plan de l'IUT de Blagnac </h2> 
       <svg width="100%" height="100%" viewBox="0 0 1417.3333 524" >
             <g id="MI" class="changeColor">
                 <title>Maison intelligente</title>
@@ -145,7 +145,7 @@ g.changeColor:hover {
 
 <style>
 svg {
-  border: dashed black 1px;
+  /* border: dashed black 1px; */
   margin-top: 0;
 }
 
@@ -158,7 +158,11 @@ svg {
   flex-direction: column;
 }
 .small-view {
-  width: 20vw;
+  width: 25vw;
+  margin: 2vh 2vw;
+  padding: 2vh 2vw;
+  border-radius: 20px;
+  background-color: var(--color-background-hover)
 }
 </style>
 
@@ -168,10 +172,10 @@ svg {
   display: flex;
   flex-wrap: wrap;
   max-width: 67vw;
+  justify-content: center;
 }
 
  h2 {
     margin-bottom: 0;
-}
-
+ }
 </style>

@@ -4,6 +4,12 @@
         <button @click="changeView('FullIut')">Accueil</button>
         <button @click="changeView('ListeSalles')">Salles</button>
       </div>
+
+      <div class="title">
+        <h1>
+            Dashboard de surveillance des salles
+        </h1>
+      </div>
   
       <div class="search-container">
         <input
@@ -213,6 +219,12 @@
     .header button:hover {
         background-color: var(--color-background-hover);
         color: var(--color-text-hover);
+    }
+
+    .title {
+        display: flex;
+        justify-content: center;
+        flex: 1; /* Ajouté pour permettre au titre de prendre l'espace disponible */
     }
 
     .headerButtonContainer {
