@@ -327,6 +327,17 @@ export default {
   },
   async mounted () {
     await this.loadData(60*24)
+    // scroll to the top of this component
+    const view = this.$refs.view;
+    const viewPosition = view.offsetTop;
+    const offset = viewPosition + 100;
+
+
+    window.scrollTo({
+      left: 0,
+      top: viewPosition - 100 ,
+      behavior: "smooth"
+    });
   },
 };
 </script>
