@@ -1,6 +1,6 @@
 <template>
     <div class="grid-scoped">
-      <h2>Etage {{ currentFloor === 0 ? 'RDC' : currentFloor }}</h2>
+      <h2>{{ currentFloor }}</h2>
       <select :value="selectedOption" @change="updateSelectedOption">
         <option value="temperature">Température</option>
         <option value="humidity">Humidité</option>
@@ -21,7 +21,7 @@
       name: 'Selector',
       props: {
         currentFloor: {
-          type: Number,
+          type: String,
           required: true
         },
         min: {

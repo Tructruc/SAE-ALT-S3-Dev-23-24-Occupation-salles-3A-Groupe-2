@@ -1,13 +1,14 @@
 <template>
 	<div class="grid">
-		<h2>RDC</h2>
-		<select :value="selectedOption" @change="updateSelectedOption">
-			<option value="temperature">Température</option>
-			<option value="humidity">Humidité</option>
-			<option value="co2">CO2</option>
-			<option value="activity">Présence</option>
-		</select>
-		<dataScale :min="valMin" :max="valMax" :real-min="realMin" :real-max="realMax" :unit="unit"></dataScale>
+    <Selector
+        current-floor="Rez-de-chaussée"
+        :min="valMin"
+        :max="valMax"
+        :real-min="realMin"
+        :real-max="realMax"
+        :unit="unit"
+        @updateSelectedOption="updateSelectedOption"
+    ></Selector>
 		<svg width="100%" height="100%" viewBox="0 90 875 390">
 			<g v-for="(room, roomId) in roomData" :key="roomId" :id="roomId" :class="{ changeColor: true }"
 				:style="{ fill: room.color }" @click="showRoomDetail(roomId)">
@@ -29,10 +30,12 @@
 import { ref, reactive, onMounted, watch } from 'vue';
 import dataScale from '../../utils/dataScale.vue';
 import RoomDetail from '@/components/roomDetail/roomDetail.vue';
+import Selector from "@/components/batiments/utils/selector.vue";
 
 
 export default {
 	components: {
+    Selector,
 		RoomDetail,
 		dataScale
 	},
@@ -62,13 +65,14 @@ export default {
     });
 
 
-		const selectedOption = ref('activity');
+		let selectedOption = 'activity';
 		const roomName = ref(null);
 
 
-		const updateSelectedOption = (event) => {
-			selectedOption.value = event.target.value;
-		};
+    const updateSelectedOption = (selected) => {
+      selectedOption = selected;
+      updateColors();
+    };
 
 		const showRoomDetail = (roomId) => {
 			roomName.value = roomId;
@@ -116,10 +120,10 @@ export default {
 		const updateColors = () => {
 			for (const roomId in roomData) {
 				if (roomData.hasOwnProperty(roomId) && roomData[roomId].state) {
-					const metricValue = parseFloat(roomData[roomId]['data'][selectedOption.value]);
+					const metricValue = parseFloat(roomData[roomId]['data'][selectedOption]);
 
 					if (!isNaN(metricValue)) {
-						roomData[roomId].color = getColorForMetric(metricValue, selectedOption.value);
+						roomData[roomId].color = getColorForMetric(metricValue, selectedOption);
 
 					}
 
