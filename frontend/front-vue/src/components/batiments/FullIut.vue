@@ -1,4 +1,16 @@
 <template>
+  <div class="pres-full" v-if="showPres">
+    <h2>Bienvenue sur le tableau de bord de visualisation des données des salles</h2>
+    <div class="presentation">
+
+      <p style="width: 40vw;">
+        Sur ce tableau de bord mono-page, vous avez la possibilité de visualiser les données des capteurs AM107 situés dans les salles de l'IUT de Blagnac. <br>
+        Grâce au plan interactif ci-dessous, à l'onglet "Salles" ou via la fonction de recherche et les recommandations qu'elle propose, vous pouvez accéder facilement à l'information désirée.
+      </p>
+      <img src="https://upload.wikimedia.org/wikipedia/fr/8/8a/Logo_IUT_Blagnac.png" alt="Logo IUT Blagnac" style="display: block; margin-left: 0; width: 16vw;">
+
+    </div>
+  </div>
   <div class="map-container">
     <div :class="{ 'small-view': showBatB || showBatE || showBatA, 'grid':true}"> 
     <h2> Plan intératif de l'IUT de Blagnac </h2> 
@@ -89,6 +101,7 @@
             showBatB: false,
             showBatE: false,
             showBatA: false,
+            showPres: true,
             };
             
         },
@@ -98,17 +111,20 @@
                 this.showBatB = true;
                 this.showBatE = false;
                 this.showBatA = false;
+                this.showPres = false;
                 },
 
             displayBatE() {
                 this.showBatE = true;
                 this.showBatB = false;
                 this.showBatA = false;
+                this.showPres = false;
                 },
             displayBatA() {
                 this.showBatA = true;
                 this.showBatB = false;
                 this.showBatE = false;
+                this.showPres = false;
                 },
             },
 
@@ -178,4 +194,36 @@ svg {
  h2 {
     margin-bottom: 0;
  }
+
+.grid{
+  align-items: center;
+  background-color: var(--color-background-hover);
+  margin: 2vh 2vw;
+  padding: 2vh 2vw;
+  border-radius: 10px;
+  gap: 2vh;
+}
+
+.presentation {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start; /* Align items to the start of the container */
+  justify-content: center; /* Start items from the beginning */
+  background-color: var(--color-background-hover);
+  width: auto;
+  margin: 2vh 2vw;
+  padding: 2vh 2vw;
+  border-radius: 10px;
+  gap: 3vh;
+}
+
+.pres-full {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.pres-full h2 {
+  text-align: center;
+}
 </style>

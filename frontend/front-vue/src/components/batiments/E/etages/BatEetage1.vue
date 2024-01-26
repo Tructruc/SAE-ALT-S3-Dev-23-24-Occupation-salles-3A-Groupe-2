@@ -1,7 +1,7 @@
 <template>
 	<div class="grid">
 		<Selector 
-  		  :current-floor="1"
+  		  current-floor="Étage 1"
   		  :min="valMin"
   		  :max="valMax"
   		  :real-min="realMin"
@@ -60,7 +60,6 @@ export default {
 
 
 		const updateSelectedOption = (selected) => {
-      console.log(selected)
       selectedOption = selected;
       updateColors();
 		};
