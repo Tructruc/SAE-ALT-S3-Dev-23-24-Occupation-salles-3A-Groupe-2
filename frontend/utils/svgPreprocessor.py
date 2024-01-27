@@ -62,5 +62,5 @@ for child in root_element:
     output = output + (
                 group_id + ": { color: \"grey\", state: true, path: [\"" + "\", \"".join(paths) + "\"], data:{} },\n")
 
-print("\n\033[0;32m[OUTPUT]VueJS List of Dictionaries : \033[0m")
+print("\n\033[0;32m[OUTPUT] VueJS List of Dictionaries : \033[0m")
 print(output)
