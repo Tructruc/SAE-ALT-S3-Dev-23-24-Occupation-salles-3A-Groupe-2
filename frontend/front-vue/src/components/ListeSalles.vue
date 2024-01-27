@@ -52,7 +52,6 @@ import loadApiConfig from '../utils/api.js';
       loadApiConfig().then(apiIp => {
         this.apiBaseUrl = apiIp;
         this.fetchApiData();
-        console.log("API config loaded:", this.apiBaseUrl);
       }).catch(error => {
         console.error("Error while loading API config:", error);
       });

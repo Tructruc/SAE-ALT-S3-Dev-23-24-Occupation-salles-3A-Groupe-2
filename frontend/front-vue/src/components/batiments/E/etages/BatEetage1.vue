@@ -97,7 +97,6 @@ export default {
 						} else {
 							// Gérer le cas où les données de la salle ne sont pas disponibles
 							roomData[roomId].state = false;
-              console.log(roomId)
 						}
 					}
 				}

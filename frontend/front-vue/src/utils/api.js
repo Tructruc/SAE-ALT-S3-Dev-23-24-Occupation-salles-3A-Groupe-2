@@ -7,14 +7,10 @@ function loadApiConfig() {
         }
         return response.json();
       })
-      .then(apiConfig => {
-        console.log("apiConfig: ", apiConfig);
-        console.log("apiConfig.API_URL: ", apiConfig.API_URL);
-  
+      .then(apiConfig => {  
         if (!apiConfig.API_URL || apiConfig.API_URL === "$API_URL") {
           return "http://localhost:8000";
         } else {
-          console.log("Using API_URL from api.json");
           return apiConfig.API_URL;
         }
       })
