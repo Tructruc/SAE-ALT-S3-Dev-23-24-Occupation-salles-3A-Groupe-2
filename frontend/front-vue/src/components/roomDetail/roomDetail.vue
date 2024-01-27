@@ -65,6 +65,7 @@ import Gauge from "@/components/roomDetail/gauge.vue";
 import Battery from "@/components/roomDetail/battery.vue";
 import TimeLine from "@/components/roomDetail/TimeLine.vue";
 import DetailCapteur from "@/components/roomDetail/DetailCapteur.vue";
+import loadApiConfig from "@/utils/api.js";
 
 ChartJS.register(
     CategoryScale,
@@ -142,8 +143,11 @@ export default {
           text: 'value'
         }
       }
-      // ... other chart options if needed
+    
+
     },
+
+    apiBaseUrl: null,
   }),
   methods:{
     getHiddenDatasetsFromTimeline() {
@@ -159,7 +163,6 @@ export default {
     },
     async updateLineMinutes(minutes){
       let days = minutes / 60 / 24;
-      console.log(days)
 
       // Calculate the date with the offset from now in minutes using thit format %Y-%m-%dT%H:%M:%S.%f %z
       let from = new Date(Date.now() - minutes * 60 * 1000).toISOString().slice(0, -5);
@@ -182,7 +185,7 @@ export default {
       this.loadedTimeLine = false
       this.visibleDatasets = this.getHiddenDatasetsFromTimeline();
       try {
-        const sensor = await fetch('http://localhost:8000/ByRoom/'+this.room+'/?depth=1&from='+from+'&to='+to);
+        const sensor = await fetch(`${this.apiBaseUrl}/ByRoom/`+this.room+'/?depth=1&from='+from+'&to='+to);
         const json = await sensor.json();
 
         if (json.all_data === undefined){
@@ -237,16 +240,15 @@ export default {
       this.visibleDatasets = this.getHiddenDatasetsFromTimeline();
       try {
         let days = minutes / 60 / 24;
-        console.log(days)
 
         // Calculate the date with the offset from now in minutes using thit format %Y-%m-%dT%H:%M:%S.%f %z
         let date = new Date(Date.now() - minutes * 60 * 1000).toISOString().slice(0, -5);
 
-        const sensor = await fetch('http://localhost:8000/ByRoom/'+this.room+'/?depth=1&from='+date);
+        const sensor = await fetch(`${this.apiBaseUrl}/ByRoom/${this.room}/?depth=1&from=${date}`);
         const json = await sensor.json();
 
 
-        const jsonLastDate = await fetch('http://localhost:8000/ByRoom/'+this.room+'/?depth=1&last_data=1');
+        const jsonLastDate = await fetch(`${this.apiBaseUrl}/ByRoom/${this.room}/?depth=1&last_data=1`);
         const jsonLastDateJson = await jsonLastDate.json();
         if (jsonLastDateJson.all_data && jsonLastDateJson.all_data.length > 0) {
           this.temp = jsonLastDateJson.all_data[jsonLastDateJson.all_data.length - 1].temperature;
@@ -326,7 +328,15 @@ export default {
     }
   },
   async mounted () {
-    await this.loadData(60*24)
+    try {
+      const apiIp = await loadApiConfig();
+      this.apiBaseUrl = apiIp;
+      await this.loadData(60*24);
+      // Reste du code
+    } catch (error) {
+      console.error("Error while loading API config:", error);
+    }
+    
     // scroll to the top of this component
     const view = this.$refs.view;
     const viewPosition = view.offsetTop;
@@ -341,6 +351,8 @@ export default {
   },
 };
 </script>
+
+<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet"></link>
 
 <style scoped>
 
@@ -417,5 +429,49 @@ h1 {
 }
 
 
+.timeSelector {
+  background-color: var(--color-background-hover); /* Light grey background */
+  padding: 15px;
+  border-radius: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: start;
+  gap: 10px;
+}
 
+.timeSelector > button {
+  padding: 10px 15px;
+  background-color: var(--vt-c-black); /* Indigo shade */
+  color: var(--vt-c-white); 
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.timeSelector > button:hover {
+  /* Darken on hover */
+  background-color: var(--vt-c-black-mute);
+}
+
+.timeSelector > input[type="datetime-local"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.timeSelector > p {
+  margin: 0; /* Remove default margins */
+  color: #ffffff;
+  font-size: 1rem;
+}
+
+input[type="datetime-local"] {
+  font-family: 'Roboto', sans-serif; /* This applies the Roboto font */
+  /* other styles */
+}
 </style>

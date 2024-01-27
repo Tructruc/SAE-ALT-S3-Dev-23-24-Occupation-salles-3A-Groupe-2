@@ -27,5 +27,8 @@ WORKDIR /usr/share/nginx/html
 COPY --from=build /build/dist/ /usr/share/nginx/html
 COPY ./nginx.conf /etc/nginx/nginx.conf
 
-# Démarrage de Nginx
-CMD ["nginx", "-g", "daemon off;"]
+COPY ./start_front.sh /start_front.sh
+RUN chmod +x /start_front.sh
+
+# Démarrage du conteneur puis de Nginx
+CMD /start_front.sh && nginx -g 'daemon off;'

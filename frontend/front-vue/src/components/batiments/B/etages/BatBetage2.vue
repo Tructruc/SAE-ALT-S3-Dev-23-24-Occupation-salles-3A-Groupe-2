@@ -29,6 +29,7 @@ import { ref, reactive, onMounted, watch } from 'vue';
 import dataScale from '../../utils/dataScale.vue';
 import RoomDetail from '@/components/roomDetail/roomDetail.vue';
 import Selector from "@/components/batiments/utils/selector.vue";
+import loadApiConfig from '../../../../utils/api.js';
 
 
 export default {
@@ -38,8 +39,8 @@ export default {
 		dataScale
 	},
 	setup() {
+		const apiBaseUrl = ref(null);
 		const roomImage = ref(null);
-
 		const valMin = ref(0);
 		const valMax = ref(500);
 		const realMax = ref(500);
@@ -422,7 +423,7 @@ export default {
 
 		const fetchAllRoomData = async () => {
 			try {
-				const response = await fetch('http://localhost:8000/ByRoom/?last_data=1&depth=1');
+				const response = await fetch(`${apiBaseUrl.value}/ByRoom/?last_data=1&depth=1`);
 				const roomsData = await response.json();
 
 				for (const roomKey in roomData) {
@@ -562,8 +563,13 @@ export default {
 		);
 
 
-		onMounted(() => {
-			fetchAllRoomData();
+		onMounted(async () => {
+			try {
+				apiBaseUrl.value = await loadApiConfig();
+				fetchAllRoomData();
+			} catch (error) {
+				console.error("Error while loading API config:", error);
+			}
 		});
 
 		return { roomData, selectedOption, updateColors, updateSelectedOption, roomName, showRoomDetail, roomImage, valMin, valMax, realMin, realMax, unit };

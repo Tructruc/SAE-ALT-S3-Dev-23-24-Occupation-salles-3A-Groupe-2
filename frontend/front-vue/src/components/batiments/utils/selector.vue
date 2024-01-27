@@ -72,14 +72,37 @@
     }
 
     select {
-      padding: 10px;
-      font-size: 16px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      background-color: #fff;
-      color: #333;
+      padding: 10px 15px;
+      font-size: 1rem;
+      border: 2px solid var(--color-border);
+      border-radius: 8px;
+      background-color: var(--color-background);
+      color: var(--color-text);
       outline: none;
-      transition: border-color 0.3s;
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background-image: url('data:image/svg+xml;utf8,<svg fill="%232c3e50" height="40" viewBox="0 0 24 24" width="40" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+      background-repeat: no-repeat;
+      background-position: right 15px center;
+      background-size: 20px; /* Increased icon size */
+      cursor: pointer;
+      transition: border-color 0.3s, box-shadow 0.3s;
     }
+
+    select:hover {
+      border-color: var(--color-border-hover);
+    }
+
+    select:focus {
+      border-color: var(--color-inverted-border-hover);
+      box-shadow: 0 0 0 2px rgba(44, 62, 80, 0.2);
+    }
+
+    /* For browsers that do not support the 'appearance' property */
+    select::-ms-expand {
+      display: none;
+    }
+
   </style>
   
