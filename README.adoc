@@ -79,7 +79,7 @@ En outre, l'avantage supplémentaire réside dans le fait qu'Emilien a déjà un
 
 === • Architecture du projet
 
-image::https://i.imgur.com/eXL32Ly.png["Schéma Architecture", link="https://www.docker.com/", width=1000]
+image::https://i.imgur.com/ag7w8DP.png["Schéma Architecture", link="https://www.docker.com/", width=1000]
 
 L'architecture que nous avons conçue est un modèle de déploiement moderne qui tire parti de la puissance et de la flexibilité des conteneurs Docker, avec Dockerfile et Docker Compose, pour orchestrer notre application complète. Notre infrastructure se décompose en 3 composants principaux, tous gérés par Docker Compose, qui permettent une mise en œuvre cohérente et une intégration transparente entre les différents services. L'architecture s'appuie aussi sur des variables d'environnement partagées via un fichier .env pour garantir la synchronisation entre les services ainsi que des volumes pour le dévellopement ou pour garantire la peristence des données.
 
