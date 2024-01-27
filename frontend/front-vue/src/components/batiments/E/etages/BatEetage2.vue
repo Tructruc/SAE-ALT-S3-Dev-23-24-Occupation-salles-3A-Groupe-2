@@ -85,7 +85,7 @@ export default {
 
 		const fetchAllRoomData = async () => {
 			try {
-				const response = await fetch(`${apiBaseUrl.value}/ByRoom/?last_data=1&depth=1&floor=1&building=E`);
+				const response = await fetch(`${apiBaseUrl.value}/ByRoom/?last_data=1&depth=1&floor=2&building=E`);
 				const roomsData = await response.json();
 
 				for (const roomKey in roomData) {
