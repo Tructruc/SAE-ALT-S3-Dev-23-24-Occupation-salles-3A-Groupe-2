@@ -108,7 +108,6 @@ export default {
         }
 
         updateColors();
-        updateScale();
       } catch (error) {
         console.error('Erreur lors de la récupération des données des salles.', error);
       }
