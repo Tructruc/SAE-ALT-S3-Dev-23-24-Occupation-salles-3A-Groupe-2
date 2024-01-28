@@ -15,7 +15,7 @@ Aujourd'hui, la quasi-totalité des salles de l'IUT de Blagnac sont équipées d
 
 === • Présentation du projet
 
-Le client, M. Boulle, nous a donc missionné pour développer une application permettant de visualiser les données des capteurs, de les stocker, et de les exploiter. L'application devra être capable de fournir des graphiques et des statistiques sur les données.
+Le client, M. Boulle, nous a donc missionner pour développer une application permettant de visualiser les données des capteurs, de les stocker, et de les exploiter. L'application devra être capable de fournir des graphiques et des statistiques sur les données.
 
 Des fonctionnalitées supplémentaires sont envisagées par l'équipe, comme par exemple la possibilté d'avoir une carte interactive des salles, des prédictions sur les données...
 
@@ -79,7 +79,7 @@ En outre, l'avantage supplémentaire réside dans le fait qu'Emilien a déjà un
 
 === • Architecture du projet
 
-image::https://i.imgur.com/ag7w8DP.png["Schéma Architecture", link="https://www.docker.com/", width=1000]
+image::https://i.imgur.com/eXL32Ly.png["Schéma Architecture", link="https://www.docker.com/", width=1000]
 
 L'architecture que nous avons conçue est un modèle de déploiement moderne qui tire parti de la puissance et de la flexibilité des conteneurs Docker, avec Dockerfile et Docker Compose, pour orchestrer notre application complète. Notre infrastructure se décompose en 3 composants principaux, tous gérés par Docker Compose, qui permettent une mise en œuvre cohérente et une intégration transparente entre les différents services. L'architecture s'appuie aussi sur des variables d'environnement partagées via un fichier .env pour garantir la synchronisation entre les services ainsi que des volumes pour le dévellopement ou pour garantire la peristence des données.
 
@@ -103,19 +103,19 @@ En résumé, cette architecture n'est pas seulement une infrastructure technique
 
 * https://github.com/Tructruc/SAE-ALT-S3-Dev-23-24-Occupation-salles-3A-Groupe-2/issues?q=is%3Aopen+is%3Aissue+label%3A%22user+story%22[Backlog Produit]
 
-=== Retours d’expérience de sprints
+=== Retours d’experience de sprints
 
 * https://github.com/Tructruc/SAE-ALT-S3-Dev-23-24-Occupation-salles-3A-Groupe-2/wiki/Gestion-de-Projet#retour-dexp%C3%A9rience-du-sprint-1[Sprint 1]
 * https://github.com/Tructruc/SAE-ALT-S3-Dev-23-24-Occupation-salles-3A-Groupe-2/wiki/Gestion-de-Projet#retour-dexp%C3%A9rience-du-sprint-2[Sprint 2]
 * https://github.com/Tructruc/SAE-ALT-S3-Dev-23-24-Occupation-salles-3A-Groupe-2/wiki/Gestion-de-Projet#retour-dexp%C3%A9rience-du-sprint-3[Sprint 3]
 
-*https://github.com/Tructruc/SAE-ALT-S3-Dev-23-24-Occupation-salles-3A-Groupe-2/wiki/Gestion-de-Projet#retour-dexp%C3%A9rience-du-projet[Retrour d’expérience du projet]
+* https://github.com/Tructruc/SAE-ALT-S3-Dev-23-24-Occupation-salles-3A-Groupe-2/wiki/Gestion-de-Projet#retour-dexp%C3%A9rience-du-projet[Retour fin de projet]
 
 === Backlogs de sprint
 
 * https://github.com/users/Tructruc/projects/3[Sprint 1]
 * https://github.com/users/Tructruc/projects/4[Sprint 2]
-* https://github.com/users/Tructruc/projects/4[Sprint 3]
+* https://github.com/users/Tructruc/projects/5[Sprint 3]
 
 == Documentation
 
@@ -127,8 +127,6 @@ La documentation du projet se trouve dans l’onglet wiki de GitHub https://gith
 
 == Évaluations hebdomadaires
 
-=== Semaine 2
-
 NOTE: Les notes ci-dessous sont mises à jour directement par les enseignants responsables de la compétence 5.
 
 ifdef::env-github[]
@@ -136,3 +134,5 @@ image:https://docs.google.com/spreadsheets/d/e/2PACX-1vRtGk-4u-mv4RE4q76-qFY-Iy4
 endif::[]
 
 Sprint 1 :Release ok pour un sprint 1. DOC :  pensez à préciser le projet, version, date , équipe. Doc user non initialisée. Il me manque le backlog produit global contenant les US, priorité, complexité (issues du projet). Esprit Scrum on compris :  US/ISSUES eclatée en tâches, je n'ai que les tâches sur votre dépôt.  A chaque sprint on traite des US et donc les tâches liées. Bilan OK. readme ok bien qu'un peu confus.
+
+Sprint 2 : Release ok. Doc tech : Ok beaucoup d'éléments techniques mais plan à revoir. Par exemple les UC arrivent assez tard alors qu'ils sont censés orienter les fonctionnalités puis les aspects techniques nécéssaires à la réalisation des fonctionnalités. Le contenu est TB, je repenserai le plan pour plus de clareté car le back et le front ne sont pas clairement identifiés. La doc USER est à développer : attention les destinataires des doc tech et utilisateurs sont différents ! Ne renvoyez pas vos utilisateurs vers la doc technique. Rappelez dans la doc user le contexte, l'intérêt de l'appli , les grandes fonctionnalités (il y a t'il un accès admin ou non ?). A retravailler. Tests ok pour le back end, reste plus que le front. US TB . Il manque le backlog sprint 3 qui devrait être prêt !
