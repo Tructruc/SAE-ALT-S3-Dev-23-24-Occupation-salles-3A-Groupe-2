@@ -16,12 +16,14 @@
 </template>
   
 <script>
-import RoomDetail from "@/components/roomDetail.vue";
+import RoomDetail from "@/components/roomDetail/roomDetail.vue";
+import loadApiConfig from '../utils/api.js';
 
   export default {
     name: 'ApiDataDisplay',
     components: {
       RoomDetail,
+      apiBaseUrl: null,
     },
     data() {
       return {
@@ -47,12 +49,17 @@ import RoomDetail from "@/components/roomDetail.vue";
       },
     },
     mounted() {
-      this.fetchApiData();
+      loadApiConfig().then(apiIp => {
+        this.apiBaseUrl = apiIp;
+        this.fetchApiData();
+      }).catch(error => {
+        console.error("Error while loading API config:", error);
+      });
     },
     methods: {
       async fetchApiData() {
         try {
-          const response = await fetch('http://localhost:8000/ByRoom/?depth=1');
+          const response = await fetch(`${this.apiBaseUrl}/ByRoom/?depth=1`);
           const jsonData = await response.json();
           this.apiData = jsonData;
         } catch (error) {

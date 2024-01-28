@@ -1,6 +1,7 @@
 <template>
   <div ref="view" class="view">
     <h1 v-if="loaded">{{room}}</h1>
+    <h2 v-if="loaded && lastDataReceived">Dernière donnée reçue : {{ lastDataReceived }}</h2>
     <h2 v-if="error_message">{{error_message}}</h2>
     <div class="dataContainer">
       <div class="topContainer">
@@ -60,10 +61,11 @@ import {
   Tooltip,
   Legend
 } from 'chart.js'
-import Gauge from "@/components/gauge.vue";
-import Battery from "@/components/battery.vue";
-import TimeLine from "@/components/TimeLine.vue";
-import DetailCapteur from "@/components/DetailCapteur.vue";
+import Gauge from "@/components/roomDetail/gauge.vue";
+import Battery from "@/components/roomDetail/battery.vue";
+import TimeLine from "@/components/roomDetail/TimeLine.vue";
+import DetailCapteur from "@/components/roomDetail/DetailCapteur.vue";
+import loadApiConfig from "@/utils/api.js";
 
 ChartJS.register(
     CategoryScale,
@@ -93,6 +95,7 @@ export default {
   },
 
   data: () => ({
+    lastDataReceived: "",
     battery: 0,
     temp: 0,
     hum: 0,
@@ -140,8 +143,11 @@ export default {
           text: 'value'
         }
       }
-      // ... other chart options if needed
+    
+
     },
+
+    apiBaseUrl: null,
   }),
   methods:{
     getHiddenDatasetsFromTimeline() {
@@ -157,7 +163,6 @@ export default {
     },
     async updateLineMinutes(minutes){
       let days = minutes / 60 / 24;
-      console.log(days)
 
       // Calculate the date with the offset from now in minutes using thit format %Y-%m-%dT%H:%M:%S.%f %z
       let from = new Date(Date.now() - minutes * 60 * 1000).toISOString().slice(0, -5);
@@ -180,12 +185,7 @@ export default {
       this.loadedTimeLine = false
       this.visibleDatasets = this.getHiddenDatasetsFromTimeline();
       try {
-
-
-
-
-
-        const sensor = await fetch('http://localhost:8000/ByRoom/'+this.room+'/?depth=1&from='+from+'&to='+to);
+        const sensor = await fetch(`${this.apiBaseUrl}/ByRoom/`+this.room+'/?depth=1&from='+from+'&to='+to);
         const json = await sensor.json();
 
         if (json.all_data === undefined){
@@ -207,14 +207,8 @@ export default {
           const view = this.$refs.view;
           const viewPosition = view.offsetTop;
           const offset = viewPosition + 80;
-
-          window.scrollBy({
-            top: 1000,
-            behavior: "smooth"
-          });
         }
-
-
+        
 
         for (const [key, value] of Object.entries(json.all_data)) {
           let utcTime = new Date(value.time);
@@ -246,16 +240,29 @@ export default {
       this.visibleDatasets = this.getHiddenDatasetsFromTimeline();
       try {
         let days = minutes / 60 / 24;
-        console.log(days)
 
         // Calculate the date with the offset from now in minutes using thit format %Y-%m-%dT%H:%M:%S.%f %z
         let date = new Date(Date.now() - minutes * 60 * 1000).toISOString().slice(0, -5);
 
-
-
-
-        const sensor = await fetch('http://localhost:8000/ByRoom/'+this.room+'/?depth=1&from='+date);
+        const sensor = await fetch(`${this.apiBaseUrl}/ByRoom/${this.room}/?depth=1&from=${date}`);
         const json = await sensor.json();
+
+
+        const jsonLastDate = await fetch(`${this.apiBaseUrl}/ByRoom/${this.room}/?depth=1&last_data=1`);
+        const jsonLastDateJson = await jsonLastDate.json();
+        if (jsonLastDateJson.all_data && jsonLastDateJson.all_data.length > 0) {
+          this.temp = jsonLastDateJson.all_data[jsonLastDateJson.all_data.length - 1].temperature;
+          this.hum = jsonLastDateJson.all_data[jsonLastDateJson.all_data.length - 1].humidity;
+          this.co2 = jsonLastDateJson.all_data[jsonLastDateJson.all_data.length - 1].co2;
+          const lastData = jsonLastDateJson.all_data[jsonLastDateJson.all_data.length - 1];
+          this.lastDataReceived = new Date(lastData.time).toLocaleString(undefined, {
+            year: 'numeric',
+            month: 'numeric',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+          });
+        }
 
         if (json.all_data === undefined){
           this.error_message = "La salle « " + this.room + " » ne comporte pas de capteur"
@@ -304,11 +311,7 @@ export default {
           this.timedDate.pressure.push(value.pressure)
         }
 
-        this.battery = json.sensor.batterylevel
-
-        this.temp = json.all_data[json.all_data.length - 1].temperature
-        this.hum = json.all_data[json.all_data.length - 1].humidity
-        this.co2 = json.all_data[json.all_data.length - 1].co2
+        this.battery = json.sensor.batterylevel;
 
         this.sensorName = json.sensor.devicename;
         this.sensorDeveui = json.sensor.deveui;
@@ -325,10 +328,31 @@ export default {
     }
   },
   async mounted () {
-    await this.loadData(60*24)
+    try {
+      const apiIp = await loadApiConfig();
+      this.apiBaseUrl = apiIp;
+      await this.loadData(60*24);
+      // Reste du code
+    } catch (error) {
+      console.error("Error while loading API config:", error);
+    }
+    
+    // scroll to the top of this component
+    const view = this.$refs.view;
+    const viewPosition = view.offsetTop;
+    const offset = viewPosition + 100;
+
+
+    window.scrollTo({
+      left: 0,
+      top: viewPosition - 100 ,
+      behavior: "smooth"
+    });
   },
 };
 </script>
+
+<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet"></link>
 
 <style scoped>
 
@@ -364,6 +388,11 @@ export default {
   justify-content: center;
   column-gap: 1vw;
   width: 67vw;
+  overflow: hidden;
+}
+
+.bottomContainer::-webkit-scrollbar {
+  display: none;
 }
 
 .graphique {
@@ -376,8 +405,13 @@ export default {
   height: 40vh;
 }
 
+#sensorinfo::-webkit-scrollbar {
+  display: none;
+}
+
 #sensorinfo{
   height: 40vh;
+  overflow: hidden;
 }
 
 h1 {
@@ -395,5 +429,49 @@ h1 {
 }
 
 
+.timeSelector {
+  background-color: var(--color-background-hover); /* Light grey background */
+  padding: 15px;
+  border-radius: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: start;
+  gap: 10px;
+}
 
+.timeSelector > button {
+  padding: 10px 15px;
+  background-color: var(--vt-c-black); /* Indigo shade */
+  color: var(--vt-c-white); 
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.timeSelector > button:hover {
+  /* Darken on hover */
+  background-color: var(--vt-c-black-mute);
+}
+
+.timeSelector > input[type="datetime-local"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.timeSelector > p {
+  margin: 0; /* Remove default margins */
+  color: #ffffff;
+  font-size: 1rem;
+}
+
+input[type="datetime-local"] {
+  font-family: 'Roboto', sans-serif; /* This applies the Roboto font */
+  /* other styles */
+}
 </style>

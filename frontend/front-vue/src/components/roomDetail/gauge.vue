@@ -86,15 +86,19 @@ export default {
       const isDanger = this.value > this.dangerValue;
 
       const cappedValue = Math.max(Math.min(this.value, this.max), this.min);
-      const adjustedValue = cappedValue - this.min
+      let adjustedValue = cappedValue - this.min
       const adjustedEmpty = this.value > this.dangerValue ? 0 : this.dangerValue-this.min -adjustedValue;
       const adjustedDanger = this.value > this.dangerValue ? this.max - this.min - adjustedValue : this.max - this.dangerValue;
+
+      const indicator =  (this.max - this.min)/150;
+      adjustedValue = adjustedValue - indicator;
+
 
       const data = {
         labels: ["Value", "Empty", "Empty danger"],
         datasets: [{
-          data: [adjustedValue, adjustedEmpty, adjustedDanger],
-          backgroundColor: [isDanger ? "Red" : "Green", "lightgrey", "lightCoral"],
+          data: [adjustedValue,indicator, adjustedEmpty, adjustedDanger],
+          backgroundColor: [isDanger ? "Red" : "Green", "black", "lightgrey", "lightCoral"],
           borderColor: this.backgroundColor
         }]
       };
@@ -106,6 +110,11 @@ export default {
           rotation: 225, // Start angle in degrees
           circumference: 270, // Sweep angle in degrees
           cutout: '80%', // Inner cutout percentage
+          elements: {
+            arc: {
+              borderWidth: 0 // Remove border
+            }
+          },
           plugins: {
             legend: {
               display: false

@@ -21,3 +21,6 @@ REST_FRAMEWORK = {
         'rest_framework.parsers.JSONParser',
     )
 }
+
+CERTFILE = os.environ.get('CERTFILE')
+KEYFILE = os.environ.get('KEYFILE')

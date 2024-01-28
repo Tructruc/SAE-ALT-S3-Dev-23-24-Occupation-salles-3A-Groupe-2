@@ -7,9 +7,9 @@
 
 
 <script>
-import FullIut from './components/FullIut.vue';
+import FullIut from './components/batiments/FullIut.vue';
 import Header from "@/components/Header.vue";
-import RoomDetail from "@/components/roomDetail.vue";
+import RoomDetail from "@/components/roomDetail/roomDetail.vue";
 import ListeSalles from "@/components/ListeSalles.vue";
 
 export default {
@@ -40,10 +40,11 @@ export default {
 
 
 <style scoped>
-#app {
-  width: 100%;
-  padding-top: 80px; /* Adjust the padding to make space for the header */
-  max-width: 80vw;
-justify-content: center;
-}
+  #app {
+    width: 100%;
+    padding-top: 80px; /* Adjust the padding to make space for the header */
+    max-width: 80vw;
+    justify-content: center;
+  }
+
 </style>

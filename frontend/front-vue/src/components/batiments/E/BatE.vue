@@ -1,7 +1,7 @@
 
 <template>
     <div :class="{ 'small-view': showRdc || showEt1 || showEt2 , 'grid':true}">
-        <h2>Bat E</h2>
+        <h2>Bâtiment E</h2>
         <svg id="svg3" inkscape:version="1.3.2 (091e20ef0f, 2023-11-25, custom)" sodipodi:docname="batiment-e.svg" version="1.1" viewBox="0 0 2141.3 1064" xmlns="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd">
             <g id="rdc" class="changeColor" @click="displayBatERdc" transform="matrix(.99999 0 0 .99999 -14.992 -18.924)">
                 <title id="title1">Rez-de-chaussée</title>
@@ -38,10 +38,10 @@
   </template>
   
   <script>
-  import BatERdc from './BatERdc.vue';
-  import BatEetage1 from './BatEetage1.vue';
-  import BatEetage2 from './BatEetage2.vue';
-  import BatBRdc from "@/components/BatBRdc.vue";
+  import BatERdc from './etages/BatERdc.vue';
+  import BatEetage1 from './etages/BatEetage1.vue';
+  import BatEetage2 from './etages/BatEetage2.vue';
+  import BatBRdc from "@/components/batiments/B/etages/BatBRdc.vue";
   export default {
         data() {
             return {
@@ -96,5 +96,14 @@ g.changeColor:hover {
 
   /* stroke:rgb(255, 193, 183);
   fill: rgb(233, 8, 0); */
+}
+
+.grid{
+  align-items: center;
+  background-color: var(--color-background-hover);
+  margin: 2vh 2vw;
+  padding: 2vh 2vw;
+  border-radius: 20px;
+  gap: 2vh;
 }
 </style>

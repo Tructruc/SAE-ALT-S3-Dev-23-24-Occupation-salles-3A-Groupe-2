@@ -1,7 +1,7 @@
 
 <template>
     <div :class="{ 'small-view': showRdc || showEt1 || showEt2 , 'grid':true}">
-    <h2>BatB</h2>
+    <h2>Bâtiment B</h2>
       <!-- SVG avec les chemins spécifiques pour le bâtiment C -->
       <svg viewBox="0 0 2141.3333 1064">
         <g id="rdc" class="changeColor" @click="displayBatBRdc">
@@ -115,9 +115,9 @@
   </template>
   
   <script>
-  import BatBRdc from './BatBRdc.vue';
-  import BatBetage1 from './BatBetage1.vue';
-  import BatBetage2 from './BatBetage2.vue';
+  import BatBRdc from './etages/BatBRdc.vue';
+  import BatBetage1 from './etages/BatBetage1.vue';
+  import BatBetage2 from './etages/BatBetage2.vue';
   export default {
         data() {
             return {
@@ -170,5 +170,14 @@ g.changeColor:hover {
 
   /* stroke:rgb(255, 193, 183);
   fill: rgb(233, 8, 0); */
+}
+
+.grid{
+  align-items: center;
+  background-color: var(--color-background-hover);
+  margin: 2vh 2vw;
+  padding: 2vh 2vw;
+  border-radius: 20px;
+  gap: 2vh;
 }
 </style>

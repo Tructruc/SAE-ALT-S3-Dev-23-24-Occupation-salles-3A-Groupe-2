@@ -1,13 +1,14 @@
 <template>
 	<div class="grid">
-		<h2>RDC</h2>
-		<select :value="selectedOption" @change="updateSelectedOption">
-			<option value="temperature">Température</option>
-			<option value="humidity">Humidité</option>
-			<option value="co2">CO2</option>
-			<option value="activity">Présence</option>
-		</select>
-		<dataScale :min="valMin" :max="valMax" :real-min="realMin" :real-max="realMax" :unit="unit"></dataScale>
+    <Selector
+        current-floor="Rez-de-chaussée"
+        :min="valMin"
+        :max="valMax"
+        :real-min="realMin"
+        :real-max="realMax"
+        :unit="unit"
+        @updateSelectedOption="updateSelectedOption"
+    ></Selector>
 		<svg width="100%" height="100%" viewBox="0 90 875 390">
 			<g v-for="(room, roomId) in roomData" :key="roomId" :id="roomId" :class="{ changeColor: true }"
 				:style="{ fill: room.color }" @click="showRoomDetail(roomId)">
@@ -27,18 +28,21 @@
 	
 <script>
 import { ref, reactive, onMounted, watch } from 'vue';
-import dataScale from './dataScale.vue';
-import RoomDetail from './roomDetail.vue';
+import dataScale from '../../utils/dataScale.vue';
+import RoomDetail from '@/components/roomDetail/roomDetail.vue';
+import Selector from "@/components/batiments/utils/selector.vue";
+import loadApiConfig from '../../../../utils/api.js';
 
 
 export default {
 	components: {
+    Selector,
 		RoomDetail,
 		dataScale
 	},
 
 	setup() {
-
+		const apiBaseUrl = ref(null);
 		const valMin = ref(0);
 		const valMax = ref(500);
 		const realMax = ref(500);
@@ -62,13 +66,14 @@ export default {
     });
 
 
-		const selectedOption = ref('activity');
+		let selectedOption = 'activity';
 		const roomName = ref(null);
 
 
-		const updateSelectedOption = (event) => {
-			selectedOption.value = event.target.value;
-		};
+    const updateSelectedOption = (selected) => {
+      selectedOption = selected;
+      updateColors();
+    };
 
 		const showRoomDetail = (roomId) => {
 			roomName.value = roomId;
@@ -76,7 +81,7 @@ export default {
 
 		const fetchAllRoomData = async () => {
 			try {
-				const response = await fetch('http://localhost:8000/ByRoom/?last_data=1&depth=1');
+				const response = await fetch(`${apiBaseUrl.value}/ByRoom/?last_data=1&depth=1&floor=0&building=E`);
 				const roomsData = await response.json();
 
 				for (const roomKey in roomData) {
@@ -107,7 +112,6 @@ export default {
 				}
 
 				updateColors();
-				updateScale();
 			} catch (error) {
 				console.error('Erreur lors de la récupération des données des salles.', error);
 			}
@@ -116,10 +120,10 @@ export default {
 		const updateColors = () => {
 			for (const roomId in roomData) {
 				if (roomData.hasOwnProperty(roomId) && roomData[roomId].state) {
-					const metricValue = parseFloat(roomData[roomId]['data'][selectedOption.value]);
+					const metricValue = parseFloat(roomData[roomId]['data'][selectedOption]);
 
 					if (!isNaN(metricValue)) {
-						roomData[roomId].color = getColorForMetric(metricValue, selectedOption.value);
+						roomData[roomId].color = getColorForMetric(metricValue, selectedOption);
 
 					}
 
@@ -216,8 +220,13 @@ export default {
 		);
 
 
-		onMounted(() => {
-			fetchAllRoomData();
+		onMounted(async () => {
+			try {
+				apiBaseUrl.value = await loadApiConfig();
+				fetchAllRoomData();
+			} catch (error) {
+				console.error("Error while loading API config:", error);
+			}
 		});
 
 		return { roomData, selectedOption, updateColors, updateSelectedOption, roomName, showRoomDetail, valMin, valMax, realMin, realMax, unit };
