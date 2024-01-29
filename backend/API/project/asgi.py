@@ -25,6 +25,22 @@ application = ProtocolTypeRouter({
         path('Events/Data/', AuthMiddlewareStack(
             URLRouter(django_eventstream.routing.urlpatterns)
         ), {'format-channels': ['Data']}),
+        re_path(r'^Events/Sensor/(?P<channel_name>\w+)/$', 
+                AuthMiddlewareStack(
+                    URLRouter(
+                        django_eventstream.routing.urlpatterns
+                    )
+                ), 
+                {'format-channels': ['Sensor/{channel_name}']}
+        ),
+         re_path(r'^Events/Data/(?P<channel_name>\w+)/$', 
+                AuthMiddlewareStack(
+                    URLRouter(
+                        django_eventstream.routing.urlpatterns
+                    )
+                ), 
+                {'format-channels': ['Data/{channel_name}']}
+        ),
         re_path(r'', get_asgi_application()),
     ]),
 })
