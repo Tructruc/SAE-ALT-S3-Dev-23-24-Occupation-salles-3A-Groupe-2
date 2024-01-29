@@ -22,7 +22,6 @@ INSTALLED_APPS = [
     'app',
 ]
 
-GRIP_URL = 'http://localhost:5561'
 
 ASGI_APPLICATION = 'project.asgi.application'
 

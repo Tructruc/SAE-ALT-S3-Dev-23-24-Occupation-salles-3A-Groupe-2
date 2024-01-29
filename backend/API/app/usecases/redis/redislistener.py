@@ -5,7 +5,7 @@ from asgiref.sync import async_to_sync
 
 from django_eventstream import send_event
 
-def redis_listener(channel_name):
+def redis_listener():
     # Connect to local redis
     r = redis.Redis(host='127.0.0.1', port=6379, db=0)
     # Subscribe to the channels
