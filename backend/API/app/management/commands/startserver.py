@@ -6,7 +6,7 @@ from django.core.management import call_command
 from project.settings.dev_settings import DEFAULT_IP, DEFAULT_PORT
 from app.processmqttlistenerstarter import start_process_mqtt_listener
 from project.loggerconfig import setup_logger
-from app.usecases.redislistener import redis_listener
+from app.usecases.redis import redis_listener
 
 class Command(BaseCommand):
     help = 'Run the Django development server using environment variables for IP and port'
