@@ -103,3 +103,5 @@ class ColorFormatter(logging.Formatter):
         return logging.Formatter.format(self, record)
 
 PATH_TO_LOG_FILE = os.path.join(BASE_DIR, 'api.log')
+
+EVENTSTREAM_ALLOW_ORIGIN = "*"
