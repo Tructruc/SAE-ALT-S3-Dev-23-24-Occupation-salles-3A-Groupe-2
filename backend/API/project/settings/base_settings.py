@@ -17,9 +17,14 @@ INSTALLED_APPS = [
     'corsheaders',
     'timescale',
     'django_extensions',
+    'channels',
     'rest_framework',
     'app',
 ]
+
+GRIP_URL = 'http://localhost:5561'
+
+ASGI_APPLICATION = 'project.asgi.application'
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -30,6 +35,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_grip.GripMiddleware',
 ]
 
 ROOT_URLCONF = 'project.urls'

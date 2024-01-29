@@ -9,7 +9,7 @@ from django.core.wsgi import get_wsgi_application
 
 bind = f"{DEFAULT_IP}:{DEFAULT_PORT}"
 custom_logger = setup_logger()
-workers = multiprocessing.cpu_count() * 2 + 1
+workers = multiprocessing.cpu_count() * 2 
 certfile = CERTFILE
 keyfile = KEYFILE
 

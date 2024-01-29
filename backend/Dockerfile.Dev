@@ -14,11 +14,20 @@ COPY ./requirements.txt /API/
 # Installe les dépendances Python
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Installer redis et suppirmer le cache
+RUN apt-get update && apt-get install -y redis-server pushpin && apt-get clean
+
+RUN rm -rf /var/lib/apt/lists/*
+
+COPY ./pushpin.conf /etc/pushpin/pushpin.conf
+
 # Execute pour debug si nécessaire
 # CMD [ "tail", "-f", "/dev/null" ]
 
 # Utiliser supervisord pour démarrer les services
-CMD python manage.py wait_for_db \
+CMD redis-server --daemonize yes \
+    && pushpin \
+    && python manage.py wait_for_db \
     && python manage.py makemigrations \
     && python manage.py migrate \
     && tail -f /dev/null
