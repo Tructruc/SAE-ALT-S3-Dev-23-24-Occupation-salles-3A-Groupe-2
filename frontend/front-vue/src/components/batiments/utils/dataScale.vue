@@ -1,8 +1,9 @@
 <template>
+  <div class="wrapper">
     <div class="scale-wrapper">
       <div class="scale-container">
         <div class="solid-color left-color" :style="{ width: leftWidth + '%' }"></div>
-        <div class="scale-bar" :style="{ width: gradientWidth + '%' }"></div>
+        <div class="scale-bar" :class="battery ? 'battery-color' : 'normal-color'" :style="{ width: gradientWidth + '%' }"></div>
         <div class="solid-color right-color" :style="{ width: rightWidth + '%' }"></div>
       </div>
       <ul class="scale-values">
@@ -11,6 +12,10 @@
         </li>
       </ul>
     </div>
+  <div class="empty-room">
+    <div class="empty-room__color"/>
+    <div class="empty-room__title">No Data</div>
+  </div></div>
 </template>
 
 <script>
@@ -36,6 +41,10 @@ export default {
     unit: {
       type: String,
       default: ''
+    },
+    battery: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -87,8 +96,14 @@ export default {
 
 .scale-bar {
   height: 100%;
-  background: linear-gradient(to right, hsl(240, 100%, 50%), hsl(120, 100%, 50%), hsl(0, 100%, 50%));
   transition: width 0.3s ease-in-out;
+}
+.normal-color {
+  background: linear-gradient(to right, hsl(240, 100%, 50%), hsl(120, 100%, 50%), hsl(0, 100%, 50%));
+}
+
+.battery-color {
+  background: linear-gradient(to right,  hsl(0, 100%, 50%), hsl(120, 100%, 50%));
 }
 
 .scale-values {
@@ -102,5 +117,26 @@ export default {
 .value {
   position: relative;
   text-align: center;
+}
+
+.empty-room{
+  margin-left: 1vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.empty-room__color {
+  width: 1vw;
+  height: 1vw;
+  background: grey;
+  border-radius: 5px;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 </style>

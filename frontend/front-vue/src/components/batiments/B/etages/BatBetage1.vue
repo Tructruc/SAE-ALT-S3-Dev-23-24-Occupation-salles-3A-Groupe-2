@@ -244,7 +244,8 @@ export default {
 								infrared: roomInfo.all_data[0].infrared,
 								infrared_and_visible: roomInfo.all_data[0].infrared_and_visible,
 								pressure: roomInfo.all_data[0].pressure,
-								state: true
+								state: true,
+                battery: roomInfo.sensor.batterylevel,
 							};
 						} else {
 							// Gérer le cas où les données de la salle ne sont pas disponibles
@@ -353,6 +354,15 @@ export default {
 				unit.value = "";
 				return getColor(0, 500, value);
 			};
+      if (option == "battery") {
+        valMin.value = 0;
+        valMax.value = 100;
+        realMin.value = 0;
+        realMax.value = 100;
+
+        unit.value = "%";
+        return `hsl(${value*1.2}, 100%, 50%)`;
+      }
 		};
 		watch(
 			() => selectedOption.value,

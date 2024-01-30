@@ -30,6 +30,7 @@ import dataScale from '../utils/dataScale.vue';
 import RoomDetail from '@/components/roomDetail/roomDetail.vue';
 import Selector from "@/components/batiments/utils/selector.vue";
 import loadApiConfig from '../../../utils/api.js';
+import battery from "@/components/roomDetail/battery.vue";
 
 
 export default {
@@ -79,7 +80,6 @@ export default {
 		let selectedOption = 'activity';
 		const roomName = ref(null);
 
-
     const updateSelectedOption = (selected) => {
       selectedOption = selected;
       updateColors();
@@ -112,7 +112,8 @@ export default {
 								infrared: roomInfo.all_data[0].infrared,
 								infrared_and_visible: roomInfo.all_data[0].infrared_and_visible,
 								pressure: roomInfo.all_data[0].pressure,
-								state: true
+								state: true,
+                battery: roomInfo.sensor.batterylevel,
 							};
 						} else {
 							// Gérer le cas où les données de la salle ne sont pas disponibles
@@ -130,7 +131,7 @@ export default {
 		const updateColors = () => {
 			for (const roomId in roomData) {
 				if (roomData.hasOwnProperty(roomId) && roomData[roomId].state) {
-					const metricValue = parseFloat(roomData[roomId]['data'][selectedOption]);
+          const metricValue = parseFloat(roomData[roomId]['data'][selectedOption]);
 
 					if (!isNaN(metricValue)) {
 						roomData[roomId].color = getColorForMetric(metricValue, selectedOption);
@@ -219,6 +220,15 @@ export default {
 				unit.value = "";
 				return getColor(0, 500, value);
 			};
+      if (option == "battery") {
+        valMin.value = 0;
+        valMax.value = 100;
+        realMin.value = 0;
+        realMax.value = 100;
+
+        unit.value = "%";
+        return `hsl(${value*1.2}, 100%, 50%)`;
+      }
 		};
 		watch(
 			() => selectedOption.value,

@@ -6,8 +6,9 @@
         <option value="humidity">Humidité</option>
         <option value="co2">CO2</option>
         <option value="activity">Présence</option>
+        <option value="battery">Batterie</option>
       </select>
-      <dataScale :min=min :max=max :real-min=realMin :real-max=realMax :unit=unit></dataScale>
+      <dataScale :min=min :max=max :real-min=realMin :real-max=realMax :unit=unit :battery=battery></dataScale>
     </div>
   </template>
   
@@ -43,15 +44,18 @@
         unit: {
           type: String,
           required: true
-        }
+        },
       },
       data() {
         return {
           selectedOption: 'activity',
+          battery: false
         };
       },
       methods: {
         updateSelectedOption(event) {
+          this.battery = event.target.value === 'battery';
+          console.log("selector" + event.target.value);
           this.$emit('updateSelectedOption', event.target.value);
           this.selectedOption = event.target.value;
         }
