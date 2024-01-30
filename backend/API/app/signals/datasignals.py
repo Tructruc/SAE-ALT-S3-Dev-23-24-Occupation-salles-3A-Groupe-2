@@ -11,7 +11,7 @@ logger = logging.getLogger('API')
 
 @receiver(post_save, sender=Data)
 def data_post_save(sender, instance, **kwargs):
-    logger.info("Data savedddd !!!!")
+    logger.debug("Data save, signal received")
 
     json_data = serializers.serialize('json', [instance])
     
@@ -23,8 +23,6 @@ def data_post_save(sender, instance, **kwargs):
     
     fields_data.pop('sensor', None)
     
-    fields_data_json = json.dumps(fields_data)
-
     redis_sender(f'Data/{sensor.room}', fields_data)
 
-    logger.info("Data sent to Redis !!!!")
+    logger.debug(f"Data sent to Redis on {sensor.room}")

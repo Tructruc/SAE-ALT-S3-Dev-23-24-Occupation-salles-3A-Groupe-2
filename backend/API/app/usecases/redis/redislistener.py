@@ -1,32 +1,37 @@
 import json
 import redis
+import logging
 
-from asgiref.sync import async_to_sync
 from django_eventstream import send_event
 
-def redis_listener():
+logger = logging.getLogger('API')
+
+def redis_listener(stop_event):
     r = redis.Redis(host='127.0.0.1', port=6379, db=0)
     listener = r.pubsub()
     listener.subscribe('sse')
 
     for message in listener.listen():
+        if stop_event.is_set():
+            break
         if message['type'] == 'message':
             message_decode = message['data'].decode('utf-8').replace('"', "").replace("'", '"')
-            print(f"Message reçu: {message_decode}")
-
-            # Retirer le premier et le dernier caractère du message (")
-            # message_data_message = message_decode['message'].strip('"') Marche pas
-            # print(f"Message reçu: {message_data_message}")
-
-            # Essayer de corriger le formatage du JSON
+            logger.debug(f"Message redis reçu: {message_decode}")
 
             message_data = json.loads(message_decode)
-            
+            logger.debug(f"Message redis reçu: {message_data}")
 
-            # Vérifier si 'Data' ou 'Sensor' est contenu dans message_data['type']
             if 'Data' in message_data['type']:
+                logger.debug("Data received from Redis")
                 formatted_message = message_data['message']
                 send_event(message_data['type'], 'message', formatted_message)
+                logger.debug(f"Event sent on {message_data['type']}")
+
             elif 'Sensor' in message_data['type']:
+                logger.debug("Sensor received from Redis")
                 formatted_message = message_data['message']
+                logger.debug(f"Event sent on Sensor")
                 send_event('Sensor', 'message', formatted_message)
+
+    listener.unsubscribe('sse')
+    logger.info("Redis listener stopped")
