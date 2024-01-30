@@ -77,6 +77,7 @@ ChartJS.register(
     Legend
 )
 
+let sseClient;
 
 
 export default {
@@ -123,6 +124,9 @@ export default {
     sensorBuilding: '',
     sensorFloor: '',
     sensorExternalPower: false,
+    duration: 60*24,
+    from: null,
+    to: null,
 
     chartOptions: {
       type: "line",
@@ -163,6 +167,7 @@ export default {
     },
     async updateLineMinutes(minutes){
       let days = minutes / 60 / 24;
+      this.duration = minutes;
 
       // Calculate the date with the offset from now in minutes using thit format %Y-%m-%dT%H:%M:%S.%f %z
       let from = new Date(Date.now() - minutes * 60 * 1000).toISOString().slice(0, -5);
@@ -174,6 +179,9 @@ export default {
     async updateLineFromTo(){
       let from = this.$refs.from.value;
       let to = this.$refs.to.value;
+      this.duration = null;
+      this.from = from;
+      this.to = to;
 
       // apply local offset to make it utc
       from = new Date(new Date(from) - new Date(Date.now()).getTimezoneOffset()).toISOString().slice(0,-5);
@@ -331,8 +339,56 @@ export default {
     try {
       const apiIp = await loadApiConfig();
       this.apiBaseUrl = apiIp;
-      await this.loadData(60*24);
-      // Reste du code
+      await this.loadData(this.duration);
+
+      sseClient = this.$sse.create({
+        url: `${this.apiBaseUrl}/Events/Data/${this.room}/`,
+        format: 'json',
+      })
+
+
+      sseClient.on('error', (e) => {
+        console.error('lost connection or failed to parse!', e);
+      });
+
+      sseClient.on('message', (message, lastEventId) => {
+        this.temp = message.temperature;
+        this.hum = message.humidity;
+        this.co2 = message.co2;
+
+        this.lastDataReceived = new Date(message.time).toLocaleString(undefined, {
+          year: 'numeric',
+          month: 'numeric',
+          day: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit'
+        });
+
+        // If the graph is in "duration" mode, we add the new data to the graph
+        if (this.duration) {
+          this.updateLineMinutes(this.duration);
+        }
+
+      });
+
+      sseClient.connect()
+          .then(sse => {
+
+            // Unsubscribes from event-less messages after 7 seconds
+            setTimeout(() => {
+              sseClient.off();
+            }, 7000);
+
+            // Unsubscribes from chat messages after 14 seconds
+            setTimeout(() => {
+              sseClient.off();
+            }, 14000);
+          })
+          .catch((err) => {
+            // When this error is caught, it means the initial connection to the
+            // events server failed.  No automatic attempts to reconnect will be made.
+            console.error('Failed to connect to server', err);
+          });
     } catch (error) {
       console.error("Error while loading API config:", error);
     }
@@ -349,6 +405,10 @@ export default {
       behavior: "smooth"
     });
   },
+  beforeDestroy() {
+    sseClient.disconnect();
+  },
+
 };
 </script>
 

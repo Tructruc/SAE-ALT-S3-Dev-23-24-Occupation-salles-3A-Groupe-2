@@ -12,6 +12,7 @@ import Header from "@/components/Header.vue";
 import RoomDetail from "@/components/roomDetail/roomDetail.vue";
 import ListeSalles from "@/components/ListeSalles.vue";
 
+
 export default {
   components: {
     RoomDetail,
