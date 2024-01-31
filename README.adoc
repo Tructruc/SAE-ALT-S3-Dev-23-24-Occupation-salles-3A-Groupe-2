@@ -9,6 +9,8 @@ Date: 09-01-2024
 
 == • Introduction
 
+image::https://github.com/Tructruc/SAE-ALT-S3-Dev-23-24-Occupation-salles-3A-Groupe-2/assets/63660254/7306b2b9-6453-4d4c-bf74-ff9b06ae0407["Logo Projet", 100, 100]
+
 === • Contexte
 
 Aujourd'hui, la quasi-totalité des salles de l'IUT de Blagnac sont équipées de capteurs link:https://www.landatel.com/en_US/shop/product/mls-am107-868m-milesight-am107-868m-multiple-indoor-environment-sensor-7-sensors-in-one-lorawan-868-mhz-14500[Milesight AM107-868M]. Ces capteurs fournissent des données précieuses sur plusieurs paramètres environnementaux : température, humidité, luminosité, taux de CO2, présence de particules fines dans l'air, pression atmosphérique, et détection de présence humaine dans la salle. Ils sont connectés à un réseau LoRaWAN, qui transmet ensuite les données à un broker MQTT. Cependant, ces informations ne sont actuellement pas exploitées à leur plein potentiel et demeurent difficilement accessibles.
