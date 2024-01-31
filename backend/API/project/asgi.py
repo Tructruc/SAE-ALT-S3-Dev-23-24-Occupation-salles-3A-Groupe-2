@@ -21,29 +21,11 @@ application = ProtocolTypeRouter({
     'http': URLRouter([
         path('Events/Sensor/', AuthMiddlewareStack(
             URLRouter(django_eventstream.routing.urlpatterns)
-        ), {'format-channels': ['Sensor']}), 
+        ), {'format-channels': ['Sensor/']}), 
 
         path('Events/Data/', AuthMiddlewareStack(
             URLRouter(django_eventstream.routing.urlpatterns)
-        ), {'format-channels': ['Data']}),
-
-        re_path(r'^Events/Sensor/(?P<RoomOrBuilding>\w+)/$', 
-            AuthMiddlewareStack(
-                URLRouter(
-                    django_eventstream.routing.urlpatterns
-                )
-            ), 
-            {'format-channels': ['Sensor/{RoomOrBuilding}/']}
-        ),
-
-        re_path(r'^Events/Sensor/(?P<Building>\w+)/(?P<Floor>\w+)/$', 
-            AuthMiddlewareStack(
-                URLRouter(
-                    django_eventstream.routing.urlpatterns
-                )
-            ), 
-            {'format-channels': ['Sensor/{RoomOrBuilding}/{Floor}/']}
-        ),
+        ), {'format-channels': ['Data/']}),
 
         re_path(r'^Events/Data/(?P<RoomOrBuilding>\w+)/$', 
             AuthMiddlewareStack(

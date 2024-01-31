@@ -27,23 +27,17 @@ def redis_listener(stop_event):
                 send_event(message_data['type'], 'message', formatted_message)
                 logger.debug(f"Event sent on {message_data['type']}")
 
-            elif message_data['type'] == 'Data':
+            elif message_data['type'] == 'Data/':
                 logger.debug("Data received from Redis NoRoom")
                 formatted_message = message_data['message']
                 logger.debug(f"Event sent on Data")
-                send_event('Data', 'message', formatted_message)
-
-            elif 'Sensor' in message_data['type']:
-                logger.debug("Sensor received from Redis")
-                formatted_message = message_data['message']
-                logger.debug(f"Event sent on Sensor")
                 send_event(message_data['type'], 'message', formatted_message)
             
-            elif message_data['type'] == 'Sensor':
+            elif message_data['type'] == 'Sensor/':
                 logger.debug("Sensor received from Redis NoRoom")
                 formatted_message = message_data['message']
                 logger.debug(f"Event sent on Sensor")
-                send_event('Sensor', 'message', formatted_message)
+                send_event(message_data['type'], 'message', formatted_message)
 
     listener.unsubscribe('sse')
     logger.info("Redis listener stopped")
