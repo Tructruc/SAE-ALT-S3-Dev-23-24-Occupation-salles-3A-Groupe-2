@@ -83,14 +83,14 @@
     </div>
     <BatB v-if="showBatB" />
     <BatE v-else-if="showBatE" />
-    <BatABibAmphis v-else-if="showBatA" />
+    <BatA batiment="A" etage="0" v-else-if="showBatA" />
   </div>
   </template>
   
   <script>
   import BatB from './B/BatB.vue'; // Adjust the path according to your project structure
   import BatE from './E/BatE.vue';
-  import BatABibAmphis from './A/BatABibAmphis.vue'; 
+  import BatA from "@/components/batiments/A/BatA.vue";
 
     export default {
         data() {
@@ -126,9 +126,9 @@
             },
 
         components: {
+          BatA,
           BatB,
           BatE,
-          BatABibAmphis
       },
     }
   </script>
