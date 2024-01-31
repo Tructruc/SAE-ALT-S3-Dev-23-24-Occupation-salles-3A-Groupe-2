@@ -12,10 +12,12 @@
         </li>
       </ul>
     </div>
-  <div class="empty-room">
-    <div class="empty-room__color"/>
-    <div class="empty-room__title">No Data</div>
-  </div></div>
+    <div class="separator"></div>
+    <div class="empty-room">
+      <div class="empty-room__color"/>
+      <div class="empty-room__title">No Data</div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -119,18 +121,33 @@ export default {
   text-align: center;
 }
 
-.empty-room{
-  margin-left: 1vw;
+.empty-room {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  align-items: center; /* Centrer horizontalement les enfants dans la colonne */
+  justify-content: center; /* Centrer verticalement les enfants dans la colonne */
+  
+  position: relative;
+  height: 100%; /* Assurez-vous que cela est suffisant pour permettre le centrage vertical */
 }
 .empty-room__color {
-  width: 1vw;
-  height: 1vw;
+  width: 20px;
+  height: 20px;
   background: grey;
   border-radius: 5px;
+}
+
+.empty-room__title {
+  margin-top: 5px;
+}
+
+.separator {
+  width: 4px;
+  background-color: var(--vt-c-divider-dark-2); 
+  height: 100%;
+  margin-left: 2vw;
+  margin-right: 2vw;
+  border-radius: 30px;
 }
 
 .wrapper {
