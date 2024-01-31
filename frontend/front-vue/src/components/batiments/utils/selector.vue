@@ -55,7 +55,6 @@
       methods: {
         updateSelectedOption(event) {
           this.battery = event.target.value === 'battery';
-          console.log("selector" + event.target.value);
           this.$emit('updateSelectedOption', event.target.value);
           this.selectedOption = event.target.value;
         }

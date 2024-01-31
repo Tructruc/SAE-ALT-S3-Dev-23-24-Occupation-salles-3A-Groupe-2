@@ -77,14 +77,11 @@ export default {
       format: 'json',
     })
 
-    console.log(this.sse)
-
     this.sse.on('error', (e) => {
       console.error('lost connection or failed to parse!', e);
     });
 
     this.sse.on('message', (message, lastEventId) => {
-      console.log("message", message);
       this.roomData[message.room].data = message.data;
       this.updateColors();
     });
@@ -109,6 +106,10 @@ export default {
 
     await this.fetchAllRoomData();
   },
+  beforeDestroy() {
+    this.sse.disconnect();
+    this.sse.off();
+  },
   methods:{
     updateSelectedOption(selected){
       this.selectedOption = selected;
@@ -125,7 +126,6 @@ export default {
     async fetchAllRoomData() {
       try {
         const response = await fetch(`${this.apiBaseUrl}/ByRoom/?last_data=1&depth=1`);
-        console.log(`${this.apiBaseUrl}/ByRoom/?last_data=1&depth=1`)
         const roomsData = await response.json();
 
         for (const roomKey in this.roomData) {
