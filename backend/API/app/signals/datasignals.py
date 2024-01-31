@@ -25,7 +25,6 @@ def data_post_save(sender, instance, **kwargs):
 
 
     if sensor.room is not None and sensor.batterylevel is not None and sensor.externalpowersource is not None :
-        logger.error(f"room {sensor.room}")
         redis_sender(f'Data/', {"room" : sensor.room, "data" : fields_data, "batterylevel" : sensor.batterylevel, "externalPower" : str(sensor.externalpowersource).lower() })
         logger.debug("Data/")
 
