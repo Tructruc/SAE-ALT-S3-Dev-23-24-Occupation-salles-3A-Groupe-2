@@ -341,6 +341,11 @@ export default {
       this.apiBaseUrl = apiIp;
       await this.loadData(this.duration);
 
+      if (sseClient){
+        sseClient.disconnect();
+        sseClient.off()
+      }
+
       sseClient = this.$sse.create({
         url: `${this.apiBaseUrl}/Events/Data/${this.room}/`,
         format: 'json',
@@ -407,6 +412,7 @@ export default {
   },
   beforeDestroy() {
     sseClient.disconnect();
+    sseClient.off()
   },
 
 };
