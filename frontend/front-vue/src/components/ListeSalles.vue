@@ -1,4 +1,8 @@
 <template>
+    <div class="title-container">
+      <h1>Liste des salles disponnibles</h1>
+    </div>
+    
     <div>
       <div
         v-for="(data, index) in filteredApiData"
@@ -88,6 +92,12 @@ import loadApiConfig from '../utils/api.js';
   
   .field-name {
     font-weight: bold;
+  }
+
+  .title-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
   }
   </style>
   
