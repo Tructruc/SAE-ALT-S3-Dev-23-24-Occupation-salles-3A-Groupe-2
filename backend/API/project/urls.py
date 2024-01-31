@@ -13,6 +13,8 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+import django_eventstream
+
 from django.urls import include, re_path
 from deepserializer import DeepViewSet
 from rest_framework import routers
@@ -20,7 +22,8 @@ from django.conf.urls.static import static
 from django.conf import settings
 from app.models import Data, Sensor
 from django.urls import path
-from app.views import DataViewSet, ByRoomViewSet, SensorViewSet, SearchViewSet, AutoCompletSearchViewSet
+from app.views import DataViewSet, ByRoomViewSet, SensorViewSet, SearchViewSet, AutoCompletSearchViewSet, events_description
+
 
 router = routers.DefaultRouter()
 DeepViewSet.init_router(router, [
@@ -34,5 +37,6 @@ router.register(r'Search', SearchViewSet, basename='Search')
 
 urlpatterns = [
     path('AutoCompletSearch/', AutoCompletSearchViewSet.as_view(), name='AutoCompletSearch'),
+    path('Events/', events_description, name='events_description'),
     re_path(r'', include(router.urls)),
-]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

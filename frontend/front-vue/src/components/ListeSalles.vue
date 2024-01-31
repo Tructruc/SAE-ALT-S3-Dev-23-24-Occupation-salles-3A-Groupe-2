@@ -1,4 +1,8 @@
 <template>
+    <div class="title-container">
+      <h1>Liste des salles disponnibles</h1>
+    </div>
+    
     <div>
       <div
         v-for="(data, index) in filteredApiData"
@@ -11,36 +15,36 @@
         <span class="field-name">Capteur:</span> {{ data.sensor.devicename }}
       </div>
 
-      <RoomDetail v-if="roomName" :room="roomName" :key="roomName" ></RoomDetail>
+      <RoomDetail v-if="roomName" :room="roomName" :key="roomName"></RoomDetail>
     </div>
 </template>
   
 <script>
 import RoomDetail from "@/components/roomDetail/roomDetail.vue";
 import loadApiConfig from '../utils/api.js';
+import api from "../utils/api.js";
 
   export default {
     name: 'ApiDataDisplay',
     components: {
       RoomDetail,
-      apiBaseUrl: null,
     },
     data() {
       return {
         apiData: [],
         roomName: null,
+        sse: null,
+        apiBaseUrl: null,
       };
     },
     computed: {
       filteredApiData() {
-        // On garde seulement les données dont le capteur n'est pas déjà affiché.
-        const dataUnique = Array.from(
-          new Set(this.apiData.map(entry => JSON.stringify(entry)))
-        ).map(entry => JSON.parse(entry));
-  
-        //return dataUnique.filter(entry => entry.room !== null);
-        //On remplace les salles null par "Inconnue"
-        return dataUnique.map(entry => {
+        const uniqueData = {};
+        this.apiData.forEach(entry => {
+          const uniqueKey = `${entry.room}-${entry.sensor.devicename}`; // Exemple de clé unique
+          uniqueData[uniqueKey] = entry;
+        });
+        return Object.values(uniqueData).map(entry => {
           if (entry.room === null) {
             entry.room = "Inconnue";
           }
@@ -48,18 +52,59 @@ import loadApiConfig from '../utils/api.js';
         });
       },
     },
-    mounted() {
-      loadApiConfig().then(apiIp => {
-        this.apiBaseUrl = apiIp;
-        this.fetchApiData();
-      }).catch(error => {
-        console.error("Error while loading API config:", error);
+    async mounted() {
+      this.apiBaseUrl = await loadApiConfig()
+
+      this.sse = this.$sse.create({
+        url: `${this.apiBaseUrl}/Events/Sensor/`,
+        format: 'json',
+      })
+
+      this.sse.on('error', (e) => {
+        console.error('lost connection or failed to parse!', e);
       });
+
+      this.sse.on('message', (message, lastEventId) => {
+        const uniqueKey = `${message.room}-${message.devicename}`;
+        const existingEntry = this.apiData.find(entry => {
+          return `${entry.room}-${entry.sensor.devicename}` === uniqueKey;
+        });
+
+        if (existingEntry) {
+        } else {
+          this.apiData.push({
+            room: message.room,
+            sensor: {
+              devicename: message.devicename,
+            },
+          });
+        }
+
+      });
+      this.sse.connect()
+          .then(sse => {
+
+            // Unsubscribes from event-less messages after 7 seconds
+            setTimeout(() => {
+              this.sse.off();
+            }, 7000);
+
+            // Unsubscribes from chat messages after 14 seconds
+            setTimeout(() => {
+              this.sse.off();
+            }, 14000);
+          })
+          .catch((err) => {
+            // When this error is caught, it means the initial connection to the
+            // events server failed.  No automatic attempts to reconnect will be made.
+            console.error('Failed to connect to server', err);
+          });
+      await this.fetchApiData();
     },
     methods: {
       async fetchApiData() {
         try {
-          const response = await fetch(`${this.apiBaseUrl}/ByRoom/?depth=1`);
+          const response = await fetch(`${this.apiBaseUrl}/ByRoom/?depth=1&last_data=0`);
           const jsonData = await response.json();
           this.apiData = jsonData;
         } catch (error) {
@@ -67,6 +112,10 @@ import loadApiConfig from '../utils/api.js';
         }
       },
     },
+    beforeDestroy() {
+      this.sse.disconnect();
+      this.sse.off();
+    }
   };
 </script>
   
@@ -90,6 +139,12 @@ import loadApiConfig from '../utils/api.js';
   
   .field-name {
     font-weight: bold;
+  }
+
+  .title-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
   }
   </style>
   

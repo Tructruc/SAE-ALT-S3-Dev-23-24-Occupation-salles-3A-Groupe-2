@@ -22,5 +22,5 @@ REST_FRAMEWORK = {
     )
 }
 
-CERTFILE = os.environ.get('CERTFILE')
-KEYFILE = os.environ.get('KEYFILE')
+# CERTFILE = os.environ.get('CERTFILE')
+# KEYFILE = os.environ.get('KEYFILE')

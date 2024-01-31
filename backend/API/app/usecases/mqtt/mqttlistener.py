@@ -73,3 +73,8 @@ class MqttClientProcess(multiprocessing.Process):
             except Exception as e:
                 logger.error(f"Failed to reconnect to MQTT broker. Retrying in 10 seconds... Error: {e}")
                 time.sleep(10)
+
+    def stop(self):
+        self.is_running = False
+        self.client.disconnect()
+        self.terminate()

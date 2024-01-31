@@ -1,7 +1,7 @@
 def start_process_mqtt_listener() :
     import logging
 
-    from app.usecases.mqttlistener import MqttClientProcess
+    from app.usecases.mqtt import MqttClientProcess
 
     logger = logging.getLogger('API')
 
@@ -16,3 +16,5 @@ def start_process_mqtt_listener() :
     mqtt_process_2.daemon = True
     mqtt_process_2.start()
     logger.info("MQQT listener process on topic 2 started")
+
+    return mqtt_process_1, mqtt_process_2

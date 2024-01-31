@@ -54,8 +54,16 @@ export default {
   mounted() {
     this.createChart();
   },
+  beforeDestroy() {
+    this.chart.destroy();
+  },
   methods: {
     createChart() {
+
+      if (this.chart) {
+        this.chart.destroy();
+      }
+
       const centerTextPlugin = {
         id: 'centerText',
         afterDraw: (chart) => {
@@ -128,7 +136,7 @@ export default {
       };
 
       const ctx = document.getElementById(this.uniqueid).getContext('2d');
-      new Chart(ctx, options);
+      this.chart = new Chart(ctx, options);
     }
   },
   watch: {
@@ -144,7 +152,8 @@ export default {
   },
   data() {
     return {
-      uniqueid: 'gauge-chart-' + crypto.randomUUID()
+      uniqueid: 'gauge-chart-' + crypto.randomUUID(),
+      chart: null
     };
   }
 };
