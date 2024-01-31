@@ -17,8 +17,10 @@ def sensor_post_save(sender, instance, **kwargs):
 
     fields_data = data_dict[0]['fields']
 
-    fields_data.pop('room', None)
+    fields_data.pop('deveui', None)
     fields_data.pop('building', None)
     fields_data.pop('floor', None)
-
+    fields_data.pop('batterylevel', None)
+    fields_data.pop('externalpowersource', None)
+    
     redis_sender(f'Sensor/', fields_data)
