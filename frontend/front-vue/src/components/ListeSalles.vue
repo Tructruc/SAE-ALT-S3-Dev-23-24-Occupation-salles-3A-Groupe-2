@@ -11,7 +11,7 @@
         <span class="field-name">Capteur:</span> {{ data.sensor.devicename }}
       </div>
 
-      <RoomDetail v-if="roomName" :room="roomName" :key="roomName" ></RoomDetail>
+      <RoomDetail v-show="roomName" :room="roomName" :key="roomName"></RoomDetail>
     </div>
 </template>
   
@@ -33,14 +33,12 @@ import loadApiConfig from '../utils/api.js';
     },
     computed: {
       filteredApiData() {
-        // On garde seulement les données dont le capteur n'est pas déjà affiché.
-        const dataUnique = Array.from(
-          new Set(this.apiData.map(entry => JSON.stringify(entry)))
-        ).map(entry => JSON.parse(entry));
-  
-        //return dataUnique.filter(entry => entry.room !== null);
-        //On remplace les salles null par "Inconnue"
-        return dataUnique.map(entry => {
+        const uniqueData = {};
+        this.apiData.forEach(entry => {
+          const uniqueKey = `${entry.room}-${entry.sensor.devicename}`; // Exemple de clé unique
+          uniqueData[uniqueKey] = entry;
+        });
+        return Object.values(uniqueData).map(entry => {
           if (entry.room === null) {
             entry.room = "Inconnue";
           }
@@ -59,7 +57,7 @@ import loadApiConfig from '../utils/api.js';
     methods: {
       async fetchApiData() {
         try {
-          const response = await fetch(`${this.apiBaseUrl}/ByRoom/?depth=1`);
+          const response = await fetch(`${this.apiBaseUrl}/ByRoom/?depth=1&last_data=0`);
           const jsonData = await response.json();
           this.apiData = jsonData;
         } catch (error) {

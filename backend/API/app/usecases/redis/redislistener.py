@@ -30,6 +30,7 @@ def redis_listener(stop_event):
             elif message_data['type'] == 'Data/':
                 logger.debug("Data received from Redis NoRoom")
                 formatted_message = message_data['message']
+                # formatted_message['room'] = formatted_message['room'].encode('utf-8')
                 logger.debug(f"Event sent on Data")
                 send_event(message_data['type'], 'message', formatted_message)
             

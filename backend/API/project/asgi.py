@@ -27,7 +27,7 @@ application = ProtocolTypeRouter({
             URLRouter(django_eventstream.routing.urlpatterns)
         ), {'format-channels': ['Data/']}),
 
-        re_path(r'^Events/Data/(?P<RoomOrBuilding>\w+)/$', 
+        re_path(r'^Events/Data/(?P<RoomOrBuilding>[\w\-]+)/$', 
             AuthMiddlewareStack(
                 URLRouter(
                     django_eventstream.routing.urlpatterns

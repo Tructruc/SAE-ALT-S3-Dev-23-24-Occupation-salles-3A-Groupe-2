@@ -37,14 +37,27 @@ class ByRoomViewSet(DeepViewSet):
             queryset = queryset.filter(time__gte=date_from)
         if date_to:
             queryset = queryset.filter(time__lte=date_to)
-
-        # Appliquer le filtrage pour la profondeur et les dernières données
+        
         if depth > 0:
             filtered_data = list(queryset)
-            sensor.filtered_data = filtered_data[-int(last_data):] if last_data else filtered_data
+            # Gérer spécifiquement last_data égal à 0
+            if last_data is not None:
+                if int(last_data) == 0:
+                    sensor.filtered_data = []
+                else:
+                    sensor.filtered_data = filtered_data[-int(last_data):]
+            else:
+                sensor.filtered_data = filtered_data
             sensor.sensor = sensor
         elif depth == 0:
-            sensor.data_ids = [data.id for data in queryset][-int(last_data):] if last_data else [data.id for data in queryset]
+            # Gérer spécifiquement last_data égal à 0
+            if last_data is not None:
+                if int(last_data) == 0:
+                    sensor.data_ids = []
+                else:
+                    sensor.data_ids = [data.id for data in queryset][-int(last_data):]
+            else:
+                sensor.data_ids = [data.id for data in queryset]
             sensor.sensor_id = sensor.deveui
         return sensor
 
