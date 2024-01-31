@@ -2,7 +2,7 @@ import multiprocessing
 import os
 
 from project.loggerconfig import setup_logger, setup_gunicorn_loggers
-from project.settings.prod_settings import DEFAULT_IP, DEFAULT_PORT, CERTFILE, KEYFILE
+from project.settings.prod_settings import DEFAULT_IP, DEFAULT_PORT#, CERTFILE, KEYFILE
 from app.processmqttlistenerstarter import start_process_mqtt_listener
 from app.threadredislistenerstarter import start_thread_redis_listener
 from django.core.wsgi import get_wsgi_application
@@ -11,8 +11,8 @@ from django.core.wsgi import get_wsgi_application
 bind = f"{DEFAULT_IP}:{DEFAULT_PORT}"
 custom_logger = setup_logger()
 workers = multiprocessing.cpu_count() * 2 
-certfile = CERTFILE
-keyfile = KEYFILE
+# certfile = CERTFILE
+# keyfile = KEYFILE
 
 def on_starting(server):
     setup_gunicorn_loggers(custom_logger)    

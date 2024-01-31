@@ -2,9 +2,6 @@
 # Démarrer Redis en arrière-plan
 redis-server --daemonize yes
 
-# Démarrer Pushpin en arrière-plan
-pushpin &
-
 # Attendre que la base de données soit prête
 python manage.py wait_for_db
 

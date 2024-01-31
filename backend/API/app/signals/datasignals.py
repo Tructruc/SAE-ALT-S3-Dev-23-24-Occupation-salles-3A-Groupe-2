@@ -23,6 +23,21 @@ def data_post_save(sender, instance, **kwargs):
     
     fields_data.pop('sensor', None)
     
-    redis_sender(f'Data/{sensor.room}', fields_data)
+    
+
+    if sensor.room is not None:
+        redis_sender(f'Data', {"room" : sensor.room, "data" : fields_data})
+        logger.debug("Data")
+
+        redis_sender(f'Data/{sensor.room}/', fields_data)
+        logger.debug(f"Data/{sensor.room}/")
+
+    if sensor.building is not None and sensor.room is not None :
+        redis_sender(f'Data/{sensor.building}/', {"room" : sensor.room, "data" : fields_data})
+        logger.debug(f"Data/{sensor.building}/")
+    
+    if sensor.floor is not None and sensor.building is not None and sensor.room is not None:
+        redis_sender(f'Data/{sensor.building}/{sensor.floor}/', {"room" : sensor.room, "data" : fields_data})
+        logger.debug(f"Data/{sensor.building}/{sensor.floor}/")
 
     logger.debug(f"Data sent to Redis on {sensor.room}")
