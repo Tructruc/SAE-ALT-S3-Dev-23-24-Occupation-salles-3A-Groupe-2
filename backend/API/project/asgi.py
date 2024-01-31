@@ -8,10 +8,43 @@ https://docs.djangoproject.com/en/3.2/howto/deployment/asgi/
 """
 
 import os
+import django_eventstream.routing
 
+from django.urls import path, re_path
+from channels.routing import ProtocolTypeRouter, URLRouter
+from channels.auth import AuthMiddlewareStack
 from django.core.asgi import get_asgi_application
-from app.processmqttlistenerstarter import start_process_mqtt_listener
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'project.settings')
 
-application = get_asgi_application()
+application = ProtocolTypeRouter({
+    'http': URLRouter([
+        path('Events/Sensor/', AuthMiddlewareStack(
+            URLRouter(django_eventstream.routing.urlpatterns)
+        ), {'format-channels': ['Sensor/']}), 
+
+        path('Events/Data/', AuthMiddlewareStack(
+            URLRouter(django_eventstream.routing.urlpatterns)
+        ), {'format-channels': ['Data/']}),
+
+        re_path(r'^Events/Data/(?P<RoomOrBuilding>[\w\-]+)/$', 
+            AuthMiddlewareStack(
+                URLRouter(
+                    django_eventstream.routing.urlpatterns
+                )
+            ), 
+            {'format-channels': ['Data/{RoomOrBuilding}/']}
+        ),
+
+         re_path(r'^Events/Data/(?P<Building>\w+)/(?P<Floor>\w+)/$', 
+            AuthMiddlewareStack(
+                URLRouter(
+                    django_eventstream.routing.urlpatterns
+                )
+            ), 
+            {'format-channels': ['Data/{Building}/{Floor}/']}
+        ),
+
+        re_path(r'', get_asgi_application()),
+    ]),
+})

@@ -17,9 +17,13 @@ INSTALLED_APPS = [
     'corsheaders',
     'timescale',
     'django_extensions',
+    'channels',
     'rest_framework',
     'app',
 ]
+
+
+ASGI_APPLICATION = 'project.asgi.application'
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -30,6 +34,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_grip.GripMiddleware',
 ]
 
 ROOT_URLCONF = 'project.urls'
@@ -98,3 +103,5 @@ class ColorFormatter(logging.Formatter):
         return logging.Formatter.format(self, record)
 
 PATH_TO_LOG_FILE = os.path.join(BASE_DIR, 'api.log')
+
+EVENTSTREAM_ALLOW_ORIGIN = "*"

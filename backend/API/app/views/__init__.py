@@ -3,3 +3,4 @@ from .byroomview import ByRoomViewSet
 from .sensorview import SensorViewSet
 from .searchview import SearchViewSet
 from .autocompletsearchview import AutoCompletSearchViewSet
+from .eventsdescription import events_description

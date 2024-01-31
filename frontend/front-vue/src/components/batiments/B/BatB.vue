@@ -110,14 +110,14 @@
     </svg>
     </div>
     <BatBRdc v-if="showRdc" />
-    <BatBetage1 v-else-if="showEt1" />
-    <BatBetage2 v-else-if="showEt2" />
+    <BatBEtage1 v-else-if="showEt1" />
+    <BatBEtage2 v-else-if="showEt2" />
   </template>
   
   <script>
   import BatBRdc from './etages/BatBRdc.vue';
-  import BatBetage1 from './etages/BatBetage1.vue';
-  import BatBetage2 from './etages/BatBetage2.vue';
+  import BatBEtage1 from './etages/BatBEtage1.vue';
+  import BatBEtage2 from "@/components/batiments/B/etages/BatBEtage2.vue";
   export default {
         data() {
             return {
@@ -144,9 +144,9 @@
                 },
             },
         components: {
-            BatBRdc,
-            BatBetage1,
-            BatBetage2
+          BatBEtage2,
+          BatBRdc,
+          BatBEtage1,
         },
     }
   </script>
