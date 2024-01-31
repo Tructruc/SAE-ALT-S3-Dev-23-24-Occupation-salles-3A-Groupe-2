@@ -144,7 +144,7 @@ export default {
 .separator {
   width: 4px;
   background-color: var(--vt-c-divider-dark-2); 
-  height: 100%;
+  height: 49px;
   margin-left: 2vw;
   margin-right: 2vw;
   border-radius: 30px;
